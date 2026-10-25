@@ -29,7 +29,7 @@ The scaffold provides the Next.js runtime, Tailwind/PostCSS configuration, envir
 - The embedding Route Handler returned dimension 384.
 - Docker/PostgreSQL could not be started in the development environment because Docker was unavailable; the health route correctly returned an unavailable response.
 
-## Phase 1 — relational schema — planned
+## Phase 1 — relational schema — implemented
 
 ### Decisions
 
@@ -45,7 +45,7 @@ The scaffold provides the Next.js runtime, Tailwind/PostCSS configuration, envir
 
 ### Build approach
 
-Create `00_extensions.sql` first, then `01_schema.sql` with all types, tables, constraints, indexes, and generated search columns. Keep demonstrations of `ALTER` and `DROP` in `02_alter_demo.sql`. Add reset/run instructions so the schema can be applied twice cleanly. Test the important integrity rule by attempting to insert one player into two teams' rosters for one season.
+Create `00_extensions.sql` first, then `01_schema.sql` with all types, tables, constraints, indexes, and generated search columns. Keep demonstrations of `ALTER` and `DROP` in `02_alter_demo.sql`. The reset and acceptance scripts apply the schema twice, reset it, apply it again, and attempt to insert one player into two teams' rosters for one season.
 
 ### Viva explanation
 
