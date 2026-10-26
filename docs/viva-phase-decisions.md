@@ -51,7 +51,7 @@ Create `00_extensions.sql` first, then `01_schema.sql` with all types, tables, c
 
 The database is not just persistence: constraints protect relationships and prevent invalid states even if a client or API is buggy. The roster membership season is deliberately duplicated because a composite foreign key keeps it synchronized with the roster while the unique constraint prevents double-drafting.
 
-## Phase 2 — views, functions, and triggers — planned
+## Phase 2 — views, functions, and triggers — implemented
 
 ### Decisions
 
@@ -62,7 +62,7 @@ The database is not just persistence: constraints protect relationships and prev
 
 ### Build approach
 
-Write PL/pgSQL functions in `04_functions.sql` and trigger functions/triggers in `05_triggers.sql`. The draft procedure locks the player, copies the roster season, inserts membership, marks a matching need filled, and lets any failure roll back the transaction. The audit trigger reads `app.current_user_id` from a transaction-local setting. Updating report text clears its embedding metadata so stale vectors cannot be served.
+Write PL/pgSQL functions in `04_functions.sql` and trigger functions/triggers in `05_triggers.sql`. The draft procedure locks the player, copies the roster season, inserts membership, marks a matching need filled, and lets any failure roll back the transaction. The audit trigger reads `app.current_user_id` from a transaction-local setting. Updating report text clears its embedding metadata so stale vectors cannot be served. `07_queries.sql` exercises successful calls and failing cases inside a rollback-safe acceptance transaction.
 
 ### Viva explanation
 

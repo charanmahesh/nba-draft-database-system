@@ -64,7 +64,7 @@ Stores dated plain-text injuries and severity. It cascades with the player becau
 
 ### `game` and `game_performance`
 
-`game` identifies a fixture, season, home team, and away team. A check prevents a team from playing itself. `external_id` supports idempotent imports. `game_performance` is correctly modeled as Game 1:N and Player 1:N, not Game 1:1. It stores minutes (0–70 for overtime), nonnegative box-score statistics, and the team represented in the game. The `(game_id, player_id)` unique key allows one performance row per player per game. The Phase 2 trigger will enforce that `team_id` is one of the game's participants.
+`game` identifies a fixture, season, home team, and away team. A check prevents a team from playing itself. `external_id` supports idempotent imports. `game_performance` is correctly modeled as Game 1:N and Player 1:N, not Game 1:1. It stores minutes (0–70 for overtime), nonnegative box-score statistics, and the team represented in the game. The `(game_id, player_id)` unique key allows one performance row per player per game. The Phase 2 trigger enforces that `team_id` is one of the game's participants.
 
 Game and performance deletion is restricted to preserve imported facts; team deletion is also restricted when games or performances reference it.
 
@@ -74,7 +74,7 @@ News is stored in PostgreSQL rather than a separate store. The title and summary
 
 ### `audit_log`
 
-Stores table name, action, record key, old/new JSONB, optional `changed_by`, and timestamp. The optional user is set by the future API transaction through `app.current_user_id`. It is not populated automatically until the Phase 2 audit trigger is added. Deleting a person sets `changed_by` to NULL so audit history remains.
+Stores table name, action, record key, old/new JSONB, optional `changed_by`, and timestamp. The user is set by the API transaction through `app.current_user_id`; the Phase 2 roster-membership audit trigger populates it. Deleting a person sets `changed_by` to NULL so audit history remains.
 
 ## Index policy
 
