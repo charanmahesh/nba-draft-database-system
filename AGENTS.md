@@ -5,17 +5,21 @@
 
 ## 1. What we are building
 
-A web app for a basketball franchise's scouting department. Scouts record reports on players and draft prospects,
-analysts compare measurements and game stats, team managers track roster and positional needs, and the system
-**recommends prospects that match a team's open needs**, lets users **search scouting reports and news by meaning**,
-and runs the draft/roster-signing workflow safely.
+A web app for a basketball franchise's scouting department. The current scope is **NBA Player Scouting and Team
+Recruitment**: scouts search and filter existing NBA players, analyse historical performance and physical attributes,
+compare players, match players against team requirements, and search scouting reports and news by meaning.
 
-This is deliberately NOT plain CRUD. The non-CRUD features are:
-1. Need-to-prospect matching score (database function + view).
-2. Draft pick / roster signing as an atomic transaction with integrity triggers, row locking and a database-enforced "one roster per player per season" rule.
-3. **Semantic search (pgvector)** over scouting report summaries and news articles, combined with relational filters (hybrid query).
-4. Keyword full-text search (tsvector + GIN) next to semantic search, so both can be compared in the demo.
-5. Role-based dashboards (Admin, Scout, Analyst, Team Manager).
+Draft functionality is a documented **future extension**. The existing `draft_prospect` table and practical related
+schema decisions are retained, but the current work does not import prospects or implement draft workflows.
+
+This is deliberately NOT plain CRUD. The active non-CRUD features are:
+1. Team-need-to-player matching score (database function + view).
+2. **Semantic search (pgvector)** over scouting report summaries and news articles, combined with relational filters (hybrid query).
+3. Keyword full-text search (tsvector + GIN) next to semantic search, so both can be compared in the demo.
+4. Role-based dashboards (Admin, Scout, Analyst, Team Manager).
+
+The existing atomic draft/roster-signing design remains documented for the future extension, but is not part of the
+current Phase 3 implementation or current scouting workflow.
 
 ## 2. Fixed decisions (do not change without asking)
 
@@ -69,7 +73,7 @@ There is no MongoDB or Neo4j in this project. Do not add them.
 ├─ README.md                  # setup + run instructions (graded)
 ├─ docker-compose.yml
 ├─ .env.example
-├─ data/raw/                  # downloaded Kaggle CSVs (gitignored; README says where to get them)
+├─ dataset/                   # local source CSVs: Nathan Lauga NBA and Draft Combine (gitignored)
 ├─ db/
 │  ├─ postgres/
 │  │  ├─ 00_extensions.sql    # CREATE EXTENSION vector
@@ -144,11 +148,11 @@ Tables that receive real imported data (`team`, `player`, `game`) also get `exte
   with `CHECK (height_cm IS NULL OR height_cm BETWEEN 150 AND 240)`, `CHECK (weight_kg IS NULL OR weight_kg BETWEEN 45 AND 200)`,
   `CHECK (secondary_position IS NULL OR secondary_position <> position)`. Source data has gaps, so these columns are nullable.
   Position set: PG, SG, SF, PF, C. The real combine data also uses hybrid labels (SG-SF, PF-C, ...), about 30% of rows:
-  the import maps the FIRST label to `position` and the second to `secondary_position`. Draft board and team needs use `position` only (players with NULL position are excluded from matching).
+  the import maps the FIRST label to `position` and the second to `secondary_position`. Team-need matching uses `position` only (players with NULL position are excluded from matching). The draft board remains a future extension.
   If the position set ever changes, change it in ONE place (`01_schema.sql`) plus `lib/positions.ts`, and record it in `db/import/mapping.md`.
 - **Draft Prospect** IS-A Player: `draft_prospect(prospect_id PK, player_id UNIQUE FK, college NULL, class_year SMALLINT NOT NULL)`.
-  `college` is NOT in the combine file; leave it NULL unless a second source or the synthetic seed fills it (do not invent real colleges for real players).
-  A drafted prospect is later added to a roster through the draft transaction.
+  This table is retained for the future draft extension. Current Phase 3 does **not** populate it, does not import
+  combine-only prospects, and does not invent colleges for real players.
 - **Combined Measurement** (Player 1:N): `combined_measurement(measurement_id PK, player_id FK, measurement_type, combine_year SMALLINT NOT NULL, measured_on DATE NULL, value NUMERIC NOT NULL, unit TEXT NOT NULL, UNIQUE(player_id, measurement_type, combine_year))`.
   The combine file only has a year, so `measured_on` stays NULL (never fabricate a date). `measurement_type` is restricted by a CHECK or enum to the types in `db/import/mapping.md`.
   Real combine data is wide (one column per test); the import unpivots it into this one-row-per-measurement shape and skips NULL values (no row for a missing test).
@@ -191,10 +195,10 @@ structured and stays relational with full integrity.
 | Retrieval | Embed the query with the same model, `ORDER BY embedding <=> $query LIMIT k`, return similarity = `1 - distance` |
 
 Features to implement:
-1. **Semantic report search:** `GET /api/search/reports?q=...&position=&classYear=&maxInjurySeverity=` — hybrid query:
-   vector similarity on `scouting_report` JOIN `player` / `draft_prospect` with relational filters in the same SQL statement.
+1. **Semantic report search:** `GET /api/search/reports?q=...&position=&maxInjurySeverity=` — hybrid query:
+   vector similarity on `scouting_report` JOIN `player` with relational filters in the same SQL statement.
 2. **Similar reports / "scouts who wrote like this":** given a `report_id`, return its nearest neighbours (excluding itself).
-3. **Similar prospects (text-based):** average or best-match report similarity per player to suggest comparable prospects.
+3. **Similar players (text-based):** average or best-match report similarity per player to suggest comparable NBA players.
 4. **News relevance:** given a player, return semantically related news (plus exact mentions from `article_mention`).
 5. **Keyword vs semantic comparison page:** same query, two result columns (tsvector FTS vs pgvector). This is the demo moment that justifies the vector DB.
 
@@ -227,42 +231,59 @@ Write `docs/relational-schema.md` and `docs/data-dictionary.md` (include the sim
   - Clear `embedding`, `embedding_model` and `embedded_at` when `summary` is updated (so stale vectors are never served).
 **Done when:** each object has a test call in `07_queries.sql` and a failing-case demo (trigger fires, transaction rolls back, double-draft rejected, 71 minutes rejected, 69 accepted).
 
-### Phase 3: Data: real Kaggle subset + synthetic remainder + embeddings
+### Phase 3: NBA scouting data, supporting data, and embeddings
+
+**Active scope boundary:** Phase 3 serves NBA Player Scouting and Team Recruitment. The `draft_prospect` table and
+existing draft database objects remain in the schema for a future extension, but Phase 3 must not populate
+`draft_prospect`, import the Draft Like a Pro dataset, or implement draft workflows.
+
+#### Phase 3A: Real NBA data import (Nathan Lauga + Draft Combine)
+
 **Source of each table:**
 
 | Table(s) | Source |
 |---|---|
-| team, player, game, game_performance, combined_measurement, draft_prospect (draft/combine data), historical rosters (from player-season team) | **Real Kaggle data**, subset of the last 5 to 10 seasons |
-| person + subtypes, team_need, current-season rosters (`is_historical = false`), injury_history (unless the dataset has injuries), users/passwords | **Synthetic** (`06_seed.sql`) |
-| scouting_report text, news_article text, article_mention | **Generated from the real stats** (`scripts/generate-text.ts`) |
+| team, player, game, game_performance, historical rosters (from player-season team) | **Nathan Lauga NBA dataset**, restricted to a documented recent-season subset |
+| combined_measurement and safely matched player physical attributes | **Draft Combine Kaggle dataset** |
+| draft_prospect | Not populated in the current scope; reserved for the future draft extension |
 
 **Real-data import (`db/import/`):**
-1. Put the CSVs in `data/raw/` (gitignored). Record dataset name, URL, licence and which files are used in `docs/data-sources.md`.
-2. `00_staging.sql`: staging tables mirroring the CSV columns (all TEXT). `01_load.sql`: `\copy` into staging.
-3. `02_transform.sql`: cleaning and `INSERT ... SELECT` into the real tables, idempotent via `external_id` (`ON CONFLICT DO NOTHING`). Rules (write each into `mapping.md`):
-   - split full names into `f_name` / `l_name`; convert heights (feet-inches or inches) to `height_cm` and weights to `weight_kg`; missing values become NULL;
-   - map position labels to the allowed set;
-   - unpivot wide combine columns into `combined_measurement` rows; **the combine file follows `db/import/mapping.md`, section A** (name format "Last, First", inches/pounds converted to cm/kg, `NA` as NULL, hybrid positions, derived and sparse columns skipped);
-   - for each player-season pick one team (most games played) for the roster row; keep the true team per game in `game_performance.team_id`;
-   - set `roster.is_historical = true` for imported rosters; drop players/games outside the chosen seasons;
-   - **player identity:** every real person gets exactly one `player_id` (our own surrogate key); `external_id` records where it came from. Use the dataset's own player ID where a file has one. When matching by name (combine <-> box scores), follow `mapping.md`: auto-link only names that are unique in BOTH files, keep suffixes (Jr., II) in the key, never link a combine class 2023+ row to a box-score player, apply the debut-season plausibility check, and write every unmatched or ambiguous row to `import_unmatched` instead of guessing.
-4. Keep volume manageable: only seasons in scope, and only players with at least a minimum number of games or a combine record.
-5. **Which players get created, and who is a prospect** (see `mapping.md` for the matching rules):
-   - Create a `player` row for (a) every box-score player in the chosen seasons and (b) every combine player from classes 2023-2026.
-     Attach combine measurements and position/height/weight to any combine player from classes before 2023 that safely matches a created player (see `mapping.md`); skip the other pre-2023 combine rows and log the count.
-     Rows from classes 2023-2026 always become their own players and are never linked to a box-score player, even if a veteran has the same name.
-     (Veterans from classes 2000-2016 still appear in recent box scores, which is why ALL combine years are loaded into staging.)
-   - `draft_prospect` rows exist only for combine classes 2023-2026 (about 278 players, none of them has NBA box-score rows in the file, which ends in April 2023). They are the pool shown on the draft board.
-     Earlier classes are ordinary `player` rows with measurements.
+1. Read the local source CSVs from `dataset/` (gitignored). Record each dataset name, URL, licence, files used, and the selected season range in `docs/data-sources.md`.
+2. `00_staging.sql`: staging tables mirroring the raw CSV columns (all `TEXT`). `01_load.sql`: `\copy` into staging.
+3. `02_transform.sql`: clean and load real tables with idempotent `external_id` values (`ON CONFLICT DO NOTHING`). Record every rule in `mapping.md`:
+   - split full names into `f_name` / `l_name`; convert combine inches to `height_cm` and `wingspan_cm`, pounds to `weight_kg`, and `MM:SS` game minutes to numeric minutes; missing values and `NA` become `NULL`;
+   - map position labels to the allowed set, using the first hybrid label as `position` and the second as `secondary_position`;
+   - unpivot wide combine columns into `combined_measurement` rows and skip missing, derived, and sparse measurements according to `mapping.md`;
+   - for each player-season choose the team with the most games for the historical roster, while retaining the true game team in `game_performance.team_id`;
+   - set imported rosters to `is_historical = true` and drop games outside the selected seasons;
+   - **player identity:** every real NBA player receives exactly one project-owned `player_id`; use Nathan Lauga player, team, and game IDs as `external_id` values where available. Match Draft Combine rows to NBA players only when normalized names are unique in both sources, suffixes (Jr., II) are preserved, and the debut-season plausibility check passes. Write every unmatched or ambiguous combine row to `import_unmatched`; never guess.
+4. Create `player` rows from NBA box-score/player rows in the selected seasons. Attach combine positions, physical attributes, and measurements only to safely matched existing NBA players. Do not create combine-only players or `draft_prospect` rows; log skipped and unmatched combine rows.
+5. Keep volume manageable by importing only the selected seasons and players meeting a documented minimum-games threshold or having a safely matched combine record.
+6. Do not fabricate injury histories for real players. `injury_history` remains empty unless a documented real injury source is introduced later.
 
-**Generated text (`scripts/generate-text.ts`):**
-- Derive each player's archetype from REAL stats and measurements (e.g. high blocks per minute + large height/wingspan -> rim protector; high assists -> playmaking guard; etc.). Define ~8 archetypes (rim protector, sharpshooter, playmaking guard, two-way wing, slasher, stretch big, defensive stopper, raw athlete).
-- Build 120+ scouting reports and 60+ news articles from vocabulary pools per archetype with varied sentence structures, inserting the player's real numbers (averages, measurements). Articles mention several real players (fills `article_mention`).
-- The archetype label is used ONLY by `eval-retrieval.ts`, never stored in the DB. Spot-check at least 20 generated texts by reading them.
-- State clearly in `docs/data-sources.md` and the demo that these texts are generated, not real scouting material.
+#### Phase 3B: Synthetic supporting data
 
-**Embeddings:** `scripts/embed.ts` embeds all rows with `embedding IS NULL`, in batches, updating `embedding`, `embedding_model`, `embedded_at`. Idempotent. Then run `08_vector_indexes.sql`.
-**Done when:** `npm run seed` runs schema + import + synthetic seed + text generation + embedding, the import report lists any unmatched rows, showcase queries return non-trivial results, and `scripts/eval-retrieval.ts` shows that for each archetype query (e.g. "athletic rim protector who blocks shots") most of the top 5 reports share that archetype.
+Synthetic data is limited to application-supporting records, never a substitute for NBA performance or measurement data:
+
+- `person` and subtype rows, passwords, team needs, and app-managed current-season rosters in `06_seed.sql`;
+- generated scouting reports, news articles, and `article_mention` rows in `scripts/generate-text.ts`, derived from imported real NBA statistics and safely matched measurements;
+- no fabricated injury histories.
+
+Define approximately eight player archetypes from real statistics and measurements (for example, rim protector,
+sharpshooter, playmaking guard, two-way wing, slasher, stretch big, defensive stopper, and raw athlete). Generate at
+least 120 reports and 60 articles from varied vocabulary and real values. The archetype label is used only by
+`eval-retrieval.ts`, never stored in the database. Spot-check at least 20 generated texts and clearly label them as
+generated—not real scouting or news material—in `docs/data-sources.md` and the demo.
+
+#### Phase 3C: Embeddings and retrieval evaluation
+
+`scripts/embed.ts` embeds rows with `embedding IS NULL` in batches and updates `embedding`, `embedding_model`, and
+`embedded_at` idempotently. Then run `08_vector_indexes.sql`. `scripts/eval-retrieval.ts` must show that, for each
+archetype query (for example, "athletic rim protector who blocks shots"), most top-five reports share that archetype.
+
+**Done when:** `npm run seed` runs schema, the Phase 3A import, Phase 3B supporting-data generation, and Phase 3C
+embedding/index steps; the import report lists unmatched records; showcase queries return non-trivial NBA-player
+results; no `draft_prospect` rows are created; and retrieval evaluation meets the documented threshold.
 
 ### Phase 4: Showcase SQL queries
 In `07_queries.sql`, at least: multi-table JOIN, GROUP BY + HAVING (players averaging > X points), ORDER BY + LIMIT,

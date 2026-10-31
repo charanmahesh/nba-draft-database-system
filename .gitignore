@@ -76,3 +76,4 @@ coverage
 # Project raw data
 data/raw/*
 !data/raw/.gitkeep
+dataset/

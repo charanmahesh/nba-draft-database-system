@@ -54,6 +54,14 @@ Prospect deletion cascades to its subtype row, while player deletion is restrict
 
 Stores the unpivoted one-row-per-player/test/year shape. `measured_on` remains nullable because the combine source provides a year but not necessarily an exact date. The uniqueness rule prevents duplicate measurements of the same type for one player and combine year. Measurements cascade with the player.
 
+### `import_unmatched`
+
+Phase 3A's durable import report for Draft Combine rows that could not be safely
+matched to a selected NBA player. It records the source row key, normalized
+name, year, reason, and diagnostic counts. Its unique source/row key makes an
+import rerunnable without silently losing an ambiguity. It has no player foreign
+key because it explicitly represents records that must not be linked.
+
 ### `scouting_report`
 
 Stores a report for a player written by a scout. `summary` is the source text. `embedding vector(384)`, `embedding_model`, and `embedded_at` support Phase 3 indexing. `search_vector` is generated from the summary and indexed with GIN for keyword search. The player and scout foreign keys restrict deletion to preserve authored scouting history.
