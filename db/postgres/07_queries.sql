@@ -1,4 +1,4 @@
--- DraftBoard Phase 2 showcase calls and acceptance demonstrations.
+-- DraftBoard Phase 4 SQL showcase and Phase 2 acceptance demonstrations.
 -- These statements are intentionally read-only until the explicit test
 -- transaction below, which rolls back all of its fixtures.
 
@@ -14,6 +14,268 @@ SELECT * FROM fn_match_prospects_for_team(
 SELECT fn_player_efficiency(
   (SELECT player_id FROM player ORDER BY player_id LIMIT 1)
 );
+
+-- Phase 4: relational query examples using the imported NBA sample.
+
+-- 1. Multi-table JOIN: game-level player output with real team and game context.
+SELECT
+  p.player_id,
+  p.f_name,
+  p.l_name,
+  p.position,
+  g.season,
+  g.game_date,
+  t.team_name,
+  gp.minutes,
+  gp.points,
+  gp.rebounds,
+  gp.assists
+FROM game_performance gp
+JOIN player p ON p.player_id = gp.player_id
+JOIN game g ON g.game_id = gp.game_id
+JOIN team t ON t.team_id = gp.team_id
+WHERE g.external_id LIKE 'nba:%'
+ORDER BY g.game_date DESC, gp.points DESC, p.l_name, p.f_name
+LIMIT 20;
+
+-- 2. GROUP BY + HAVING: players averaging at least 20 points over 10+ games.
+SELECT
+  p.player_id,
+  p.f_name,
+  p.l_name,
+  p.position,
+  COUNT(*) AS games_played,
+  ROUND(AVG(gp.points), 2) AS avg_points
+FROM game_performance gp
+JOIN game g ON g.game_id = gp.game_id
+JOIN player p ON p.player_id = gp.player_id
+WHERE g.external_id LIKE 'nba:%'
+GROUP BY p.player_id, p.f_name, p.l_name, p.position
+HAVING COUNT(*) >= 10 AND AVG(gp.points) >= 20
+ORDER BY avg_points DESC, games_played DESC, p.l_name, p.f_name;
+
+-- 3. ORDER BY + LIMIT: top 10 players by points per game in the imported sample.
+SELECT
+  p.player_id,
+  p.f_name,
+  p.l_name,
+  p.position,
+  COUNT(*) AS games_played,
+  ROUND(AVG(gp.points), 2) AS avg_points
+FROM game_performance gp
+JOIN game g ON g.game_id = gp.game_id
+JOIN player p ON p.player_id = gp.player_id
+WHERE g.external_id LIKE 'nba:%'
+GROUP BY p.player_id, p.f_name, p.l_name, p.position
+ORDER BY avg_points DESC, games_played DESC, p.l_name, p.f_name
+LIMIT 10;
+
+-- 4. Correlated subquery: players above their position's mean player average.
+WITH player_averages AS (
+  SELECT
+    p.player_id,
+    p.f_name,
+    p.l_name,
+    p.position,
+    AVG(gp.points) AS avg_points
+  FROM game_performance gp
+  JOIN game g ON g.game_id = gp.game_id
+  JOIN player p ON p.player_id = gp.player_id
+  WHERE g.external_id LIKE 'nba:%'
+    AND p.position IS NOT NULL
+  GROUP BY p.player_id, p.f_name, p.l_name, p.position
+  HAVING COUNT(*) >= 10
+)
+SELECT
+  current_player.position,
+  current_player.player_id,
+  current_player.f_name,
+  current_player.l_name,
+  ROUND(current_player.avg_points, 2) AS avg_points
+FROM player_averages current_player
+WHERE current_player.avg_points > (
+  SELECT AVG(peer.avg_points)
+  FROM player_averages peer
+  WHERE peer.position = current_player.position
+)
+ORDER BY current_player.position, current_player.avg_points DESC;
+
+-- 5. EXISTS subquery: imported players with both a report and NBA appearances.
+SELECT p.player_id, p.f_name, p.l_name, p.position
+FROM player p
+WHERE EXISTS (
+  SELECT 1
+  FROM scouting_report sr
+  WHERE sr.player_id = p.player_id
+)
+AND EXISTS (
+  SELECT 1
+  FROM game_performance gp
+  JOIN game g ON g.game_id = gp.game_id
+  WHERE gp.player_id = p.player_id
+    AND g.external_id LIKE 'nba:%'
+)
+ORDER BY p.position NULLS LAST, p.l_name, p.f_name
+LIMIT 20;
+
+-- 6. Window function: rank each player's points average within their position.
+WITH player_averages AS (
+  SELECT
+    p.player_id,
+    p.f_name,
+    p.l_name,
+    p.position,
+    COUNT(*) AS games_played,
+    AVG(gp.points) AS avg_points
+  FROM game_performance gp
+  JOIN game g ON g.game_id = gp.game_id
+  JOIN player p ON p.player_id = gp.player_id
+  WHERE g.external_id LIKE 'nba:%'
+    AND p.position IS NOT NULL
+  GROUP BY p.player_id, p.f_name, p.l_name, p.position
+  HAVING COUNT(*) >= 10
+), ranked_players AS (
+  SELECT
+    player_averages.*,
+    ROW_NUMBER() OVER (
+      PARTITION BY position
+      ORDER BY avg_points DESC, games_played DESC, l_name, f_name
+    ) AS position_rank
+  FROM player_averages
+)
+SELECT
+  position,
+  position_rank,
+  player_id,
+  f_name,
+  l_name,
+  games_played,
+  ROUND(avg_points, 2) AS avg_points
+FROM ranked_players
+WHERE position_rank <= 3
+ORDER BY position, position_rank;
+
+-- 7. Keyword full-text search over generated scouting-report search vectors.
+SELECT
+  sr.report_id,
+  p.f_name,
+  p.l_name,
+  ts_rank_cd(
+    sr.search_vector,
+    plainto_tsquery('english', 'points rebounds assists')
+  ) AS keyword_rank,
+  sr.summary
+FROM scouting_report sr
+JOIN player p ON p.player_id = sr.player_id
+WHERE sr.search_vector @@ plainto_tsquery('english', 'points rebounds assists')
+ORDER BY keyword_rank DESC, sr.report_id
+LIMIT 10;
+
+-- 8. Pure vector search: find reports nearest to one embedded report.
+-- The scalar subqueries select the same anchor and support HNSW ORDER BY.
+SELECT
+  sr.report_id,
+  p.f_name,
+  p.l_name,
+  1 - (
+    sr.embedding <=> (
+      SELECT anchor.embedding
+      FROM scouting_report anchor
+      WHERE anchor.embedding IS NOT NULL
+      ORDER BY anchor.report_id
+      LIMIT 1
+    )
+  ) AS cosine_similarity,
+  sr.summary
+FROM scouting_report sr
+JOIN player p ON p.player_id = sr.player_id
+WHERE sr.embedding IS NOT NULL
+  AND sr.embedding_model = (
+    SELECT anchor.embedding_model
+    FROM scouting_report anchor
+    WHERE anchor.embedding IS NOT NULL
+    ORDER BY anchor.report_id
+    LIMIT 1
+  )
+  AND sr.report_id <> (
+    SELECT anchor.report_id
+    FROM scouting_report anchor
+    WHERE anchor.embedding IS NOT NULL
+    ORDER BY anchor.report_id
+    LIMIT 1
+  )
+ORDER BY sr.embedding <=> (
+  SELECT anchor.embedding
+  FROM scouting_report anchor
+  WHERE anchor.embedding IS NOT NULL
+  ORDER BY anchor.report_id
+  LIMIT 1
+)
+LIMIT 10;
+
+-- 9. Hybrid search: nearest reports plus an exact player-position filter.
+WITH anchor AS MATERIALIZED (
+  SELECT sr.report_id, sr.embedding, sr.embedding_model, p.position
+  FROM scouting_report sr
+  JOIN player p ON p.player_id = sr.player_id
+  WHERE sr.embedding IS NOT NULL
+    AND p.position IS NOT NULL
+  ORDER BY sr.report_id
+  LIMIT 1
+)
+SELECT
+  sr.report_id,
+  p.player_id,
+  p.f_name,
+  p.l_name,
+  p.position,
+  1 - (sr.embedding <=> anchor.embedding) AS cosine_similarity,
+  sr.summary
+FROM anchor
+JOIN scouting_report sr
+  ON sr.embedding_model = anchor.embedding_model
+ AND sr.embedding IS NOT NULL
+JOIN player p ON p.player_id = sr.player_id
+WHERE sr.report_id <> anchor.report_id
+  AND p.position = anchor.position
+ORDER BY sr.embedding <=> anchor.embedding
+LIMIT 10;
+
+-- 10. Vector query plan without the report HNSW index.
+-- Transactional DDL removes it for this plan only and ROLLBACK restores it.
+-- Run against the demo database, not during concurrent application traffic.
+BEGIN;
+DROP INDEX IF EXISTS idx_scouting_report_embedding_hnsw;
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT sr.report_id
+FROM scouting_report sr
+WHERE sr.embedding IS NOT NULL
+ORDER BY sr.embedding <=> (
+  SELECT anchor.embedding
+  FROM scouting_report anchor
+  WHERE anchor.embedding IS NOT NULL
+  ORDER BY anchor.report_id
+  LIMIT 1
+)
+LIMIT 5;
+ROLLBACK;
+
+-- 11. Same vector query with the Phase 3C HNSW index present.
+-- Sequential scans are discouraged to make the index plan visible on demo data.
+SET enable_seqscan = off;
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT sr.report_id
+FROM scouting_report sr
+WHERE sr.embedding IS NOT NULL
+ORDER BY sr.embedding <=> (
+  SELECT anchor.embedding
+  FROM scouting_report anchor
+  WHERE anchor.embedding IS NOT NULL
+  ORDER BY anchor.report_id
+  LIMIT 1
+)
+LIMIT 5;
+RESET enable_seqscan;
 
 -- The procedure is called inside the acceptance transaction below so its
 -- locking, need update, audit row, and rollback behavior are demonstrated.
@@ -49,14 +311,14 @@ DECLARE
   v_efficiency NUMERIC;
   i INTEGER;
 BEGIN
-  INSERT INTO team (external_id, team_name, city, abbreviation)
-  VALUES ('phase2-home', 'Phase 2 Home', 'Test City', 'P2H')
+  INSERT INTO team (external_id, team_name, city)
+  VALUES ('phase2-home', 'Phase 2 Home', 'Test City')
   RETURNING team_id INTO v_home_team;
-  INSERT INTO team (external_id, team_name, city, abbreviation)
-  VALUES ('phase2-away', 'Phase 2 Away', 'Test City', 'P2A')
+  INSERT INTO team (external_id, team_name, city)
+  VALUES ('phase2-away', 'Phase 2 Away', 'Test City')
   RETURNING team_id INTO v_away_team;
-  INSERT INTO team (external_id, team_name, city, abbreviation)
-  VALUES ('phase2-outsider', 'Phase 2 Outsider', 'Test City', 'P2O')
+  INSERT INTO team (external_id, team_name, city)
+  VALUES ('phase2-outsider', 'Phase 2 Outsider', 'Test City')
   RETURNING team_id INTO v_outsider_team;
 
   INSERT INTO person (
