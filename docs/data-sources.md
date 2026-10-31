@@ -26,8 +26,32 @@ inserts `draft_prospect` rows. It does not import the Draft Like a Pro dataset.
 `injury_history` is deliberately empty in Phase 3A: no real injury source has
 been introduced, so no injuries are fabricated.
 
-## Generated data
+## Phase 3B generated supporting data
 
-No generated data is created by Phase 3A. Scouting reports, news articles, and
-their embeddings belong to Phase 3B/3C and are intentionally not part of this
-implementation.
+`db/postgres/06_seed.sql` creates only application-supporting synthetic data:
+four local demo accounts and subtype rows, one manager assigned to the first
+imported team, demo team needs, and empty app-managed rosters for the current
+calendar year. It does not create player statistics, measurements, injuries,
+or draft prospects. The shared demo password is `DraftBoardDemo!2026`; these
+accounts are for local demonstration only.
+
+Run `scripts/seed-phase3b.ps1` after the Phase 3A import. It applies the SQL
+seed and runs `npm run text:generate`. The generator reads the imported
+2017–2019 NBA box-score averages and safely matched combine measurements,
+then inserts 120 scouting reports and 60 news-style articles. Each report and
+article is explicitly labeled in its text as generated demo material, not a
+real scouting report or news item. Articles mention an imported player through
+`article_mention`; no real-world event, quote, transaction, or injury is
+invented. No injury rows are added.
+
+The generator writes its output to `db/seed/reports.json` and
+`db/seed/articles.json`. The report JSON also carries one of eight statistical
+profile labels and its evaluation query for the future retrieval evaluator.
+Those labels are kept in the JSON output only; they are not added to the
+database or embedded in report text. Generated database rows use reserved
+prefixes so rerunning the generator replaces only its own records. The
+generator prints the first 20 report summaries for a spot-check.
+
+These are synthetic demo texts based on real imported values, not authored
+scouting analysis or published reporting. Do not present them as genuine
+scouting reports or news in the demo.

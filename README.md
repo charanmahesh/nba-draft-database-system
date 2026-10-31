@@ -1,6 +1,8 @@
 # DraftBoard
 
-Phase 0 scaffold for the DraftBoard scouting and draft decision-support system.
+DraftBoard is a scouting and team-recruitment database project. Real NBA
+statistics and safely matched combine measurements are imported separately
+from synthetic application-supporting demo data.
 
 ## Phase 0 setup
 
@@ -25,4 +27,34 @@ Phase 0 scaffold for the DraftBoard scouting and draft decision-support system.
    npm run dev
    ```
 
-The health route checks both the PostgreSQL connection and the `vector` extension. No schema scripts are included yet; those belong to Phase 1.
+The health route checks both the PostgreSQL connection and the `vector` extension.
+
+## Phase 3B supporting data
+
+After applying the schema and Phase 2 database objects, configure `psql` with
+the PostgreSQL connection environment variables (`PGHOST`, `PGPORT`, `PGUSER`,
+`PGPASSWORD`, and `PGDATABASE`). From the repository root, run the Phase 3A
+import followed by the Phase 3B seed:
+
+```powershell
+.\scripts\import-phase3a.ps1
+.\scripts\seed-phase3b.ps1
+```
+
+This seeds demo accounts, team needs, and empty app-managed current-season
+rosters, then generates 120 scouting reports and 60 news-style demo articles
+from the imported NBA statistics and safely matched measurements. The generated
+texts are explicitly labeled synthetic and are not real scouting reports or
+news. JSON output, including the report evaluation labels, is written to
+`db/seed/`.
+
+Local demo accounts all use the password `DraftBoardDemo!2026`:
+
+| Role | Email |
+| --- | --- |
+| Admin | `admin@draftboard.local` |
+| Scout | `scout@draftboard.local` |
+| Analyst | `analyst@draftboard.local` |
+| Team manager | `manager@draftboard.local` |
+
+These are local demonstration credentials, not production credentials.
