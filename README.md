@@ -58,3 +58,18 @@ Local demo accounts all use the password `DraftBoardDemo!2026`:
 | Team manager | `manager@draftboard.local` |
 
 These are local demonstration credentials, not production credentials.
+
+## Phase 3C embeddings
+
+After Phase 3B has generated its reports and articles, run the missing-vector
+backfill, create the HNSW indexes, and evaluate retrieval:
+
+```powershell
+npm run seed:phase3c
+```
+
+This embeds report summaries and article titles plus summaries using the
+configured 384-dimensional local model, creates the cosine HNSW indexes, and
+checks top-five retrieval for each report archetype. The evaluation exits with
+an error if any archetype has fewer than three matching reports in its top
+five. For individual steps, see [docs/vector-search.md](./docs/vector-search.md).
