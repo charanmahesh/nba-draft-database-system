@@ -82,3 +82,6 @@ reference/
 
 .next-fail
 .next-check
+
+# Local browser failure screenshots
+tests/ui-failures/

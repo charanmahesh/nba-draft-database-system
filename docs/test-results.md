@@ -71,3 +71,7 @@ The complete scout, analyst, manager and admin suite passed **25 checks, 0 faile
 ## Phase 7 Team Match — 2026-11-01
 
 The full browser suite passed **27 checks, 0 failed**, including manager own-team scoping and score breakdowns, an attempted cross-team query, and the admin team picker. TypeScript and a production build passed after stopping the development server to prevent concurrent route-type generation. The local server was restarted after the build.
+
+## Phase 7 search browser check — 2026-11-01
+
+The full browser suite passed **31 checks, 0 failed**, including semantic filter parameters and similarity bars and all three documented keyword-versus-semantic demo queries. Each demo returned five semantic results and at most one keyword result in this run. The first run exposed an accessible filter-label issue, which was fixed; its screenshot remains local in `tests/ui-failures/`. TypeScript and the production build passed with the development server stopped; the server was restarted afterward. The examples use generated, in-sample demonstration reports and do not establish general retrieval accuracy.

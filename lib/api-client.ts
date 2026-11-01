@@ -21,7 +21,7 @@ export interface Article { article_id:Id; title:string; publish_date:string; sum
 export interface Match { player_id:Id; f_name:string; l_name:string; position:Position; target_season:number; need_id:Id; need_priority:number; position_score:Numeric; stats_score:Numeric; measurement_bonus:Numeric; match_score:Numeric }
 export interface SemanticReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; similarity:number; f_name?:string; l_name?:string; position?:Position|null }
 export interface SimilarPlayer { player_id:Id; f_name:string; l_name:string; position:Position|null; similarity:number }
-export interface KeywordReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; rank:number; headline:string }
+export interface KeywordReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; f_name:string; l_name:string; position:Position|null; rank:number; headline:string }
 export interface Person { person_id:Id; f_name:string; l_name:string; email:string; role:Role }
 export type PersonInput = {f_name:string;l_name:string;email:string;password:string} & ({role:"admin";subtype:{role:"admin"}}|{role:"scout";subtype:{role:"scout";experience?:number}}|{role:"analyst";subtype:{role:"analyst";specialization?:string}}|{role:"team_manager";subtype:{role:"team_manager";team_id:Id}});
 export type Page = {page?:number;limit?:number};
