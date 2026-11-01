@@ -68,6 +68,7 @@ async function main() {
   for (const [name,path,role,status] of [["own",`/api/teams/${team}/matches`,"manager",200],["cross-team",`/api/teams/${other}/matches`,"manager",403],["scout",`/api/teams/${team}/matches`,"scout",403],["analyst",`/api/teams/${team}/matches`,"analyst",403],["invalid","/api/teams/bad/matches","admin",400]] as const) await check(`team matches alias: ${name}`,async()=>{await request(role,path,status);});
   await documentChecks(player);
   await searchChecks();
+  await adminChecks();
   const roster=(await pool.query("SELECT roster_id, season FROM roster WHERE team_id=$1 AND NOT is_historical ORDER BY roster_id LIMIT 1",[team])).rows[0];
   if (!roster) throw new Error("Manager needs an app-managed roster");
   const candidates=(await pool.query("SELECT player_id FROM player p WHERE NOT EXISTS (SELECT 1 FROM roster_player rp WHERE rp.player_id=p.player_id AND rp.season=$1) ORDER BY player_id LIMIT 16",[roster.season])).rows.map(r=>String(r.player_id));
@@ -96,6 +97,23 @@ async function main() {
   }
   if (added.length) await check("roster: delete audit actor",async()=>{const row=await pool.query("SELECT 1 FROM audit_log WHERE table_name='roster_player' AND action='DELETE' AND changed_by=$1 AND old_data->>'roster_id'=$2 AND old_data->>'player_id'=$3 AND audit_id > $4",[actor,String(roster.roster_id),added[0],auditBaseline]);if(!row.rowCount)throw new Error("audit actor missing");});
 }
+async function adminChecks(){
+  const suffix=`${Date.now()}-${Math.floor(Math.random()*100000)}`;
+  const teamBody={team_name:`API fixture ${suffix}`,city:"Test"};
+  const personBody={f_name:"API",l_name:"Fixture",email:`api-${suffix}@draftboard.local`,password:"temporary-test-password",role:"scout",subtype:{role:"scout",experience:2}};
+  for(const role of ["scout","analyst","manager"]){await check(`admin team create: ${role} denied`,async()=>{await request(role,"/api/teams",403,"POST",teamBody);});await check(`admin person create: ${role} denied`,async()=>{await request(role,"/api/persons",403,"POST",personBody);});}
+  let teamId:string|undefined;let personId:string|undefined;
+  try{
+    await check("admin team create",async()=>{const row=await request("admin","/api/teams",201,"POST",teamBody);teamId=String(row.team_id);});
+    if(teamId){for(const role of ["scout","analyst","manager"])await check(`admin team edit: ${role} denied`,async()=>{await request(role,`/api/teams/${teamId}`,403,"PATCH",{city:"New"});});await check("admin team edit",async()=>{const row=await request("admin",`/api/teams/${teamId}`,200,"PATCH",{city:"New"});if(row.city!=="New")throw new Error("city unchanged");});}
+    await check("admin person and subtype create",async()=>{const row=await request("admin","/api/persons",201,"POST",personBody);personId=String(row.person_id);const data=await pool.query("SELECT p.password_hash,s.experience FROM person p JOIN scout s USING(person_id) WHERE p.person_id=$1",[personId]);const bcrypt=await import("bcryptjs");if(!data.rowCount||!await bcrypt.compare(personBody.password,data.rows[0].password_hash))throw new Error("subtype or password hash missing");});
+    await check("person mismatch rolls back",async()=>{const body={...personBody,email:`mismatch-${suffix}@draftboard.local`,subtype:{role:"admin"}};await request("admin","/api/persons",422,"POST",body);if((await pool.query("SELECT 1 FROM person WHERE email=$1",[body.email])).rowCount)throw new Error("person was not rolled back");});
+    await check("admin team invalid",async()=>{await request("admin","/api/teams",400,"POST",{});});
+    await check("admin person invalid",async()=>{await request("admin","/api/persons",400,"POST",{});});
+    await check("admin team missing",async()=>{await request("admin","/api/teams/9223372036854775807",404,"PATCH",{city:"New"});});
+  } finally {if(personId)await pool.query("DELETE FROM person WHERE person_id=$1",[personId]);if(teamId)await pool.query("DELETE FROM team WHERE team_id=$1",[teamId]);}
+}
+
 async function searchChecks() {
   const labels=JSON.parse(await readFile("db/seed/reports.json","utf8")) as {reports:{report_id:string;archetype:string}[]};
   const demos=[["protects the basket from opposing layups","rim_protector"],["facilitator who sets up teammates","playmaking_guard"],["lockdown perimeter defender","defensive_stopper"]] as const;

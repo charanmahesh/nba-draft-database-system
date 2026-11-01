@@ -4,6 +4,7 @@ import { ROLES, requireRole } from "../auth/guard";
 import { pageSchema } from "../validators/core";
 export function failure(error: unknown) {
   const code = typeof error === "object" && error !== null && "code" in error ? (error as { code: unknown }).code : null;
+  if (code === "SUBTYPE_MISMATCH") return NextResponse.json({ ok: false, error: "Role and subtype must match" }, { status: 422 });
   if (code === "HISTORICAL") return NextResponse.json({ ok: false, error: "Historical rosters cannot be modified" }, { status: 422 });
   if (code === "23514" && error instanceof Error && /cannot contain more than 15 players/.test(error.message)) return NextResponse.json({ ok: false, error: "Roster cannot contain more than 15 players" }, { status: 422 });
   if (code === "23505") return NextResponse.json({ ok: false, error: "Record already exists" }, { status: 409 });
