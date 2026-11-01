@@ -15,6 +15,9 @@ SELECT fn_player_efficiency(
   (SELECT player_id FROM player ORDER BY player_id LIMIT 1)
 );
 
+-- Phase 6 NBA team match: uses the most recent managed roster season.
+SELECT * FROM fn_match_players_for_team((SELECT team_id FROM team ORDER BY team_id LIMIT 1)) LIMIT 10;
+
 -- Phase 4: relational query examples using the imported NBA sample.
 
 -- 1. Multi-table JOIN: game-level player output with real team and game context.

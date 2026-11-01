@@ -164,3 +164,47 @@ AS $$
   FROM game_performance gp
   WHERE gp.player_id = p_player_id;
 $$;
+
+-- Current NBA scouting workflow. Scores are transparent proxies, not a
+-- prediction of player quality. The latest managed roster defines the season.
+CREATE OR REPLACE FUNCTION fn_match_players_for_team(p_team_id BIGINT)
+RETURNS TABLE (
+  player_id BIGINT, f_name TEXT, l_name TEXT, "position" player_position,
+  target_season SMALLINT, need_id BIGINT, need_priority SMALLINT,
+  position_score NUMERIC, stats_score NUMERIC, measurement_bonus NUMERIC,
+  match_score NUMERIC
+)
+LANGUAGE plpgsql STABLE AS $$
+DECLARE
+  v_season SMALLINT;
+BEGIN
+  SELECT r.season INTO v_season FROM roster r
+  WHERE r.team_id = p_team_id AND NOT r.is_historical
+  ORDER BY r.season DESC LIMIT 1;
+  IF v_season IS NULL THEN RETURN; END IF;
+
+  RETURN QUERY
+  WITH candidates AS (
+    SELECT p.player_id, p.f_name, p.l_name, p.position, n.need_id, n.priority,
+      (n.priority * 20)::numeric AS ps,
+      COALESCE(LEAST(ROUND(AVG(gp.points + gp.rebounds + gp.assists + gp.steals + gp.blocks), 2), 50), 0)::numeric AS ss,
+      LEAST(COUNT(DISTINCT cm.measurement_id) * 2, 10)::numeric AS mb
+    FROM player p
+    JOIN LATERAL (
+      SELECT tn.need_id, tn.priority FROM team_need tn
+      WHERE tn.team_id = p_team_id AND NOT tn.is_filled AND tn.position = p.position
+      ORDER BY tn.priority DESC, tn.need_id LIMIT 1
+    ) n ON true
+    LEFT JOIN game_performance gp ON gp.player_id = p.player_id
+    LEFT JOIN LATERAL (SELECT m.measurement_id FROM combined_measurement m WHERE m.player_id = p.player_id LIMIT 5) cm ON true
+    WHERE p.position IS NOT NULL AND NOT EXISTS (
+      SELECT 1 FROM roster_player rp WHERE rp.player_id = p.player_id AND rp.season = v_season
+    )
+    GROUP BY p.player_id, n.need_id, n.priority
+    HAVING COUNT(DISTINCT gp.performance_id) >= 10
+  )
+  SELECT c.player_id, c.f_name, c.l_name, c.position, v_season,
+         c.need_id, c.priority, c.ps, c.ss, c.mb, c.ps + c.ss + c.mb
+  FROM candidates c ORDER BY c.ps + c.ss + c.mb DESC, c.player_id;
+END;
+$$;
