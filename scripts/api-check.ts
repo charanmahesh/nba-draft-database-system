@@ -17,6 +17,7 @@ async function check(name: string, fn: () => Promise<void>) {
 async function request(role: string, path: string, status: number, method = "GET", body?: unknown, target = base) {
   const response = await fetch(`${target}${path}`, {method, headers: {cookie:cookies[role] ?? "", "content-type":"application/json"}, ...(body === undefined ? {} : {body: JSON.stringify(body)})});
   const data = await response.json().catch(() => null);
+  if (status >= 400 && (data?.ok !== false || typeof data?.error !== "string" || /\b(SELECT|INSERT|UPDATE|DELETE|stack trace|at .+\.ts:)\b/i.test(data.error))) throw new Error(`unsafe or malformed error response: ${JSON.stringify(data)}`);
   if (response.status !== status || (status < 400 && !data?.ok)) throw new Error(`expected ${status}, got ${response.status}: ${JSON.stringify(data)}`);
   return data?.data;
 }
@@ -52,6 +53,9 @@ async function main() {
     for (const role of ["scout", "manager"]) await check(`${w.path}: ${role} write forbidden`, async () => { await request(role,`/api/${w.path}`,403,"POST",w.body); });
     await check(`${w.path}: invalid write`, async () => { await request("admin",`/api/${w.path}`,400,"POST",{}); });
   }
+  await check("performance: missing reference conflict",async()=>{await request("analyst","/api/performances",409,"POST",{game_id:"9223372036854775807",player_id:String(freePlayer),team_id:String(game.home_team_id),minutes:1});});
+  await check("performance: invalid game team database rule",async()=>{const wrong=(await pool.query("SELECT t.team_id FROM team t JOIN game g ON g.game_id=$1 WHERE t.team_id NOT IN (g.home_team_id,g.away_team_id) LIMIT 1",[game.game_id])).rows[0].team_id;await request("analyst","/api/performances",422,"POST",{game_id:String(game.game_id),player_id:String(freePlayer),team_id:String(wrong),minutes:1});});
+  for(const path of ["/api/players/9223372036854775807","/api/reports/9223372036854775807","/api/news/9223372036854775807"])await check(`missing resource: ${path}`,async()=>{await request("admin",path,404);});
   for (const resource of ["needs","roster"]) {
     await check(`${resource}: manager read`, async () => { await request("manager",`/api/teams/${team}/${resource}`,200); });
     await check(`${resource}: admin read`, async () => { await request("admin",`/api/teams/${team}/${resource}`,200); });
@@ -69,6 +73,8 @@ async function main() {
   await documentChecks(player);
   await searchChecks();
   await adminChecks();
+  await check("production ignores forced embedding failure",async()=>{const env={...process.env,NODE_ENV:"production" as const,EMBEDDING_FORCE_FAIL:"1"};const result=await execFileAsync(process.execPath,["--import","tsx","-e","import('./lib/embeddings/embed.ts').then(async m => {const f=m.embedText ?? m.default.embedText; const v=await f('production embedding check'); if(v.length!==384) process.exit(1);})"],{env,timeout:180000});if(result.stderr.includes("Forced embedding failure"))throw new Error("failure flag was applied");});
+  for(const path of ["/api/teams/9223372036854775807/needs","/api/teams/9223372036854775807/roster"]) await check(`missing team: ${path}`,async()=>{await request("admin",path,404);});
   const roster=(await pool.query("SELECT roster_id, season FROM roster WHERE team_id=$1 AND NOT is_historical ORDER BY roster_id LIMIT 1",[team])).rows[0];
   if (!roster) throw new Error("Manager needs an app-managed roster");
   const candidates=(await pool.query("SELECT player_id FROM player p WHERE NOT EXISTS (SELECT 1 FROM roster_player rp WHERE rp.player_id=p.player_id AND rp.season=$1) ORDER BY player_id LIMIT 16",[roster.season])).rows.map(r=>String(r.player_id));
@@ -106,6 +112,7 @@ async function adminChecks(){
   try{
     await check("admin team create",async()=>{const row=await request("admin","/api/teams",201,"POST",teamBody);teamId=String(row.team_id);});
     if(teamId){for(const role of ["scout","analyst","manager"])await check(`admin team edit: ${role} denied`,async()=>{await request(role,`/api/teams/${teamId}`,403,"PATCH",{city:"New"});});await check("admin team edit",async()=>{const row=await request("admin",`/api/teams/${teamId}`,200,"PATCH",{city:"New"});if(row.city!=="New")throw new Error("city unchanged");});}
+    if(teamId) await check("duplicate team returns conflict",async()=>{await request("admin","/api/teams",409,"POST",teamBody);});
     await check("admin person and subtype create",async()=>{const row=await request("admin","/api/persons",201,"POST",personBody);personId=String(row.person_id);const data=await pool.query("SELECT p.password_hash,s.experience FROM person p JOIN scout s USING(person_id) WHERE p.person_id=$1",[personId]);const bcrypt=await import("bcryptjs");if(!data.rowCount||!await bcrypt.compare(personBody.password,data.rows[0].password_hash))throw new Error("subtype or password hash missing");});
     await check("person mismatch rolls back",async()=>{const body={...personBody,email:`mismatch-${suffix}@draftboard.local`,subtype:{role:"admin"}};await request("admin","/api/persons",422,"POST",body);if((await pool.query("SELECT 1 FROM person WHERE email=$1",[body.email])).rowCount)throw new Error("person was not rolled back");});
     await check("admin team invalid",async()=>{await request("admin","/api/teams",400,"POST",{});});

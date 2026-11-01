@@ -9,7 +9,7 @@ export function failure(error: unknown) {
   if (code === "23514" && error instanceof Error && /cannot contain more than 15 players/.test(error.message)) return NextResponse.json({ ok: false, error: "Roster cannot contain more than 15 players" }, { status: 422 });
   if (code === "23505") return NextResponse.json({ ok: false, error: "Record already exists" }, { status: 409 });
   if (code === "23503") return NextResponse.json({ ok: false, error: "Referenced record does not exist" }, { status: 409 });
-  if (code === "23514" || code === "P0001") return NextResponse.json({ ok: false, error: "Record violates a database rule" }, { status: 422 });
+  if (code === "23514" || code === "23502" || code === "22003" || code === "P0001") return NextResponse.json({ ok: false, error: "Record violates a database rule" }, { status: 422 });
   return NextResponse.json({ ok: false, error: "Database request failed" }, { status: 500 });
 }
 export async function list(request: Request, fn: (page: number, limit: number) => Promise<unknown>) {

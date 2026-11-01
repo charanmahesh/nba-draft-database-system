@@ -29,7 +29,8 @@ export async function getSession(): Promise<Session | null> {
 
 type GuardResult = { session: Session; error?: never } | { session?: never; error: NextResponse };
 export async function requireRole(roles: readonly Role[]): Promise<GuardResult> {
-  const session = await getSession();
+  let session: Session | null;
+  try { session = await getSession(); } catch { return { error: NextResponse.json({ ok: false, error: "Authentication unavailable" }, { status: 503 }) }; }
   if (!session) return { error: NextResponse.json({ ok: false, error: "Authentication required" }, { status: 401 }) };
   if (!roles.includes(session.role)) return { error: NextResponse.json({ ok: false, error: "Forbidden" }, { status: 403 }) };
   return { session };
