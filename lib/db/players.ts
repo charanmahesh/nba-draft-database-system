@@ -15,12 +15,15 @@ export async function listPlayers(input: PlayerListInput) {
       GROUP BY p.player_id
       HAVING count(gp.performance_id) >= $5
     )
-    SELECT *, count(*) OVER()::int AS total FROM matching
+    SELECT matching.*, totals.total FROM (SELECT count(*)::int AS total FROM matching) totals LEFT JOIN LATERAL (SELECT * FROM matching
     ORDER BY CASE WHEN $6 = 'points' THEN avg_points END DESC NULLS LAST,
              CASE WHEN $6 = 'games' THEN games END DESC NULLS LAST,
              l_name, f_name, player_id
-    LIMIT $7 OFFSET $8`, [input.position ?? null, input.name ?? null, input.season ?? null, input.team ?? null, input.minGames, input.sort, input.limit, (input.page - 1) * input.limit]);
-  return { items: result.rows, total: result.rows[0]?.total ?? 0, page: input.page, limit: input.limit };
+    LIMIT $7 OFFSET $8) matching ON true
+`, [input.position ?? null, input.name ?? null, input.season ?? null, input.team ?? null, input.minGames, input.sort, input.limit, (input.page - 1) * input.limit]);
+  const total = result.rows[0]?.total ?? 0;
+  const items = result.rows.filter(row => row.player_id !== null).map(({ total: _total, ...row }) => row);
+  return { items, total, page: input.page, limit: input.limit };
 }
 export async function getPlayer(id: string) {
   const player = await pool.query("SELECT * FROM v_player_profile WHERE player_id = $1", [id]);

@@ -1,7 +1,7 @@
 import { pool } from "./pg";
 import type { z } from "zod";
 import type { performanceSchema, measurementSchema, injurySchema } from "../validators/core";
-export async function teams() { return (await pool.query("SELECT team_id, team_name, city FROM team ORDER BY team_name, team_id")).rows; }
+export async function teams(page: number, limit: number) { return (await pool.query("SELECT team_id, team_name, city FROM team ORDER BY team_name, team_id LIMIT $1 OFFSET $2", [limit, (page-1)*limit])).rows; }
 export async function games(page: number, limit: number) { return (await pool.query("SELECT g.*, h.team_name AS home_team, a.team_name AS away_team FROM game g JOIN team h ON h.team_id = g.home_team_id JOIN team a ON a.team_id = g.away_team_id ORDER BY g.game_date DESC, g.game_id DESC LIMIT $1 OFFSET $2", [limit, (page-1)*limit])).rows; }
 export async function performances(page: number, limit: number) { return (await pool.query("SELECT * FROM game_performance ORDER BY performance_id DESC LIMIT $1 OFFSET $2", [limit,(page-1)*limit])).rows; }
 export async function measurements(page: number, limit: number) { return (await pool.query("SELECT * FROM combined_measurement ORDER BY measurement_id DESC LIMIT $1 OFFSET $2", [limit,(page-1)*limit])).rows; }
