@@ -208,3 +208,31 @@ BEGIN
   FROM candidates c ORDER BY c.ps + c.ss + c.mb DESC, c.player_id;
 END;
 $$;
+
+-- Aggregate dashboard data without truncating results to API list pages.
+CREATE OR REPLACE FUNCTION fn_dashboard(p_person_id BIGINT)
+RETURNS JSONB LANGUAGE plpgsql STABLE AS $$
+DECLARE v_role person_role; v_team BIGINT; v_result JSONB;
+BEGIN
+  SELECT p.role, tm.team_id INTO v_role,v_team FROM person p LEFT JOIN team_manager tm ON tm.person_id=p.person_id WHERE p.person_id=p_person_id;
+  IF v_role = 'admin' THEN
+    SELECT jsonb_build_object('role',v_role,'counts',jsonb_build_object(
+      'players',(SELECT count(*) FROM player),'teams',(SELECT count(*) FROM team),'reports',(SELECT count(*) FROM scouting_report),'open_needs',(SELECT count(*) FROM team_need WHERE NOT is_filled)),
+      'recent_reports',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT r.report_id::text,r.player_id::text,r.report_date,r.summary,concat_ws(' ',p.f_name,p.l_name) AS player_name,CASE WHEN r.embedding IS NULL THEN 'pending' ELSE 'indexed' END AS embedding_status FROM scouting_report r JOIN player p USING(player_id) ORDER BY r.report_date DESC,r.report_id DESC LIMIT 5) x),
+      'open_needs',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT n.need_id::text,t.team_name,n.position,n.priority,n.description FROM team_need n JOIN team t USING(team_id) WHERE NOT n.is_filled ORDER BY n.priority DESC,n.need_id LIMIT 8) x)) INTO v_result;
+  ELSIF v_role = 'scout' THEN
+    SELECT jsonb_build_object('role',v_role,'report_count',count(*),'pending_count',count(*) FILTER (WHERE r.embedding IS NULL),
+      'reports',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT sr.report_id::text,sr.player_id::text,sr.report_date,sr.summary,concat_ws(' ',p.f_name,p.l_name) AS player_name,CASE WHEN sr.embedding IS NULL THEN 'pending' ELSE 'indexed' END AS embedding_status FROM scouting_report sr JOIN player p USING(player_id) WHERE sr.scout_id=p_person_id ORDER BY sr.report_date DESC,sr.report_id DESC LIMIT 8) x)) INTO v_result FROM scouting_report r WHERE r.scout_id=p_person_id;
+  ELSIF v_role = 'analyst' THEN
+    SELECT jsonb_build_object('role',v_role,
+      'top_performers',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT p.player_id::text,concat_ws(' ',p.f_name,p.l_name) AS player_name,count(*)::int AS games,round(avg(gp.points),2) AS points FROM game_performance gp JOIN player p USING(player_id) GROUP BY p.player_id HAVING count(*)>=10 ORDER BY avg(gp.points) DESC,p.player_id LIMIT 5) x),
+      'efficiency_leaders',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT p.player_id::text,concat_ws(' ',p.f_name,p.l_name) AS player_name,count(*)::int AS games,round(sum(gp.points+gp.rebounds+gp.assists+gp.steals+gp.blocks)/nullif(sum(gp.minutes),0),3) AS efficiency FROM game_performance gp JOIN player p USING(player_id) GROUP BY p.player_id HAVING count(*)>=10 AND sum(gp.minutes)>0 ORDER BY sum(gp.points+gp.rebounds+gp.assists+gp.steals+gp.blocks)/nullif(sum(gp.minutes),0) DESC,p.player_id LIMIT 5) x)) INTO v_result;
+  ELSIF v_role = 'team_manager' THEN
+    SELECT jsonb_build_object('role',v_role,'team_id',v_team::text,'team_name',(SELECT team_name FROM team WHERE team_id=v_team),
+      'open_needs',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT need_id::text,position,priority,description FROM team_need WHERE team_id=v_team AND NOT is_filled ORDER BY priority DESC,need_id) x),
+      'roster',(SELECT to_jsonb(x) FROM (SELECT r.roster_id::text,r.season,count(rp.player_id)::int AS size FROM roster r LEFT JOIN roster_player rp USING(roster_id) WHERE r.team_id=v_team AND NOT r.is_historical GROUP BY r.roster_id ORDER BY r.season DESC LIMIT 1) x),
+      'matches',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT m.player_id::text,m.f_name,m.l_name,m.position,m.match_score,m.need_priority FROM fn_match_players_for_team(v_team) m ORDER BY m.match_score DESC,m.player_id LIMIT 5) x)) INTO v_result;
+  END IF;
+  RETURN v_result;
+END;
+$$;

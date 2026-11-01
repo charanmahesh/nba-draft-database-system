@@ -14,6 +14,10 @@ Successful responses use `{ "ok": true, "data": ... }`; errors use `{ "ok": fals
 | GET `/api/health` | Public | None | `{"ok":true,"data":{"database":"draftboard","vectorEnabled":true}}` |
 | GET `/api/embedding` | All roles | None | `{"ok":true,"data":{"model":"Xenova/all-MiniLM-L6-v2","dimensions":384,"expectedDimensions":384}}` |
 
+## Dashboard
+
+`GET /api/dashboard` requires any authenticated role and accepts no parameters. It returns role-specific data derived from the authenticated session: `{"ok":true,"data":{"role":"scout","report_count":1,"pending_count":0,"reports":[]}}` is an example. Admin receives counts, recent reports and open needs; analyst receives points-per-game and per-minute efficiency leaders (minimum ten games); manager receives their own team needs, latest app-managed roster and top five matches. Counts cover the database rather than a paginated sample.
+
 ## Players, teams and games
 
 | Method and path | Roles | Parameters | Example response |
