@@ -1,11 +1,11 @@
-# DraftBoard Phase 1 data dictionary
+# DraftBoard data dictionary
 
 ## Conventions
 
 - Primary keys are identity-backed `BIGINT` values unless a junction table uses a composite key.
 - Foreign keys use restrictive deletion when historical facts would be damaged, and cascade when a row has no independent meaning without its parent.
 - Nullable `dob`, `height_cm`, and `weight_kg` reflect gaps in source data; missing values are not fabricated.
-- Embedding metadata is nullable because Phase 3 may save text before embedding succeeds. If an embedding is present, its model and timestamp are required by a check constraint.
+- Embedding metadata is nullable because the application may save text before embedding succeeds. If an embedding is present, its model and timestamp are required by a check constraint.
 
 ## Types
 
@@ -36,17 +36,17 @@ The subtype foreign keys cascade when a person is deleted because subtype rows c
 
 ### `team_need`
 
-Stores a team's requested position, priority from 1 (lowest) to 5 (highest), description, and fill state. It cascades on team deletion. Phase 2 matching uses open needs and priority.
+Stores a team's requested position, priority from 1 (lowest) to 5 (highest), description, and fill state. It cascades on team deletion. Team Match uses open needs and priority.
 
 ### `roster` and `roster_player`
 
-`roster` has one row per team and season, with `is_historical` distinguishing imported historical rosters from app-managed rosters. `roster_player` is the membership junction. Its `season` is deliberately duplicated and protected by the composite foreign key. `UNIQUE(player_id, season)` enforces the one-roster-per-player-per-season rule, which is the database-level guard against double-drafting. A traded player is simplified to one roster row for the team they played the most games for; per-game team truth remains in `game_performance.team_id`.
+`roster` has one row per team and season, with `is_historical` distinguishing imported historical rosters from app-managed rosters. `roster_player` is the membership junction. Its `season` is deliberately duplicated and protected by the composite foreign key. `UNIQUE(player_id, season)` enforces the one-roster-per-player-per-season rule, which is the database-level guard against duplicate season membership. A traded player is simplified to one roster row for the team they played the most games for; per-game team truth remains in `game_performance.team_id`.
 
 Roster deletion cascades to memberships. Player deletion is restricted while membership exists.
 
 ### `player` and `draft_prospect`
 
-`player` stores one project-owned identity for each real player. `external_id` preserves the source identity. Position is nullable; hybrid source labels are mapped later to primary and secondary enum values. Height must be 150–240 cm and weight 45–200 kg when present. Secondary position cannot equal primary position. `draft_prospect` is the player subtype used for the draft pool and has an optional college plus class year.
+`player` stores one project-owned identity for each real player. `external_id` preserves the source identity. Position is nullable; hybrid source labels are mapped later to primary and secondary enum values. Height must be 150–240 cm and weight 45–200 kg when present. Secondary position cannot equal primary position. `draft_prospect` is an optional player subtype reserved for the future draft extension, with an optional college and class year. Current imports create no prospect rows.
 
 Prospect deletion cascades to its subtype row, while player deletion is restricted by historical performance/report references.
 
@@ -78,14 +78,22 @@ Game and performance deletion is restricted to preserve imported facts; team del
 
 ### `news_article` and `article_mention`
 
-News is stored in PostgreSQL rather than a separate store. The title and summary produce a generated GIN-backed keyword vector. The future embedding represents `title || '. ' || summary` and has 384 dimensions. `article_mention` models the many-to-many relationship between articles and players. Mentions cascade when an article is deleted; player deletion is restricted while an article mentions that player.
+News is stored in PostgreSQL rather than a separate store. The title and summary produce a generated GIN-backed keyword vector. The embedding represents `title || '. ' || summary` and has 384 dimensions. `article_mention` models the many-to-many relationship between articles and players. Mentions cascade when an article is deleted; player deletion is restricted while an article mentions that player.
 
 ### `audit_log`
 
-Stores table name, action, record key, old/new JSONB, optional `changed_by`, and timestamp. The user is set by the API transaction through `app.current_user_id`; the Phase 2 roster-membership audit trigger populates it. Deleting a person sets `changed_by` to NULL so audit history remains.
+Stores table name, action, record key, old/new JSONB, optional `changed_by`, and timestamp. The user is set by the API transaction through `app.current_user_id`; the roster-membership audit trigger populates it. Deleting a person sets `changed_by` to NULL so audit history remains.
 
 ## Index policy
 
 Foreign-key and common filter columns receive B-tree indexes. `scouting_report.search_vector` and `news_article.search_vector` receive GIN indexes. HNSW indexes on embedding columns are intentionally excluded from Phase 1 and belong only in `08_vector_indexes.sql` after embeddings are loaded.
 
 News embeddings are invalidated by a database trigger when either `title` or `summary` changes, since both fields form the embedded text. Report summary changes similarly clear report embedding metadata.
+
+## Views and functions
+
+`v_player_profile` combines player information, latest measurements and injury count; `v_team_open_needs` lists unfilled needs; `v_prospect_board` is retained for the future extension. `fn_player_efficiency(player_id)` divides total points, rebounds, assists, steals and blocks by total minutes, returning zero when no minutes exist.
+
+`fn_match_players_for_team(team_id)` uses the latest non-historical roster season; without one it returns no rows. It matches each positioned player to the highest-priority open need at that primary position, requires at least ten performances, and excludes anyone already on any roster in that season. It returns player identity, position, target season, need ID and priority, plus `position_score` (priority × 20), `stats_score` (average sum of points, rebounds, assists, steals and blocks per game, capped at 50), `measurement_bonus` (2 per recorded measurement, capped at 10), and their sum `match_score`. Results sort by score descending then player ID. These are transparent proxies, not predictions of player quality. The older prospect-matching and draft procedure are retained for a future extension, not exposed as active workflows.
+
+`fn_dashboard`, workspace, news and showcase functions support the current application; their contracts are exposed through [api.md](api.md). Roster insertion triggers enforce the 15-player limit only for managed rosters and record inserts, updates and deletes in the audit log. A deferred trigger verifies person/subtype consistency; a game-performance trigger verifies the team participated in the game.

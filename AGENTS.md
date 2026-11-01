@@ -101,8 +101,8 @@ There is no MongoDB or Neo4j in this project. Do not add them.
 ├─ app/
 │  ├─ (auth)/login/
 │  ├─ dashboard/              # role-based
-│  ├─ players/  prospects/  teams/  rosters/  games/
-│  ├─ reports/  news/  search/  draft-board/
+│  ├─ players/  teams/  games/
+│  ├─ reports/  news/  search/  team-match/
 │  └─ api/**                  # Route Handlers
 ├─ lib/
 │  ├─ db/pg.ts
@@ -292,31 +292,18 @@ a pure vector query, and a **hybrid query** (vector ordering + relational filter
 Also show `EXPLAIN ANALYZE` with and without the HNSW index. Document each in `docs/queries.md` with purpose + sample output.
 
 ### Phase 5: Auth + roles
-`POST /api/auth/login`, `/logout`, `GET /api/auth/me`. JWT cookie, `middleware.ts` protecting `/dashboard` and `/api/**`.
-`lib/auth/guard.ts`: `requireRole(['admin','scout'])`.
-Permissions:
-- **admin**: manage persons, teams, everything.
-- **scout**: create/edit own scouting reports, view players/prospects, use search.
-- **analyst**: record measurements, game performances, view all analytics and search.
-- **team_manager**: manage own team's needs and roster, run the draft function, view the draft board for own team only.
-**Done when:** a scout gets 403 on the draft route; a manager cannot touch another team's roster.
+`POST /api/auth/login`, `/logout`, `GET /api/auth/me`; JWT httpOnly cookie, middleware and per-route role checks.
+- **admin**: manage persons, teams and all application data.
+- **scout**: read players and search; create and edit only their own reports.
+- **analyst**: view analytics and search; record measurements, injuries and performances.
+- **team_manager**: manage only their own team's needs and roster and run Team Match for that team.
+**Done when:** unauthorized roles receive 403 and a manager cannot access another team's protected operations.
 
 ### Phase 6: Core API
-Route Handlers for players, prospects, teams, needs, rosters, games, performances, measurements, injuries, reports, news,
-`GET /api/draft-board?teamId=` (calls `fn_match_prospects_for_team`), `POST /api/draft` (explicit `BEGIN`/`COMMIT`/`ROLLBACK` around the draft procedure, with `app.current_user_id` set),
-and the vector endpoints from section 6 plus `GET /api/search/keyword?q=`.
-When a report or article is created or its summary edited: save the row, embed, update the vector (follow the failure rule in section 3).
-All inputs zod-validated; DB errors (constraint/trigger) mapped to readable 4xx messages.
+Route Handlers cover players, teams, needs, rosters, games, performances, measurements, injuries, reports, news, people, dashboards, Team Match, the SQL showcase and section 6 vector and keyword search. `GET /api/team-match?teamId=` uses `fn_match_players_for_team`; admin may select a team and managers are restricted to their own. API roster writes run in transactions with `app.current_user_id` set for auditing. Reports and articles are saved before embedding; failures leave them pending for backfill. Validate inputs and map DB errors to readable responses. Prospects and drafting remain future work; no draft API is part of the active scope.
 
 ### Phase 7: UI
-Login page, role-aware sidebar, and:
-- Dashboard per role (cards + Recharts charts: top performers, open needs, recent reports).
-- Players / Prospects tables with filter, sort, pagination (real data is large, paginate in SQL); player detail page (measurements, injuries, reports, related news, stat chart).
-- Scouting report form (embedding status shown: "indexed" / "pending").
-- Draft board page: ranked prospects for the manager's team with score breakdown and a "Draft" button.
-- **Semantic search page** with filters (position, class year, injury severity), similarity score on each result, and the keyword-vs-semantic side-by-side comparison.
-- News feed with player filter and "related articles".
-**Done when:** every phase 2/4/6 feature is reachable from the UI.
+Login, role-aware navigation and dashboards; paginated player list and detail; reports; games and analytics; teams, needs and rosters; Team Match with score breakdown; semantic search and keyword comparison; and news. Managers see their own team and admins can select a team. Clearly label generated content. Phase 2/4/6 features should be reachable within their intended permissions; draft/prospect workflows are future work.
 
 ### Phase 8: Tests
 `tests/` (vitest) with: SQL tests (constraint violation, trigger fires, transaction rollback, function output, same player in two rosters of one season rejected,
@@ -344,13 +331,13 @@ Complete all `docs/*` (especially `vector-search.md`, `db-justification.md`, `da
 | Auth, 2+ roles | Phase 5 (4 roles) |
 | DB-level validation + integrity | CHECK/FK/UNIQUE (incl. one roster per player-season), triggers, transactions, audit log |
 | Docs, Git/README, demo, tests | Phase 8, 9 |
-| Not just CRUD | draft board scoring, draft transaction, semantic + hybrid search |
+| Not just CRUD | Team Match scoring, audited roster transactions, semantic + hybrid search |
 | DB choice justified per data type | `docs/db-justification.md` (structured -> relational constraints; free text -> embeddings) |
 | Real-world data, clearly sourced | `docs/data-sources.md` (real vs generated per table) |
 
 ## 9. Team split (2 members, both must touch DB and app)
 
-- **Member A:** Phases 1, 2, 4 (schema, views/functions/triggers, queries) + backend routes for players, rosters, draft; auth.
+- **Member A:** Phases 1, 2, 4 (schema, views/functions/triggers, queries) + backend routes for players, rosters, Team Match; auth.
 - **Member B:** Phase 0 embedding spike, Phase 3 (Kaggle import, text generation, embedding pipeline, retrieval eval), vector/search routes, UI pages.
 - Both: review each other's PRs, write tests for own features, split docs. Use feature branches and PRs so commits show individual contribution.
 
@@ -361,7 +348,7 @@ Complete all `docs/*` (especially `vector-search.md`, `db-justification.md`, `da
 3. Run schema + import, show tables and constraints failing on bad input (double roster, 71 minutes).
 4. Show a view, a function result, a trigger firing, an audit_log row, a transaction rollback.
 5. Show a `vector(384)` column, the HNSW index, `EXPLAIN ANALYZE`, and one hybrid query.
-6. Live app: login as scout, then as team manager, run the draft board and draft a prospect.
+6. Live app: log in as scout to create a report, then as team manager to inspect own needs, roster and ranked Team Match results. Drafting is a future extension.
 7. Semantic search page: show a query where keyword search misses and semantic search hits.
 8. Show tests and git history by author.
 

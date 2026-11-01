@@ -100,3 +100,7 @@ QUERY PLAN
  Planning Time: 0.032 ms
  Execution Time: 0.536 ms
 ```
+
+## Active Team Match
+
+`fn_match_players_for_team(team_id)` applies open position needs to eligible NBA players and returns score components in descending order. The UI exposes it at `/team-match`, and `GET /api/team-match?teamId=...` enforces the manager's team boundary. The scoring formula, minimum game count, roster exclusion and limitations are recorded in [data-dictionary.md](data-dictionary.md). The legacy prospect examples in `07_queries.sql` remain as rolled-back demonstrations for a future draft extension.

@@ -146,7 +146,7 @@ Test the database as a source of truth, not only the HTTP layer. Cover constrain
 
 Vitest covers SQL, vector, retrieval and import tests. The API acceptance matrix and Playwright browser matrix cover HTTP roles, validation and workflows. `npm run test:all` runs all three against isolated test databases and temporary servers; results and limitations are recorded in `docs/test-results.md`.
 
-## Phase 9 — documentation and polish — planned
+## Phase 9 — documentation and polish — done
 
 ### Decisions
 
@@ -154,7 +154,7 @@ Make the project reproducible and explainable: README setup, data provenance, da
 
 ### Build approach
 
-Complete the documentation only after the implementation and tests reflect the final behavior. The demo should move from ER corrections and data provenance to constraints, database functions/triggers, vector indexes and hybrid queries, role-based workflow, and the semantic-search comparison.
+The ER diagram and its source, schema dictionary, database rationale, vector design, architecture, SQL examples, data sources, README and screenshots document the implemented scouting scope. The demo moves from ER corrections and provenance to constraints, functions and triggers, hybrid search, role workflows and the semantic-search comparison. Draft workflows remain future work.
 
 ## Cross-phase principles to repeat in the viva
 

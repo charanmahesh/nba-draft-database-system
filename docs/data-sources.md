@@ -55,3 +55,7 @@ generator prints the first 20 report summaries for a spot-check.
 These are synthetic demo texts based on real imported values, not authored
 scouting analysis or published reporting. Do not present them as genuine
 scouting reports or news in the demo.
+
+## Provenance at a glance
+
+Imported NBA facts: teams, selected players, games, performances and derived historical rosters. Safely matched combine records supply positions, physical attributes and measurements. Synthetic support: demo people and subtype rows, needs and managed rosters. Generated material: reports, articles and their mention links, derived from imported statistics; embeddings are model outputs over those generated texts. User-entered records are application data and should not be presented as imported facts. `import_unmatched` preserves unresolved combine records for inspection; `draft_prospect` and imported injury history remain empty under the documented import. See [db/import/mapping.md](../db/import/mapping.md) for exact cleaning and matching rules and [test-results.md](test-results.md) for measured subset counts.
