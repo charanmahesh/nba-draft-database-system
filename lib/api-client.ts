@@ -5,7 +5,8 @@ export type Id = string;
 export type Numeric = string | number;
 export interface Session { person_id:Id; name:string; email:string; role:Role; team_id:Id|null }
 export interface Player { player_id:Id; f_name:string; l_name:string; position:Position|null; height_cm:Numeric|null; weight_kg:Numeric|null; games:number; avg_points:Numeric|null }
-export interface PlayerDetail { player_id:Id; f_name:string; l_name:string; position:Position|null; season_averages:Record<string,unknown>[]; measurements:Measurement[]; injuries:Injury[]; reports:Report[]; news:Article[]; [key:string]:unknown }
+export interface SeasonAverage { season:number; games:number; minutes:Numeric|null; points:Numeric|null; rebounds:Numeric|null; assists:Numeric|null; steals:Numeric|null; blocks:Numeric|null }
+export interface PlayerDetail { player_id:Id; f_name:string; l_name:string; position:Position|null; secondary_position:Position|null; dob:string|null; height_cm:Numeric|null; weight_kg:Numeric|null; season_averages:SeasonAverage[]; measurements:Measurement[]; injuries:Injury[]; reports:Report[]; news:Article[]; [key:string]:unknown }
 export interface Team { team_id:Id; team_name:string; city:string }
 export interface Game { game_id:Id; game_date:string; season:number; home_team_id:Id; away_team_id:Id; home_team:string; away_team:string }
 export interface Performance { performance_id:Id; game_id:Id; player_id:Id; team_id:Id; minutes:Numeric; points:number; rebounds:number; assists:number; blocks:number; steals:number }
