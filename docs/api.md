@@ -65,11 +65,14 @@ Person `subtype` must match `role`: `{"role":"admin"}`, `{"role":"scout","experi
 | GET `/api/reports/:id` | All roles | Report ID | `{"ok":true,"data":{"report_id":"1","summary":"Example","embedding_status":"pending",…}}` |
 | PATCH `/api/reports/:id` | Admin, owning scout | JSON `summary` | `{"ok":true,"data":{"report_id":"1","summary":"Revised","embedding_status":"indexed",…}}` |
 | DELETE `/api/reports/:id` | Admin, owning scout | Report ID | `{"ok":true,"data":{"report_id":"1",…}}` |
-| GET `/api/news` | All roles | Query `page`, `limit` | `{"ok":true,"data":[]}` |
+| GET `/api/news` | All roles | Query `page`, `limit`, optional `playerId` for exact mentions | `{"ok":true,"data":[]}` |
 | POST `/api/news` | Admin | JSON `title`, `publish_date`, `summary`, optional `url` or null | `{"ok":true,"data":{"article_id":"1","title":"Example","embedding_status":"indexed",…}}` |
 | GET `/api/news/:id` | All roles | Article ID | `{"ok":true,"data":{"article_id":"1","title":"Example","embedding_status":"pending",…}}` |
+| GET `/api/news/:id/related` | All roles | Article ID; optional query `k` (1–100, default 5) | `{"ok":true,"data":[{"article_id":"2","similarity":0.8,…}]}` |
 | PATCH `/api/news/:id` | Admin | JSON at least one of `title`, `publish_date`, `summary`, `url` | `{"ok":true,"data":{"article_id":"1","title":"Revised","embedding_status":"indexed",…}}` |
 | DELETE `/api/news/:id` | Admin | Article ID | `{"ok":true,"data":{"article_id":"1",…}}` |
+
+The news feed orders articles by publish date and ID, newest first; the player filter uses exact mentions. Related articles use cosine similarity of indexed title-and-summary embeddings, exclude the source article, and return an empty list when the source has no compatible embedding.
 
 Text is saved before embedding. On failure, the response reports `embedding_status: "pending"`; `npm run embed -- --missing` backfills pending rows. Editing embedded text clears stale vectors before re-embedding.
 

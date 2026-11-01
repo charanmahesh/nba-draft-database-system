@@ -75,3 +75,7 @@ The full browser suite passed **27 checks, 0 failed**, including manager own-tea
 ## Phase 7 search browser check — 2026-11-01
 
 The full browser suite passed **31 checks, 0 failed**, including semantic filter parameters and similarity bars and all three documented keyword-versus-semantic demo queries. Each demo returned five semantic results and at most one keyword result in this run. The first run exposed an accessible filter-label issue, which was fixed; its screenshot remains local in `tests/ui-failures/`. TypeScript and the production build passed with the development server stopped; the server was restarted afterward. The examples use generated, in-sample demonstration reports and do not establish general retrieval accuracy.
+
+## Phase 7 news browser check — 2026-11-01
+
+The full UI suite passed **38 checks, 0 failed**, including the exact-mention player filter, pending and indexed badges, related articles, admin creation and editing, and re-indexing. The generated article and mention fixtures were removed. TypeScript and the production build passed. Apply the updated `db/postgres/04_functions.sql` to an existing database before using the new news routes.

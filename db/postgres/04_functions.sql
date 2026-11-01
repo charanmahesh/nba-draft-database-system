@@ -253,3 +253,20 @@ CREATE OR REPLACE FUNCTION fn_workspace_update_need(p_team_id bigint,p_need_id b
 RETURNS SETOF team_need LANGUAGE sql AS $$ UPDATE team_need SET position=coalesce(p_position,position),priority=coalesce(p_priority,priority),description=coalesce(p_description,description),is_filled=coalesce(p_is_filled,is_filled) WHERE team_id=p_team_id AND need_id=p_need_id RETURNING * $$;
 CREATE OR REPLACE FUNCTION fn_workspace_delete_need(p_team_id bigint,p_need_id bigint)
 RETURNS SETOF team_need LANGUAGE sql AS $$ DELETE FROM team_need WHERE team_id=p_team_id AND need_id=p_need_id RETURNING * $$;
+
+-- News feed filtering uses exact article mentions; semantic neighbours use the configured model.
+CREATE OR REPLACE FUNCTION fn_news_feed(p_limit integer,p_offset integer,p_player_id bigint)
+RETURNS TABLE(article_id bigint,title text,publish_date date,summary text,url text,embedding_status text)
+LANGUAGE sql STABLE AS $$
+ SELECT n.article_id,n.title,n.publish_date,n.summary,n.url,CASE WHEN n.embedding IS NULL THEN 'pending' ELSE 'indexed' END
+ FROM news_article n WHERE p_player_id IS NULL OR EXISTS (SELECT 1 FROM article_mention am WHERE am.article_id=n.article_id AND am.player_id=p_player_id)
+ ORDER BY n.publish_date DESC,n.article_id DESC LIMIT p_limit OFFSET p_offset
+$$;
+CREATE OR REPLACE FUNCTION fn_news_related(p_article_id bigint,p_model text,p_limit integer)
+RETURNS TABLE(article_id bigint,title text,publish_date date,summary text,url text,embedding_status text,similarity double precision)
+LANGUAGE sql STABLE AS $$
+ SELECT n.article_id,n.title,n.publish_date,n.summary,n.url,CASE WHEN n.embedding IS NULL THEN 'pending' ELSE 'indexed' END,1-(n.embedding <=> source.embedding)
+ FROM news_article source JOIN news_article n ON n.article_id<>source.article_id
+ WHERE source.article_id=p_article_id AND source.embedding IS NOT NULL AND source.embedding_model=p_model AND n.embedding IS NOT NULL AND n.embedding_model=p_model
+ ORDER BY n.embedding <=> source.embedding,n.article_id LIMIT p_limit
+$$;
