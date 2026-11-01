@@ -97,7 +97,7 @@ Demonstrate the DBMS syllabus directly: joins, grouping and `HAVING`, ordering a
 
 Keep executable examples in `07_queries.sql` and explain their purpose and sample output in `docs/queries.md`. The hybrid query performs vector ordering and relational filtering in one SQL statement, showing why structured and semantic retrieval belong together.
 
-## Phase 5 — authentication and roles — planned
+## Phase 5 — authentication and roles — implemented (core API stubs pending Phase 6)
 
 ### Decisions
 
