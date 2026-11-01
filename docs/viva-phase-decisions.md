@@ -109,7 +109,7 @@ Keep executable examples in `07_queries.sql` and explain their purpose and sampl
 
 Implement login, logout, and current-user routes. Centralize authorization in `lib/auth/guard.ts`. A team manager is additionally restricted to their own team, and a scout must receive 403 for draft actions. Passwords and JWT secrets always come from environment variables.
 
-## Phase 6 — core API — planned
+## Phase 6 — core API — done
 
 ### Decisions
 
@@ -120,7 +120,7 @@ Implement login, logout, and current-user routes. Centralize authorization in `l
 
 ### Build approach
 
-Build route handlers for the core entities, draft board, draft transaction, keyword search, semantic search, similar reports/prospects, and related news. Convert database constraint and trigger failures into readable client errors. Use the pgvector `toSql` helper and `::vector` casts for vector parameters.
+The current scouting API provides the implemented player, team, game, performance, measurement, injury, needs, roster, person, report, news, matching and search routes documented in `api.md`. It maps database constraint and trigger failures to client errors and uses pgvector `toSql` with `::vector` casts. Draft workflows and prospect endpoints remain future work under the current scouting scope. Some resources expose collection operations only; see `api.md` for the exact methods. The final local acceptance matrix passed 200 checks.
 
 ## Phase 7 — UI — planned
 

@@ -33,3 +33,13 @@ Reproduce with a running server and `DEMO_PASSWORD` set to the README's local de
 ## Phase 6 chunk 5 — 2026-11-01
 
 The expanded API matrix passed 176 checks against seeded data. It checked the three selected keyword-miss/semantic-hit examples against their generated archetype labels, similarity ordering and limits, position and injury filters, self-exclusion, exact news mentions, keyword rank and headlines, and invalid or anonymous requests. These examples remain in-sample demonstrations as described in `vector-search.md`.
+
+## Phase 6 final API matrix — 2026-11-01
+
+The final local run against the seeded PostgreSQL database and two development servers produced:
+
+```text
+Results: 200 passed, 0 failed
+```
+
+`npx tsc --noEmit` and `npm run build` also passed. The matrix covers role and team restrictions, writes and cleanup, 404/409/422 responses, roster cap and audit actor, report/news embedding failure and backfill, production-mode failure-flag behavior, and search filters and retrieval examples. It exercises representative errors; it is not an exhaustive fault-injection test for every database failure. Follow the two-server instructions in the README to reproduce; backfill processes all pending documents in the configured database.
