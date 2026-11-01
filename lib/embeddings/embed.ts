@@ -16,6 +16,7 @@ function getExtractor(): Promise<FeatureExtractor> {
 }
 
 export async function embedText(text: string): Promise<number[]> {
+  if (process.env.NODE_ENV !== "production" && process.env.EMBEDDING_FORCE_FAIL === "1") throw new Error("Forced embedding failure");
   const output = await (await getExtractor())(text, { pooling: "mean", normalize: true });
   const embedding = Array.from(output.data);
   if (embedding.length !== EMBEDDING_DIMENSIONS) {

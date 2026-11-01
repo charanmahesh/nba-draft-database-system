@@ -25,3 +25,7 @@ Descriptions were iteratively revised using both query sets, so these figures ar
 Scout and analyst received 403 for needs and roster writes and match board; a manager received 403 for the same endpoints on another team. Admin on another team and manager on their own team reached the authorized 501 placeholders. `withUserTx` set the transaction-local actor and rolled back a deliberately failed insert. These endpoints are authorization stubs, not Phase 6 functionality. Logout clears the browser cookie; JWTs are stateless and a copied token remains valid until its one-hour expiry.
 
 Reproduce with a running server and `DEMO_PASSWORD` set to the README's local demo password: `npx tsx scripts/phase5-check.ts`. For a production server, set `TEST_BASE_URL` and `TEST_EXPECT_SECURE=1` as well. The login UI is planned for Phase 7.
+
+## Phase 6 chunk 4 — 2026-11-01
+
+`npm run check:api` passed 154 checks against the seeded local database, using normal and forced-failure development servers. Report and news creation, failed embedding, backfill, edited text invalidation and re-embedding, report ownership, and the team matches alias were exercised; fixtures were removed. `npx tsc --noEmit` and `npm run build` passed. The backfill command processes all pending documents in the configured database.

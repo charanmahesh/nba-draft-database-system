@@ -87,3 +87,5 @@ Stores table name, action, record key, old/new JSONB, optional `changed_by`, and
 ## Index policy
 
 Foreign-key and common filter columns receive B-tree indexes. `scouting_report.search_vector` and `news_article.search_vector` receive GIN indexes. HNSW indexes on embedding columns are intentionally excluded from Phase 1 and belong only in `08_vector_indexes.sql` after embeddings are loaded.
+
+News embeddings are invalidated by a database trigger when either `title` or `summary` changes, since both fields form the embedded text. Report summary changes similarly clear report embedding metadata.

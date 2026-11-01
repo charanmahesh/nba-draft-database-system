@@ -1,16 +1,20 @@
 import "dotenv/config";
 import { pool } from "../lib/db/pg";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+const execFileAsync = promisify(execFile);
 
 const base = process.env.TEST_BASE_URL ?? "http://localhost:3000";
 const password = process.env.DEMO_PASSWORD;
+const failBase = process.env.TEST_FAIL_BASE_URL;
 const results: { check: string; result: string }[] = [];
 const cookies: Record<string, string> = {};
 async function check(name: string, fn: () => Promise<void>) {
   try { await fn(); results.push({check:name, result:"PASS"}); }
   catch (error) { results.push({check:name, result:`FAIL: ${error instanceof Error ? error.message : error}`}); }
 }
-async function request(role: string, path: string, status: number, method = "GET", body?: unknown) {
-  const response = await fetch(`${base}${path}`, {method, headers: {cookie:cookies[role] ?? "", "content-type":"application/json"}, ...(body === undefined ? {} : {body: JSON.stringify(body)})});
+async function request(role: string, path: string, status: number, method = "GET", body?: unknown, target = base) {
+  const response = await fetch(`${target}${path}`, {method, headers: {cookie:cookies[role] ?? "", "content-type":"application/json"}, ...(body === undefined ? {} : {body: JSON.stringify(body)})});
   const data = await response.json().catch(() => null);
   if (response.status !== status || (status < 400 && !data?.ok)) throw new Error(`expected ${status}, got ${response.status}: ${JSON.stringify(data)}`);
   return data?.data;
@@ -60,6 +64,8 @@ async function main() {
   await check("needs: cross-team write forbidden", async () => {await request("manager",`/api/teams/${other}/needs`,403,"POST",needBody);});
   await check("needs: invalid write", async () => {await request("admin",`/api/teams/${team}/needs`,400,"POST",{});});
   for (const [name,path,role,status] of [["own",`/api/team-match?teamId=${team}`,"manager",200],["cross-team",`/api/team-match?teamId=${other}`,"manager",403],["admin",`/api/team-match?teamId=${team}`,"admin",200],["scout",`/api/team-match?teamId=${team}`,"scout",403],["analyst",`/api/team-match?teamId=${team}`,"analyst",403],["invalid","/api/team-match?teamId=bad","admin",400]] as const) await check(`team-match: ${name}`,async()=>{await request(role,path,status);});
+  for (const [name,path,role,status] of [["own",`/api/teams/${team}/matches`,"manager",200],["cross-team",`/api/teams/${other}/matches`,"manager",403],["scout",`/api/teams/${team}/matches`,"scout",403],["analyst",`/api/teams/${team}/matches`,"analyst",403],["invalid","/api/teams/bad/matches","admin",400]] as const) await check(`team matches alias: ${name}`,async()=>{await request(role,path,status);});
+  await documentChecks(player);
   const roster=(await pool.query("SELECT roster_id, season FROM roster WHERE team_id=$1 AND NOT is_historical ORDER BY roster_id LIMIT 1",[team])).rows[0];
   if (!roster) throw new Error("Manager needs an app-managed roster");
   const candidates=(await pool.query("SELECT player_id FROM player p WHERE NOT EXISTS (SELECT 1 FROM roster_player rp WHERE rp.player_id=p.player_id AND rp.season=$1) ORDER BY player_id LIMIT 16",[roster.season])).rows.map(r=>String(r.player_id));
@@ -88,4 +94,40 @@ async function main() {
   }
   if (added.length) await check("roster: delete audit actor",async()=>{const row=await pool.query("SELECT 1 FROM audit_log WHERE table_name='roster_player' AND action='DELETE' AND changed_by=$1 AND old_data->>'roster_id'=$2 AND old_data->>'player_id'=$3 AND audit_id > $4",[actor,String(roster.roster_id),added[0],auditBaseline]);if(!row.rowCount)throw new Error("audit actor missing");});
 }
+async function documentChecks(player:string) {
+  if (!failBase) { await check("embedding failure server configured",async()=>{throw new Error("Set TEST_FAIL_BASE_URL to a separate development server started with EMBEDDING_FORCE_FAIL=1");}); return; }
+  const scout = await request("scout","/api/auth/me",200);
+  const fixture = await pool.connect();
+  let otherScout:string | undefined;
+  const reportIds:string[]=[]; const articleIds:string[]=[];
+  try {
+    await fixture.query("BEGIN");
+    const person=await fixture.query("INSERT INTO person (f_name,l_name,email,password_hash,role) SELECT 'API','Fixture',$1,password_hash,'scout' FROM person WHERE person_id=$2 RETURNING person_id",[`api-fixture-${Date.now()}@draftboard.local`,scout.person_id]);
+    otherScout=String(person.rows[0].person_id);
+    await fixture.query("INSERT INTO scout (person_id) VALUES ($1)",[otherScout]);
+    await fixture.query("COMMIT");
+    const reportBody={player_id:player,summary:"A skilled passing guard who protects the ball."};
+    const newsBody={title:"Acceptance fixture",publish_date:"2026-01-01",summary:"A guard creates opportunities for teammates."};
+    for (const [kind,role,body,ids,key] of [["reports","scout",reportBody,reportIds,"report_id"],["news","admin",newsBody,articleIds,"article_id"]] as const) {
+      let indexed:string | undefined, pending:string | undefined;
+      await check(`${kind}: create indexed`,async()=>{const row=await request(role,`/api/${kind}`,201,"POST",body);ids.push(String(row[key]));indexed=String(row[key]);if(row.embedding_status!=="indexed")throw new Error(`expected indexed, got ${row.embedding_status}`);});
+      await check(`${kind}: forced failure pending`,async()=>{const row=await request(role,`/api/${kind}`,201,"POST",body,failBase);ids.push(String(row[key]));pending=String(row[key]);if(row.embedding_status!=="pending")throw new Error(`expected pending, got ${row.embedding_status}`);});
+      await check(`${kind}: edit clears vector on failure`,async()=>{if(!indexed)throw new Error("indexed fixture missing");const row=await request(role,`/api/${kind}/${indexed}`,200,"PATCH",{summary:"Edited fixture with a different summary."},failBase);if(row.embedding_status!=="pending")throw new Error("stale vector retained");});
+      await check(`${kind}: edit re-embeds`,async()=>{if(!indexed)throw new Error("indexed fixture missing");const row=await request(role,`/api/${kind}/${indexed}`,200,"PATCH",{summary:"Another edited fixture with a new summary."});if(row.embedding_status!=="indexed")throw new Error("edit did not index");});
+      await check(`${kind}: admin edit`,async()=>{if(!indexed)throw new Error("fixture missing");const row=await request("admin",`/api/${kind}/${indexed}`,200,"PATCH",{summary:"An admin revised this acceptance fixture."});if(row.embedding_status!=="indexed")throw new Error("admin edit did not index");});
+      if(kind==="news") await check("news: title edit clears vector",async()=>{if(!indexed)throw new Error("fixture missing");const row=await request("admin",`/api/news/${indexed}`,200,"PATCH",{title:"Changed fixture title"},failBase);if(row.embedding_status!=="pending")throw new Error("title edit retained stale vector");});
+      await check(`${kind}: invalid create`,async()=>{await request(role,`/api/${kind}`,400,"POST",{});});
+      for(const denied of kind==="reports"?["analyst","manager"]:["scout","analyst","manager"]) await check(`${kind}: ${denied} create forbidden`,async()=>{await request(denied,`/api/${kind}`,403,"POST",body);});
+      if(kind==="reports") await check("reports: scout cannot edit another scout",async()=>{const row=await request("admin","/api/reports",201,"POST",{...reportBody,scout_id:otherScout});ids.push(String(row.report_id));await request("scout",`/api/reports/${row.report_id}`,403,"PATCH",{summary:"unauthorized"});});
+      await check(`${kind}: backfill pending`,async()=>{if(!pending)throw new Error("pending fixture missing");const env={...process.env};delete env.EMBEDDING_FORCE_FAIL;await execFileAsync("npm",["run","embed","--","--missing"],{env,timeout:180000});const row=await request(role,`/api/${kind}/${pending}`,200);if(row.embedding_status!=="indexed")throw new Error("backfill did not index fixture");});
+    }
+  } catch(e) { try {await fixture.query("ROLLBACK");}catch{} await check("document fixture setup",async()=>{throw e;}); }
+  finally {
+    fixture.release();
+    for(const id of reportIds) await check(`reports: cleanup ${id}`,async()=>{await request("admin",`/api/reports/${id}`,200,"DELETE");});
+    for(const id of articleIds) await check(`news: cleanup ${id}`,async()=>{await request("admin",`/api/news/${id}`,200,"DELETE");});
+    if(otherScout) await check("scout fixture cleanup",async()=>{const client=await pool.connect();try{await client.query("BEGIN");await client.query("DELETE FROM scout WHERE person_id=$1",[otherScout]);await client.query("DELETE FROM person WHERE person_id=$1",[otherScout]);await client.query("COMMIT");}catch(e){await client.query("ROLLBACK");throw e;}finally{client.release();}});
+  }
+}
+
 main().catch(error=>{results.push({check:"setup",result:`FAIL: ${error instanceof Error ? error.message : error}`});}).finally(async()=>{console.table(results);const failures=results.filter(r=>r.result!=="PASS").length;console.log(`Results: ${results.length-failures} passed, ${failures} failed`);if(failures)process.exitCode=1;await pool.end();});
