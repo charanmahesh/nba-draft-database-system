@@ -5,7 +5,7 @@
 | Dataset | Provider and URL | Files used | Licence/status | Project use |
 | --- | --- | --- | --- | --- |
 | NBA Games | Nathan Lauga, Kaggle: [NBA Games](https://www.kaggle.com/datasets/nathanlauga/nba-games) | `teams.csv`, `players.csv`, `games.csv`, `games_details.csv` | Kaggle dataset; follow Kaggle's dataset terms | Real teams, selected games, performances, and historical rosters. |
-| NBA Draft Combine Measurements | Kaggle: [NBA Draft Combine Measurements](https://www.kaggle.com/datasets/mattop/nba-draft-combine-measurements) | `Draft Combine - Kaggle.csv` | Kaggle dataset; follow Kaggle's dataset terms | Safely matched physical attributes and measurements only. |
+| NBA Draft Combine Measurements | Kaggle: [NBA Draft Combine Measurements](https://www.kaggle.com/datasets/marcusfern/nba-draft-combine) | `Draft Combine - Kaggle.csv` | Kaggle dataset; follow Kaggle's dataset terms | Safely matched physical attributes and measurements only. |
 
 The documented NBA subset is 2017–2019. The importer retains players with at
 least 25 selected-subset appearances and any safely matched combine player.
