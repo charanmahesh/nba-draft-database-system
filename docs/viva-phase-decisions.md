@@ -136,7 +136,7 @@ The landing page, sign-in, role dashboards, player index and details, reports, g
 
 The full browser suite passed 42 checks; simulated empty, 403 and server-error states passed 33 checks. Playwright checked 56 role/page combinations at 375px and saved screenshots in `docs/screenshots/`. TypeScript and the production build passed with the dev server stopped. Backfill remains a Phase 3 script; draft and prospect workflows remain future work.
 
-## Phase 8 — tests — planned
+## Phase 8 — tests — done
 
 ### Decisions
 
@@ -144,7 +144,7 @@ Test the database as a source of truth, not only the HTTP layer. Cover constrain
 
 ### Build approach
 
-Use Vitest for API, SQL, vector, retrieval, and import tests. Record commands, environment assumptions, pass/fail results, and any unavailable infrastructure in `docs/test-results.md`.
+Vitest covers SQL, vector, retrieval and import tests. The API acceptance matrix and Playwright browser matrix cover HTTP roles, validation and workflows. `npm run test:all` runs all three against isolated test databases and temporary servers; results and limitations are recorded in `docs/test-results.md`.
 
 ## Phase 9 — documentation and polish — planned
 

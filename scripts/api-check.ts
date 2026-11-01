@@ -136,7 +136,7 @@ async function adminChecks(){
 }
 
 async function searchChecks() {
-  const labels=JSON.parse(await readFile("db/seed/reports.json","utf8")) as {reports:{report_id:string;archetype:string}[]};
+  const labels=JSON.parse(await readFile(process.env.TEST_REPORTS_PATH ?? "db/seed/reports.json","utf8")) as {reports:{report_id:string;archetype:string}[]};
   const demos=[["protects the basket from opposing layups","rim_protector"],["facilitator who sets up teammates","playmaking_guard"],["lockdown perimeter defender","defensive_stopper"]] as const;
   const ordered=(rows:{similarity:number}[])=>rows.every((row,i)=>i===0||Number(rows[i-1].similarity)>=Number(row.similarity));
   for(const [query,archetype] of demos) await check(`search demo: ${archetype}`,async()=>{const q=encodeURIComponent(query);const keyword=await request("scout",`/api/search/keyword?q=${q}&k=5`,200);const semantic=await request("scout",`/api/search/reports?q=${q}&k=5`,200);const relevant=new Set(labels.reports.filter(r=>r.archetype===archetype).map(r=>r.report_id));if(keyword.length!==0||semantic.length!==5||!ordered(semantic)||semantic.filter((r:{report_id:string})=>relevant.has(String(r.report_id))).length<3)throw new Error("expected no keyword hits and at least 3 relevant ordered semantic hits");});

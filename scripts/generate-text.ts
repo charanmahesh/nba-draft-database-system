@@ -373,7 +373,9 @@ async function main(): Promise<void> {
     articleInputs,
     scoutResult.rows[0].person_id,
   );
-  const outputDirectory = resolve(ROOT, "db", "seed");
+  const outputDirectory = process.env.DRAFTBOARD_SEED_OUTPUT_DIR
+    ? resolve(process.env.DRAFTBOARD_SEED_OUTPUT_DIR)
+    : resolve(ROOT, "db", "seed");
   await mkdir(outputDirectory, { recursive: true });
 
   await Promise.all([
