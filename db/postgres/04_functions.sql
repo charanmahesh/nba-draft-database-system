@@ -6,7 +6,7 @@ RETURNS TABLE (
   player_id BIGINT,
   f_name TEXT,
   l_name TEXT,
-  position player_position,
+  "position" player_position,
   class_year SMALLINT,
   target_season SMALLINT,
   position_score NUMERIC,

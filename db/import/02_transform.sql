@@ -40,7 +40,7 @@ WITH valid_games AS (
   JOIN team home ON home.external_id = 'nba:' || trim(s.home_team_id)
   JOIN team away ON away.external_id = 'nba:' || trim(s.visitor_team_id)
   WHERE trim(s.season) IN ('2017', '2018', '2019')
-    AND trim(s.game_date_est) ~ '^\\d{4}-\\d{2}-\\d{2}$'
+    AND trim(s.game_date_est) ~ '^\d{4}-\d{2}-\d{2}$'
     AND trim(s.home_team_id) <> trim(s.visitor_team_id)
   ORDER BY trim(s.game_id), trim(s.game_date_est) DESC
 )
@@ -65,10 +65,10 @@ WITH candidate_rows AS (
   FROM candidate_rows GROUP BY source_player_id
 ), combine_rows AS (
   SELECT trim(year)::smallint AS combine_year, trim(player) AS raw_name,
-         trim(regexp_replace(player, '^\\s*([^,]+),\\s*(.+?)\\s*$', '\\2 \\1')) AS nba_order_name,
+         trim(regexp_replace(player, '^\s*([^,]+),\s*(.+?)\s*$', '\2 \1')) AS nba_order_name,
          pos, hgt, wgt, wngspn, stndrch, stndvert, lpvert, lane, shuttle, sprint, bench
   FROM stg_draft_combine
-  WHERE trim(coalesce(year, '')) ~ '^\\d{4}$' AND trim(coalesce(player, '')) <> ''
+  WHERE trim(coalesce(year, '')) ~ '^\d{4}$' AND trim(coalesce(player, '')) <> ''
 ), combine_named AS (
   SELECT *, import_normalize_name(nba_order_name) AS normalized_name,
          count(*) OVER (PARTITION BY import_normalize_name(nba_order_name)) AS combine_name_count
@@ -93,16 +93,16 @@ WITH candidate_rows AS (
 )
 INSERT INTO player (external_id, f_name, l_name, height_cm, weight_kg, position, secondary_position)
 SELECT 'nba:' || source_player_id,
-       NULLIF(regexp_replace(player_name, '\\s+\\S+\\s*$', ''), ''),
-       regexp_replace(player_name, '^.*\\s', ''),
-       CASE WHEN hgt ~ '^\\d+(\\.\\d+)?$' THEN round((hgt::numeric * 2.54), 2) END,
-       CASE WHEN wgt ~ '^\\d+(\\.\\d+)?$' THEN round((wgt::numeric * 0.45359237), 2) END,
+       NULLIF(regexp_replace(player_name, '\s+\S+\s*$', ''), ''),
+       regexp_replace(player_name, '^.*\s', ''),
+       CASE WHEN hgt ~ '^\d+(\.\d+)?$' AND hgt::numeric * 2.54 BETWEEN 150 AND 240 THEN round((hgt::numeric * 2.54), 2) END,
+       CASE WHEN wgt ~ '^\d+(\.\d+)?$' AND wgt::numeric * 0.45359237 BETWEEN 45 AND 200 THEN round((wgt::numeric * 0.45359237), 2) END,
        CASE WHEN upper(split_part(replace(coalesce(pos, ''), '/', '-'), '-', 1)) IN ('PG','SG','SF','PF','C')
          THEN upper(split_part(replace(pos, '/', '-'), '-', 1))::player_position END,
        CASE WHEN upper(split_part(replace(coalesce(pos, ''), '/', '-'), '-', 2)) IN ('PG','SG','SF','PF','C')
          THEN upper(split_part(replace(pos, '/', '-'), '-', 2))::player_position END
 FROM player_payload
-WHERE player_name ~ '\\s+'
+WHERE player_name ~ '\s+'
 ON CONFLICT (external_id) DO UPDATE SET
   height_cm = COALESCE(EXCLUDED.height_cm, player.height_cm),
   weight_kg = COALESCE(EXCLUDED.weight_kg, player.weight_kg),
@@ -126,8 +126,8 @@ WITH candidate_rows AS (
   FROM candidates GROUP BY normalized_name
 ), combines AS (
   SELECT trim(year)::smallint AS combine_year, trim(player) AS raw_name,
-    import_normalize_name(trim(regexp_replace(player, '^\\s*([^,]+),\\s*(.+?)\\s*$', '\\2 \\1'))) AS normalized_name
-  FROM stg_draft_combine WHERE trim(coalesce(year, '')) ~ '^\\d{4}$' AND trim(coalesce(player, '')) <> ''
+    import_normalize_name(trim(regexp_replace(player, '^\s*([^,]+),\s*(.+?)\s*$', '\2 \1'))) AS normalized_name
+  FROM stg_draft_combine WHERE trim(coalesce(year, '')) ~ '^\d{4}$' AND trim(coalesce(player, '')) <> ''
 ), classified AS (
   SELECT c.*, count(*) OVER (PARTITION BY c.normalized_name) AS combine_name_count,
     cc.nba_name_count, cc.first_seen_season
@@ -141,8 +141,8 @@ SELECT 'Draft Combine - Kaggle', combine_year || ':' || raw_name, raw_name, norm
        ELSE 'failed_debut_season_plausibility' END,
   jsonb_build_object('nbaCandidateCount', coalesce(nba_name_count, 0), 'firstSeenSeason', first_seen_season)
 FROM classified
-WHERE NOT (combine_name_count = 1 AND nba_name_count = 1
-           AND first_seen_season BETWEEN combine_year AND combine_year + 8)
+WHERE (combine_name_count = 1 AND nba_name_count = 1
+           AND first_seen_season BETWEEN combine_year AND combine_year + 8) IS NOT TRUE
 ON CONFLICT (source_name, source_row_key) DO UPDATE SET
   raw_name = EXCLUDED.raw_name, normalized_name = EXCLUDED.normalized_name,
   source_year = EXCLUDED.source_year, reason = EXCLUDED.reason,
@@ -151,9 +151,9 @@ ON CONFLICT (source_name, source_row_key) DO UPDATE SET
 WITH raw_performance AS (
   SELECT d.*, g.game_id AS project_game_id, g.home_team_id, g.away_team_id,
     p.player_id AS project_player_id, t.team_id AS project_team_id,
-    CASE WHEN trim(d.min) ~ '^\\d+:\\d{2}$'
+    CASE WHEN trim(d.min) ~ '^\d+:\d{2}$'
       THEN split_part(trim(d.min), ':', 1)::numeric + split_part(trim(d.min), ':', 2)::numeric / 60
-      WHEN trim(d.min) ~ '^\\d+(\\.\\d+)?$' THEN trim(d.min)::numeric END AS minutes_value
+      WHEN trim(d.min) ~ '^\d+(\.\d+)?$' THEN trim(d.min)::numeric END AS minutes_value
   FROM stg_nba_game_detail d
   JOIN game g ON g.external_id = 'nba:' || trim(d.game_id)
   JOIN player p ON p.external_id = 'nba:' || trim(d.player_id)
@@ -164,11 +164,11 @@ WITH raw_performance AS (
 )
 INSERT INTO game_performance (game_id, player_id, team_id, minutes, points, rebounds, assists, blocks, steals)
 SELECT project_game_id, project_player_id, project_team_id, minutes_value,
-  CASE WHEN trim(pts) ~ '^\\d+(\\.\\d+)?$' THEN trim(pts)::numeric ELSE 0 END,
-  CASE WHEN trim(reb) ~ '^\\d+(\\.\\d+)?$' THEN trim(reb)::numeric ELSE 0 END,
-  CASE WHEN trim(ast) ~ '^\\d+(\\.\\d+)?$' THEN trim(ast)::numeric ELSE 0 END,
-  CASE WHEN trim(blk) ~ '^\\d+(\\.\\d+)?$' THEN trim(blk)::numeric ELSE 0 END,
-  CASE WHEN trim(stl) ~ '^\\d+(\\.\\d+)?$' THEN trim(stl)::numeric ELSE 0 END
+  CASE WHEN trim(pts) ~ '^\d+(\.\d+)?$' THEN trim(pts)::numeric ELSE 0 END,
+  CASE WHEN trim(reb) ~ '^\d+(\.\d+)?$' THEN trim(reb)::numeric ELSE 0 END,
+  CASE WHEN trim(ast) ~ '^\d+(\.\d+)?$' THEN trim(ast)::numeric ELSE 0 END,
+  CASE WHEN trim(blk) ~ '^\d+(\.\d+)?$' THEN trim(blk)::numeric ELSE 0 END,
+  CASE WHEN trim(stl) ~ '^\d+(\.\d+)?$' THEN trim(stl)::numeric ELSE 0 END
 FROM valid_performance
 ON CONFLICT (game_id, player_id) DO NOTHING;
 
@@ -212,8 +212,8 @@ WITH candidate_rows AS (
   SELECT *, count(*) OVER (PARTITION BY normalized_name) AS name_count FROM candidates
 ), combine_rows AS (
   SELECT trim(year)::smallint AS combine_year, trim(player) AS raw_name, pos, hgt, wgt, wngspn, stndrch, stndvert, lpvert, lane, shuttle, sprint, bench,
-    import_normalize_name(trim(regexp_replace(player, '^\\s*([^,]+),\\s*(.+?)\\s*$', '\\2 \\1'))) AS normalized_name
-  FROM stg_draft_combine WHERE trim(coalesce(year, '')) ~ '^\\d{4}$' AND trim(coalesce(player, '')) <> ''
+    import_normalize_name(trim(regexp_replace(player, '^\s*([^,]+),\s*(.+?)\s*$', '\2 \1'))) AS normalized_name
+  FROM stg_draft_combine WHERE trim(coalesce(year, '')) ~ '^\d{4}$' AND trim(coalesce(player, '')) <> ''
 ), safe_combine AS (
   SELECT c.*, n.source_player_id, count(*) OVER (PARTITION BY c.normalized_name) AS combine_name_count
   FROM combine_rows c JOIN candidate_named n USING (normalized_name)
@@ -234,7 +234,7 @@ INSERT INTO combined_measurement (player_id, measurement_type, combine_year, mea
 SELECT player_id, measurement_type, combine_year, NULL,
   round(raw_value::numeric * multiplier, 2), unit
 FROM measurements
-WHERE trim(coalesce(raw_value, '')) ~ '^\\d+(\\.\\d+)?$'
+WHERE trim(coalesce(raw_value, '')) ~ '^\d+(\.\d+)?$'
 ON CONFLICT (player_id, measurement_type, combine_year) DO UPDATE
 SET value = EXCLUDED.value, unit = EXCLUDED.unit;
 
