@@ -31,7 +31,7 @@ export type MeasurementInput = {player_id:Id;measurement_type:"height_cm"|"weigh
 export type InjuryInput = {player_id:Id;injury_date:string;description:string;severity:Severity};
 export type ReportInput = {player_id:Id;scout_id?:Id;report_date?:string;summary:string};
 export type NewsInput = {title:string;publish_date:string;summary:string;url?:string|null};
-export class ApiError extends Error { constructor(message:string,public readonly status:number){super(message);this.name="ApiError";} }
+export class ApiError extends Error { constructor(message:string,public readonly status:number){super(status===403?"Access denied. Your role cannot perform this action.":message);this.name="ApiError";} }
 type Envelope<T> = {ok:true;data:T}|{ok:false;error:string};
 async function request<T>(path:string, options:RequestInit={}):Promise<T> { const response=await fetch(path,{...options,credentials:"same-origin",headers:{...(options.body?{"Content-Type":"application/json"}:{}),...options.headers}}); const body=await response.json().catch(()=>null) as Envelope<T>|null; if(!response.ok||!body?.ok)throw new ApiError(body && !body.ok?body.error:"Request failed",response.status); return body.data; }
 function query(values:object={}) { const p=new URLSearchParams(); for(const [key,value] of Object.entries(values))if(value!==undefined&&value!==null&&value!=="")p.set(key,String(value));const s=p.toString();return s?`?${s}`:""; }

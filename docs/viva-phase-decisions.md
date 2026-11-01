@@ -122,17 +122,19 @@ Implement login, logout, and current-user routes. Centralize authorization in `l
 
 The current scouting API provides the implemented player, team, game, performance, measurement, injury, needs, roster, person, report, news, matching and search routes documented in `api.md`. It maps database constraint and trigger failures to client errors and uses pgvector `toSql` with `::vector` casts. Draft workflows and prospect endpoints remain future work under the current scouting scope. Some resources expose collection operations only; see `api.md` for the exact methods. The final local acceptance matrix passed 200 checks.
 
-## Phase 7 — UI — planned
+## Phase 7 — UI — done (current NBA scouting scope)
 
 ### Decisions
 
-- Use plain Tailwind components and Recharts; avoid a heavy UI kit.
-- Make the UI role-aware but never rely on it for authorization.
-- Show keyword and semantic search side by side to make the vector feature demonstrable.
+- Use plain Tailwind components and Recharts, with role checks enforced by the backend.
+- Show keyword and semantic search side by side; use Team Match for NBA players and keep draft workflows as a future extension.
+- Clearly identify seeded needs and rosters as synthetic and seeded reports and news as generated demonstrations.
 
-### Build approach
+### Build approach and evidence
 
-Implement login, role dashboards, paginated player/prospect tables, detail pages, report forms with embedding status, the manager draft board, semantic search filters, keyword comparison, and related-news views. Pagination belongs in SQL because the real dataset can be large.
+The landing page, sign-in, role dashboards, player index and details, reports, games, teams, Team Match, search, news and article details are implemented. The SQL showcase runs fixed examples and includes admin-only audit and rollback demonstrations; it never accepts arbitrary SQL. The detailed mapping and remaining scope boundaries are in `ui-port-plan.md`.
+
+The full browser suite passed 42 checks; simulated empty, 403 and server-error states passed 33 checks. Playwright checked 56 role/page combinations at 375px and saved screenshots in `docs/screenshots/`. TypeScript and the production build passed with the dev server stopped. Backfill remains a Phase 3 script; draft and prospect workflows remain future work.
 
 ## Phase 8 — tests — planned
 

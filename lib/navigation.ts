@@ -8,6 +8,7 @@ export const navigation: {label:string;href:string;roles:Role[];mark:string}[] =
   {label:"Team Match",href:"/team-match",roles:["admin","team_manager"],mark:"05"},
   {label:"Reports",href:"/reports",roles:all,mark:"06"},
   {label:"News",href:"/news",roles:all,mark:"07"},
+  {label:"SQL Showcase",href:"/showcase",roles:["admin","analyst"],mark:"09"},
   {label:"Teams",href:"/teams",roles:["admin","analyst","team_manager"],mark:"08"},
 ];
 export function homeForRole(role:Role) { return role==="scout"||role==="analyst"?"/players":"/dashboard"; }

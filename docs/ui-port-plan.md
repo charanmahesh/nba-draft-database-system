@@ -24,7 +24,7 @@ Other auth components (RegisterPage, LoginPage, ForgotPasswordPage, ResetPasswor
 
 ## Mock functions to replace
 
-All endpoints below are planned, except the existing health and embedding spikes. SQL must be parameterized and live in the project SQL files.
+This is the original prototype-to-API mapping, retained as design history. The current route contracts are in `api.md`; implementation status is tracked in the reachability audit below. SQL must be parameterized and live in the project SQL files.
 
 | Mock function | API and SQL needed |
 | --- | --- |
@@ -72,3 +72,33 @@ All endpoints below are planned, except the existing health and embedding spikes
 | similarity, match_note, counts, pagination, took_ms | derive from query results and request timing; never persist as facts |
 | match score, breakdown, board_rank | derive from proposed matching function and ranking; no invented values |
 | session email, role, full_name | person email, role, names; JWT stays in httpOnly cookie; drop mock token and client-selected role |
+
+## Phase 7 feature reachability audit
+
+This checklist maps the current implementation, rather than implying that a database demonstration is exposed merely because it exists in SQL. Draft and prospect workflows remain future extensions under the active scouting scope.
+
+| Phase | Feature | UI reachability | Status |
+| --- | --- | --- | --- |
+| 2 | `v_player_profile`: player and measurements/injury count | `/players/:id` | Available (profile and detail sections) |
+| 2 | `v_team_open_needs` | `/teams`, `/team-match` | Available through `/showcase`; team-specific needs also appear on `/teams` and `/team-match` |
+| 2 | `v_prospect_board`, prospect matcher and draft procedure | None | Future draft extension, outside active scope |
+| 2 | Player efficiency | `/dashboard` analyst | Available on the analyst dashboard; ranking calls `fn_player_efficiency` |
+| 2 | Roster cap, unique membership, transaction and audit attribution | `/teams` roster add/remove | Available through writes; `/showcase` exposes audit attribution and a fixed rollback demonstration to admin |
+| 2 | Game team and minutes validation | `/games` performance form | Available through validation and database constraints |
+| 2 | Person/subtype consistency | `/teams` admin person form | Available through transactional creation |
+| 2 | Stale embedding trigger and backfill | `/reports`, `/news/:id` | Status visible after edits; manual backfill remains the Phase 3 script |
+| 4 | Multi-table JOIN, grouped averages, ordering/limit | `/games`, `/players`, analyst `/dashboard` | Available on `/showcase`, alongside `/games`, `/players` and analyst `/dashboard` |
+| 4 | Correlated subquery, EXISTS, position window ranking | None | Available as fixed read-only examples on `/showcase` |
+| 4 | Keyword, pure vector and hybrid search | `/search`, `/reports` similar panel | Available |
+| 4 | HNSW EXPLAIN with/without index | None | Available on `/showcase` using disabled index scans, default planning, and discouraged sequential scans; the index is never dropped |
+| 6 | Auth and role-aware dashboard | `/login`, `/dashboard` | Available |
+| 6 | Players, teams, needs, rosters, games and box scores | `/players`, `/players/:id`, `/teams`, `/games` | Available collection/detail operations as implemented; API has no general game or player write routes |
+| 6 | Measurements and performances | `/games` | Create and read available |
+| 6 | Injuries | `/players/:id` | Available to read and to create for admin/analyst |
+| 6 | Reports and similar reports | `/reports`, `/players/:id` | Available to read, create, edit, delete and find similar reports |
+| 6 | News and related news | `/news`, `/news/:id`, `/players/:id` | Available to read, create, edit, delete and find related articles |
+| 6 | Team matching | `/team-match` | Available to admin and owning manager |
+| 6 | Keyword and semantic search, similar players | `/search`, `/players/:id` | Available |
+| 6 | Health and embedding diagnostic endpoints | None | Available under `/showcase` service diagnostics |
+
+The draft procedure and prospect objects remain documented future extensions. `/showcase` provides a fixed, admin-only rollback demonstration; its temporary player, roster and audit fixtures are rolled back. Embedding backfill remains the documented Phase 3 script rather than a UI action.

@@ -226,7 +226,7 @@ BEGIN
   ELSIF v_role = 'analyst' THEN
     SELECT jsonb_build_object('role',v_role,
       'top_performers',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT p.player_id::text,concat_ws(' ',p.f_name,p.l_name) AS player_name,count(*)::int AS games,round(avg(gp.points),2) AS points FROM game_performance gp JOIN player p USING(player_id) GROUP BY p.player_id HAVING count(*)>=10 ORDER BY avg(gp.points) DESC,p.player_id LIMIT 5) x),
-      'efficiency_leaders',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT p.player_id::text,concat_ws(' ',p.f_name,p.l_name) AS player_name,count(*)::int AS games,round(sum(gp.points+gp.rebounds+gp.assists+gp.steals+gp.blocks)/nullif(sum(gp.minutes),0),3) AS efficiency FROM game_performance gp JOIN player p USING(player_id) GROUP BY p.player_id HAVING count(*)>=10 AND sum(gp.minutes)>0 ORDER BY sum(gp.points+gp.rebounds+gp.assists+gp.steals+gp.blocks)/nullif(sum(gp.minutes),0) DESC,p.player_id LIMIT 5) x)) INTO v_result;
+      'efficiency_leaders',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT p.player_id::text,concat_ws(' ',p.f_name,p.l_name) AS player_name,count(*)::int AS games,round(fn_player_efficiency(p.player_id),3) AS efficiency FROM game_performance gp JOIN player p USING(player_id) GROUP BY p.player_id HAVING count(*)>=10 AND sum(gp.minutes)>0 ORDER BY sum(gp.points+gp.rebounds+gp.assists+gp.steals+gp.blocks)/nullif(sum(gp.minutes),0) DESC,p.player_id LIMIT 5) x)) INTO v_result;
   ELSIF v_role = 'team_manager' THEN
     SELECT jsonb_build_object('role',v_role,'team_id',v_team::text,'team_name',(SELECT team_name FROM team WHERE team_id=v_team),
       'open_needs',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT need_id::text,position,priority,description FROM team_need WHERE team_id=v_team AND NOT is_filled ORDER BY priority DESC,need_id) x),
@@ -269,4 +269,66 @@ LANGUAGE sql STABLE AS $$
  FROM news_article source JOIN news_article n ON n.article_id<>source.article_id
  WHERE source.article_id=p_article_id AND source.embedding IS NOT NULL AND source.embedding_model=p_model AND n.embedding IS NOT NULL AND n.embedding_model=p_model
  ORDER BY n.embedding <=> source.embedding,n.article_id LIMIT p_limit
+$$;
+
+-- Fixed, read-only examples for the UI; no caller-supplied SQL is executed.
+CREATE OR REPLACE FUNCTION fn_showcase_relational(p_example text)
+RETURNS jsonb LANGUAGE plpgsql STABLE AS $$
+DECLARE result jsonb;
+BEGIN
+ IF p_example='view_needs' THEN
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT need_id::text,team_id::text,team_name,position,priority,description FROM v_team_open_needs ORDER BY priority DESC,need_id LIMIT 50) x;
+ ELSIF p_example='audit' THEN
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT audit_id::text,table_name,action,record_key,changed_by::text,changed_at FROM audit_log ORDER BY changed_at DESC,audit_id DESC LIMIT 50) x;
+ ELSIF p_example='join' THEN
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT p.player_id::text,p.f_name,p.l_name,g.season,g.game_date,t.team_name,gp.minutes,gp.points,gp.rebounds,gp.assists FROM game_performance gp JOIN player p USING(player_id) JOIN game g USING(game_id) JOIN team t USING(team_id) WHERE g.external_id LIKE 'nba:%' ORDER BY g.game_date DESC,gp.points DESC,p.l_name,p.f_name LIMIT 20) x;
+ ELSIF p_example='having' THEN
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT p.player_id::text,p.f_name,p.l_name,p.position,count(*) AS games,round(avg(gp.points),2) AS avg_points FROM player p JOIN game_performance gp USING(player_id) JOIN game g USING(game_id) WHERE g.external_id LIKE 'nba:%' GROUP BY p.player_id HAVING count(*)>=10 AND avg(gp.points)>=20 ORDER BY avg(gp.points) DESC,count(*) DESC,p.l_name,p.f_name) x;
+ ELSIF p_example='top' THEN
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT p.player_id::text,p.f_name,p.l_name,p.position,count(*) AS games,round(avg(gp.points),2) AS avg_points FROM player p JOIN game_performance gp USING(player_id) JOIN game g USING(game_id) WHERE g.external_id LIKE 'nba:%' GROUP BY p.player_id HAVING count(*)>=10 ORDER BY avg(gp.points) DESC,count(*) DESC,p.l_name,p.f_name LIMIT 10) x;
+ ELSIF p_example='correlated' THEN
+   WITH averages AS (SELECT p.player_id,p.f_name,p.l_name,p.position,avg(gp.points) AS points FROM player p JOIN game_performance gp USING(player_id) JOIN game g USING(game_id) WHERE g.external_id LIKE 'nba:%' AND p.position IS NOT NULL GROUP BY p.player_id HAVING count(*)>=10)
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT a.player_id::text,a.f_name,a.l_name,a.position,round(a.points,2) AS avg_points FROM averages a WHERE a.points>(SELECT avg(b.points) FROM averages b WHERE b.position=a.position) ORDER BY a.position,a.points DESC LIMIT 50) x;
+ ELSIF p_example='exists' THEN
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT p.player_id::text,p.f_name,p.l_name,p.position FROM player p WHERE EXISTS (SELECT 1 FROM scouting_report r WHERE r.player_id=p.player_id) AND EXISTS (SELECT 1 FROM game_performance gp JOIN game g USING(game_id) WHERE gp.player_id=p.player_id AND g.external_id LIKE 'nba:%') ORDER BY p.position NULLS LAST,p.l_name,p.f_name LIMIT 20) x;
+ ELSIF p_example='ranking' THEN
+   WITH averages AS (SELECT p.player_id,p.f_name,p.l_name,p.position,count(*) AS games,avg(gp.points) AS points FROM player p JOIN game_performance gp USING(player_id) JOIN game g USING(game_id) WHERE g.external_id LIKE 'nba:%' AND p.position IS NOT NULL GROUP BY p.player_id HAVING count(*)>=10), ranked AS (SELECT *,row_number() OVER(PARTITION BY position ORDER BY points DESC,games DESC,l_name,f_name) AS rank FROM averages)
+   SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO result FROM (SELECT position,rank,player_id::text,f_name,l_name,games,round(points,2) AS avg_points FROM ranked WHERE rank<=3 ORDER BY position,rank) x;
+ ELSE RAISE EXCEPTION 'Unknown showcase example' USING ERRCODE='22023'; END IF;
+ RETURN result;
+END;
+$$;
+CREATE OR REPLACE FUNCTION fn_showcase_vector_plan(p_mode text)
+RETURNS SETOF text LANGUAGE plpgsql VOLATILE AS $$
+DECLARE line text;
+BEGIN
+ IF p_mode='without_index' THEN PERFORM set_config('enable_indexscan','off',true); PERFORM set_config('enable_bitmapscan','off',true);
+ ELSIF p_mode='index_available' THEN NULL;
+ ELSIF p_mode='force_index' THEN PERFORM set_config('enable_seqscan','off',true);
+ ELSE RAISE EXCEPTION 'Unknown plan mode' USING ERRCODE='22023'; END IF;
+ FOR line IN EXECUTE 'EXPLAIN (ANALYZE, BUFFERS) SELECT sr.report_id, 1 - (sr.embedding <=> (SELECT anchor.embedding FROM scouting_report anchor WHERE anchor.embedding IS NOT NULL ORDER BY anchor.report_id LIMIT 1)) AS similarity FROM scouting_report sr WHERE sr.embedding IS NOT NULL ORDER BY sr.embedding <=> (SELECT anchor.embedding FROM scouting_report anchor WHERE anchor.embedding IS NOT NULL ORDER BY anchor.report_id LIMIT 1) LIMIT 5' LOOP RETURN NEXT line; END LOOP;
+END;
+$$;
+
+-- A fixed rollback demonstration. The exception block rolls back every fixture write.
+CREATE OR REPLACE FUNCTION fn_showcase_rollback()
+RETURNS jsonb LANGUAGE plpgsql VOLATILE AS $$
+DECLARE team_a bigint; team_b bigint; player bigint; roster_a bigint; roster_b bigint; fixture_name text := 'UI rollback demo ' || txid_current()::text; rejected boolean := false; violated_constraint text;
+BEGIN
+ BEGIN
+  INSERT INTO team(team_name,city) VALUES(fixture_name,'Demo') RETURNING team_id INTO team_a;
+  INSERT INTO team(team_name,city) VALUES(fixture_name || ' B','Demo') RETURNING team_id INTO team_b;
+  INSERT INTO player(f_name,l_name) VALUES('Rollback','Fixture') RETURNING player_id INTO player;
+  INSERT INTO roster(team_id,season) VALUES(team_a,2200) RETURNING roster_id INTO roster_a;
+  INSERT INTO roster(team_id,season) VALUES(team_b,2200) RETURNING roster_id INTO roster_b;
+  INSERT INTO roster_player(roster_id,player_id,season) VALUES(roster_a,player,2200);
+  INSERT INTO roster_player(roster_id,player_id,season) VALUES(roster_b,player,2200);
+  RAISE EXCEPTION 'Expected duplicate membership to fail';
+ EXCEPTION WHEN unique_violation THEN
+  GET STACKED DIAGNOSTICS violated_constraint = CONSTRAINT_NAME;
+  IF violated_constraint <> 'uq_roster_player_player_season' THEN RAISE; END IF;
+  rejected := true;
+ END;
+ RETURN jsonb_build_object('duplicate_rejected',rejected,'fixtures_rolled_back',NOT EXISTS(SELECT 1 FROM team WHERE team_name=fixture_name));
+END;
 $$;

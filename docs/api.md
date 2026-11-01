@@ -18,6 +18,10 @@ Successful responses use `{ "ok": true, "data": ... }`; errors use `{ "ok": fals
 
 `GET /api/dashboard` requires any authenticated role and accepts no parameters. It returns role-specific data derived from the authenticated session: `{"ok":true,"data":{"role":"scout","report_count":1,"pending_count":0,"reports":[]}}` is an example. Admin receives counts, recent reports and open needs; analyst receives points-per-game and per-minute efficiency leaders (minimum ten games); manager receives their own team needs, latest app-managed roster and top five matches. Counts cover the database rather than a paginated sample.
 
+## SQL showcase
+
+`GET /api/showcase?example=...` lets admins and analysts run fixed read-only examples (`view_needs`, `join`, `having`, `top`, `correlated`, `exists`, `ranking`, `without_index`, `index_available`, `force_index`). The `audit` example is admin-only. Plan examples use transaction-local planner settings; they do not drop indexes. `POST /api/showcase` with `{"example":"rollback"}` is admin-only and exercises a fixed duplicate-roster fixture inside a rolled-back subtransaction, with the actor set for audit triggers. These endpoints do not accept arbitrary SQL.
+
 ## Players, teams and games
 
 | Method and path | Roles | Parameters | Example response |

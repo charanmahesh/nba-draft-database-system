@@ -79,3 +79,12 @@ The full browser suite passed **31 checks, 0 failed**, including semantic filter
 ## Phase 7 news browser check — 2026-11-01
 
 The full UI suite passed **38 checks, 0 failed**, including the exact-mention player filter, pending and indexed badges, related articles, admin creation and editing, and re-indexing. The generated article and mention fixtures were removed. TypeScript and the production build passed. Apply the updated `db/postgres/04_functions.sql` to an existing database before using the new news routes.
+
+## Phase 7 wrap-up — 2026-11-01
+
+- `npm run check:ui`: **42 passed, 0 failed**, including injury entry, report and news deletion, SQL showcase and rolled-back roster fixture.
+- `npm run check:ui:states`: **33 passed, 0 failed**, using simulated empty, 403 and 500 responses and checking loading indicators. Public/static pages do not have applicable authenticated 403 or data-empty states; missing detail records were checked as 404s.
+- `npm run check:ui:mobile`: **56 passed, 0 failed** at 375px across the four demo roles. Viewport screenshots are in `docs/screenshots/`; denied-role screenshots show access-denied states. The old Team Match Board route redirects to Team Match and was not captured separately. The Next.js development indicator was hidden for captures.
+- `npx tsc --noEmit` and `npm run build` passed with the dev server stopped; it was restarted afterward. Existing databases need the updated `db/postgres/04_functions.sql` applied. Draft/prospect workflows and Phase 3 embedding backfill remain outside the current UI scope.
+
+Run the browser scripts with `DEMO_PASSWORD` set to the local demo password and the dev server running. The screenshots show seeded demo data; screenshots cover the initial viewport, not every interactive state. Failure screenshots are saved separately under ignored `tests/ui-failures/`.

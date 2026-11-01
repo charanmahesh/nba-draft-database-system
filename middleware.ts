@@ -10,5 +10,5 @@ export async function middleware(request: NextRequest) {
   return NextResponse.redirect(new URL("/login", request.url));
 }
 export const config = {
-  matcher: ["/api/:path*", "/dashboard/:path*", "/players/:path*", "/prospects/:path*", "/teams/:path*", "/rosters/:path*", "/games/:path*", "/reports/:path*", "/news/:path*", "/search/:path*", "/draft-board/:path*", "/team-match-board/:path*", "/team-match/:path*"],
+  matcher: ["/api/:path*", "/dashboard/:path*", "/players/:path*", "/prospects/:path*", "/teams/:path*", "/rosters/:path*", "/games/:path*", "/reports/:path*", "/news/:path*", "/search/:path*", "/draft-board/:path*", "/team-match-board/:path*", "/team-match/:path*", "/showcase/:path*"],
 };

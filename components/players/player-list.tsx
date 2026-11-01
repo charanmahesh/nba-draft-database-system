@@ -1,14 +1,14 @@
 "use client";
 import { useEffect,useState,type FormEvent } from "react";
 import Link from "next/link";
-import { api,type Player,type PlayerFilters,type Position,type Team } from "@/lib/api-client";
+import { api,ApiError,type Player,type PlayerFilters,type Position,type Team } from "@/lib/api-client";
 import { Button,EmptyState,Input,Pagination,Select,Skeleton,Table } from "@/components/ui";
 const positions:Position[]=["PG","SG","SF","PF","C"];
 const defaults:PlayerFilters={page:1,limit:20,sort:"name"};
 const fmt=(v:string|number|null,unit="")=>v===null?"—":`${Number(v).toFixed(1)}${unit}`;
 export function PlayerList(){const [filters,setFilters]=useState<PlayerFilters>(defaults);const [draft,setDraft]=useState("");const [season,setSeason]=useState("");const [minGames,setMinGames]=useState("");const [data,setData]=useState<{items:Player[];total:number;page:number;limit:number}|null>(null);const [teams,setTeams]=useState<Team[]>([]);const [teamError,setTeamError]=useState(false);const [error,setError]=useState("");const [loading,setLoading]=useState(true);
  useEffect(()=>{let active=true;api.teams({limit:100}).then(rows=>{if(active)setTeams(rows)}).catch(()=>{if(active)setTeamError(true)});return()=>{active=false}},[]);
- useEffect(()=>{let active=true;setLoading(true);setError("");api.players(filters).then(result=>{if(active)setData(result)}).catch(()=>{if(active){setData(null);setError("Could not load players. Please try again.")}}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[filters]);
+ useEffect(()=>{let active=true;setLoading(true);setError("");api.players(filters).then(result=>{if(active)setData(result)}).catch(e=>{if(active){setData(null);setError(e instanceof ApiError&&e.status===403?e.message:"Could not load players. Please try again.")}}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[filters]);
  function update(p:Partial<PlayerFilters>){setFilters(f=>({...f,...p,page:1}));}
  function submit(e:FormEvent){e.preventDefault();update({name:draft.trim()||undefined,season:season?Number(season):undefined,minGames:minGames?Number(minGames):undefined});}
  return <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10"><p className="eyebrow text-ink/55">Player index</p><h1 className="mt-4 font-display text-5xl leading-[.9] sm:text-6xl">EVERY PLAYER<br/><span className="text-cream">ON ONE SHEET.</span></h1><p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/65">Explore imported NBA players. Statistics reflect the selected team and season filters, or all imported games when no filter is selected.</p>
