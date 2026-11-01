@@ -47,3 +47,7 @@ Results: 200 passed, 0 failed
 ## Phase 7 workspace routes — 2026-11-01
 
 After adding report ownership filtering, game box scores, person listing and team-need updates/deletes, `npm run check:api` passed **216 checks, 0 failed** against the seeded database. The added checks cover box-score completeness, scout report filtering, admin-only person listing, manager need updates/deletes and cross-team denials. `npx tsc --noEmit` and `npm run build` passed. Existing databases need the updated `db/postgres/04_functions.sql` applied before using these routes.
+
+## Playwright dependency — 2026-11-01
+
+`@playwright/test` is a development dependency for browser acceptance checks, including the planned Phase 8 UI tests. Chromium was installed locally for those checks. The UI acceptance suite has not yet been implemented or run.
