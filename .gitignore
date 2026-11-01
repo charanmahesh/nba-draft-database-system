@@ -77,3 +77,4 @@ coverage
 data/raw/*
 !data/raw/.gitkeep
 dataset/
+reference/
