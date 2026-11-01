@@ -5,7 +5,7 @@ export const navigation: {label:string;href:string;roles:Role[];mark:string}[] =
   {label:"Players",href:"/players",roles:all,mark:"02"},
   {label:"Games",href:"/games",roles:["admin","analyst","team_manager"],mark:"03"},
   {label:"Search",href:"/search",roles:all,mark:"04"},
-  {label:"Team Match",href:"/team-match-board",roles:["admin","team_manager"],mark:"05"},
+  {label:"Team Match",href:"/team-match",roles:["admin","team_manager"],mark:"05"},
   {label:"Reports",href:"/reports",roles:all,mark:"06"},
   {label:"News",href:"/news",roles:all,mark:"07"},
   {label:"Teams",href:"/teams",roles:["admin","analyst","team_manager"],mark:"08"},

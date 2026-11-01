@@ -18,7 +18,7 @@ export interface Roster { roster_id:Id; team_id:Id; season:number; is_historical
 export interface Membership { roster_id:Id; player_id:Id; season:number }
 export interface Report { report_id:Id; player_id:Id; scout_id:Id; report_date:string; summary:string; embedding_status:"indexed"|"pending" }
 export interface Article { article_id:Id; title:string; publish_date:string; summary:string; url:string|null; embedding_status?:"indexed"|"pending" }
-export interface Match { player_id:Id; [key:string]:unknown }
+export interface Match { player_id:Id; f_name:string; l_name:string; position:Position; target_season:number; need_id:Id; need_priority:number; position_score:Numeric; stats_score:Numeric; measurement_bonus:Numeric; match_score:Numeric }
 export interface SemanticReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; similarity:number; f_name?:string; l_name?:string; position?:Position|null }
 export interface SimilarPlayer { player_id:Id; f_name:string; l_name:string; position:Position|null; similarity:number }
 export interface KeywordReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; rank:number; headline:string }
