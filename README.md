@@ -99,7 +99,7 @@ On Linux, Playwright may require additional system packages; see the instruction
 
 ## Documentation
 
-[Architecture](docs/architecture.md) · [ER model](docs/er-diagram.png) · [Data dictionary](docs/data-dictionary.md) · [API](docs/api.md) · [SQL examples](docs/queries.md) · [Database justification](docs/db-justification.md)
+[Architecture](docs/architecture.md) · [ER model](docs/er-diagram.png) · [Data dictionary](docs/data-dictionary.md) · [API](docs/api.md) · [SQL examples](docs/queries.md) · [Database justification](docs/db-justification.md) · [Demo script](docs/demo-script.md)
 
 ### Dependency audit
 
