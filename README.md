@@ -4,30 +4,22 @@ DraftBoard is a scouting and team-recruitment database project. Real NBA
 statistics and safely matched combine measurements are imported separately
 from synthetic application-supporting demo data.
 
-## Phase 0 setup
+## macOS setup
 
-1. Copy `.env.example` to `.env` and fill in the PostgreSQL and JWT values.
-2. Start PostgreSQL with pgvector:
+Install Docker Desktop (`brew install --cask docker`), open it and wait for it to run. Install Node and the PostgreSQL client with `brew install node libpq && brew link --force libpq`; put `/opt/homebrew/opt/libpq/bin` first on PATH if another client takes precedence.
 
-   ```bash
-   docker compose up -d
-   ```
+Copy `.env.example` to `.env`, set the PostgreSQL values and generate `JWT_SECRET` with `openssl rand -hex 32`. Use port 5433 if 5432 is occupied. Never commit `.env`.
 
-3. Install dependencies and run the embedding spike:
+Place the CSVs listed in [data sources](docs/data-sources.md) in `dataset/`, then run:
 
-   ```bash
-   npm install
-   npm run embedding:spike
-   ```
+```bash
+docker compose up -d
+npm install
+npm run seed
+npm run dev
+```
 
-   The first embedding run downloads `Xenova/all-MiniLM-L6-v2` locally and prints two 384-dimensional embeddings' cosine similarity.
-4. Start Next.js and open `/api/health`:
-
-   ```bash
-   npm run dev
-   ```
-
-The health route checks both the PostgreSQL connection and the `vector` extension.
+`npm run seed` **resets the database**, imports the local CSVs, generates synthetic text, downloads the embedding model on first use, embeds and indexes the texts, and evaluates retrieval. Check `/api/health` and run `npm run embedding:spike` to verify the setup. Existing PowerShell scripts remain available for individual phases.
 
 ## Phase 3B supporting data
 

@@ -68,16 +68,16 @@ Write PL/pgSQL functions in `04_functions.sql` and trigger functions/triggers in
 
 Application validation improves user experience, but database validation is the final authority. Row locking handles races, while the unique constraint remains the real protection against two teams acquiring the same player in a season.
 
-## Phase 3 — real data, synthetic data, and embeddings — planned
+## Phase 3 — real data, synthetic data, and embeddings — implemented and locally verified
 
 ### Decisions
 
-- Use a documented Kaggle subset for teams, players, games, performances, measurements, prospects, and historical rosters.
-- Use synthetic seed data for users, roles, current rosters, needs, and injuries where real data is unavailable.
+- Use a documented Kaggle subset for teams, players, games, performances, measurements and historical rosters.
+- Use synthetic seed data for users, roles, current rosters and needs; injury histories are not fabricated.
 - Generate scouting reports and news from real statistics, but label them clearly as generated text rather than real scouting material.
 - Load raw CSVs into all-text staging tables with `psql \\copy`, then transform with SQL.
 - Use external IDs for idempotent imports and log ambiguous/unmatched player identity matches instead of guessing.
-- Never link combine classes 2023–2026 to box-score veterans; those classes become the draft prospect pool.
+- Never link combine classes 2023–2026 to box-score veterans; unmatched rows are logged; draft prospects remain a future extension.
 
 ### Build approach
 
