@@ -46,14 +46,14 @@ export async function similarPlayers(id:string, limit:number) {
 }
 export async function playerNews(id:string, limit:number) {
   const source=await pool.query("SELECT 1 FROM player WHERE player_id=$1",[id]); if(!source.rowCount)return null;
-  return (await pool.query(`SELECT n.article_id,n.title,n.summary,n.publish_date,n.url,
-    EXISTS(SELECT 1 FROM article_mention m WHERE m.article_id=n.article_id AND m.player_id=$1) AS exact_mention,
-    (SELECT max(1-(n.embedding <=> r.embedding)) FROM scouting_report r
-      WHERE r.player_id=$1 AND r.embedding IS NOT NULL AND r.embedding_model=$2
-        AND n.embedding IS NOT NULL AND n.embedding_model=$2) AS similarity
-    FROM news_article n
-    WHERE (n.embedding IS NOT NULL AND n.embedding_model=$2 AND EXISTS
-      (SELECT 1 FROM scouting_report r WHERE r.player_id=$1 AND r.embedding IS NOT NULL AND r.embedding_model=$2))
-      OR EXISTS(SELECT 1 FROM article_mention m WHERE m.article_id=n.article_id AND m.player_id=$1)
-    ORDER BY similarity DESC NULLS LAST, exact_mention DESC, n.article_id LIMIT $3`,[id,EMBEDDING_MODEL,limit])).rows;
+  const mentions=(await pool.query(`SELECT n.article_id,n.title,n.summary,n.publish_date,n.url
+    FROM news_article n JOIN article_mention m ON m.article_id=n.article_id
+    WHERE m.player_id=$1 ORDER BY n.publish_date DESC,n.article_id DESC`,[id])).rows;
+  const related=(await pool.query(`SELECT n.article_id,n.title,n.summary,n.publish_date,n.url,
+    max(1-(n.embedding <=> r.embedding)) AS similarity
+    FROM news_article n JOIN scouting_report r ON r.player_id=$1
+    WHERE n.embedding IS NOT NULL AND n.embedding_model=$2 AND r.embedding IS NOT NULL AND r.embedding_model=$2
+      AND NOT EXISTS (SELECT 1 FROM article_mention m WHERE m.player_id=$1 AND m.article_id=n.article_id)
+    GROUP BY n.article_id ORDER BY similarity DESC,n.article_id LIMIT $3`,[id,EMBEDDING_MODEL,limit])).rows;
+  return { mentions, related };
 }
