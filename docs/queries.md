@@ -1,97 +1,102 @@
-# Phase 4 SQL showcase
+# Phase 4 showcase queries
 
-Run the schema, Phase 2 objects, Phase 3A import, Phase 3B supporting-data
-generation, and Phase 3C embedding/index steps before the complete showcase.
-In particular, the vector examples expect report embeddings and the HNSW
-index to exist. From the repository root, run:
+Run `db/postgres/07_queries.sql` from the repository root after `npm run seed`, with `psql -v ON_ERROR_STOP=1 -f db/postgres/07_queries.sql` and the standard PostgreSQL connection variables set. The samples below were captured on 2026-11-01 from the imported 2017–2019 NBA seasons, 120 generated report summaries and their model-generated vectors. Reports are synthetic; player statistics are imported. Results, report IDs and timings can change after reseeding. The file also includes Phase 2 acceptance fixtures, which run inside a transaction and roll back.
 
-```powershell
-psql -v ON_ERROR_STOP=1 -f db/postgres/07_queries.sql
+The following numbers match the numbered statements in `07_queries.sql`; the complete executable SQL is there.
+
+| # | Purpose and SQL concept | Short sample output |
+| --- | --- | --- |
+| 1 | **Multi-table JOIN** connects players, their game performances, games and teams to show game context. | 2020-10-11: LeBron James, Los Angeles Lakers, 28 points, 14 rebounds, 10 assists. |
+| 2 | **GROUP BY + HAVING** finds players with at least 10 appearances and at least 20 points per game in the selected sample. | James Harden: 274 games, 32.72 points/game; 30 players returned. |
+| 3 | **ORDER BY + LIMIT** lists the ten highest scoring averages among players with at least 10 games. | Harden 32.72, Giannis Antetokounmpo 27.50, LeBron James 26.92. |
+| 4 | **Correlated subquery** compares each eligible player's scoring average with the mean of player averages at the same recorded position. Players without positions are excluded. | PG Damian Lillard 26.60 and Stephen Curry 26.47; 132 players returned. |
+| 5 | **EXISTS subqueries** select players who have both a generated report and an imported NBA game appearance. | Eric Bledsoe, Darren Collison, Stephen Curry; first 20 returned. |
+| 6 | **CTE and window function** rank players by scoring average within their recorded position; `ROW_NUMBER` returns the top three per position, with deterministic tie-breaks. | PG: Lillard 26.60, Curry 26.47, Kyrie Irving 23.90; 15 rows total. |
+| 7 | **Full-text search** uses `search_vector @@ plainto_tsquery('english', 'points rebounds assists')`, ranked by `ts_rank_cd`. | Report 41, De'Aaron Fox, rank 0.03214; report 35, LeBron James, 0.03167. |
+| 8 | **Pure vector similarity** orders reports by cosine distance `<=>` from the first stored, model-embedded report, excludes the anchor, and restricts the model to the anchor's model. The player join supplies a name. | Report 4 Hassan Whiteside, similarity 0.93468; report 13 Daniel Gafford, 0.92341. |
+| 9 | **Hybrid search** combines a model-embedded report anchor, a JOIN to player, an exact position filter, and vector-distance ordering in one statement. | Anchor position PF; Daniel Gafford 0.92341, John Henson 0.85033. |
+| 10 | **EXPLAIN ANALYZE without HNSW** drops the report index inside a transaction, runs the vector query, then rolls back the drop. | Sequential scan and top-N sort; 0.353 ms in this run. |
+| 11 | **EXPLAIN ANALYZE with HNSW available**, default planner settings. | Planner still chose sequential scan and top-N sort; 0.330 ms. |
+| 12 | **EXPLAIN ANALYZE with sequential scans discouraged** demonstrates the available HNSW index. | `Index Scan using idx_scouting_report_embedding_hnsw`; 0.536 ms. |
+
+The first non-null report is the query vector for statements 8–12; it was generated using the configured model and is not a fabricated vector. Query 9 uses the first embedded report whose player has a position. The short sample contains 120 report vectors (plus 60 article vectors), so the normal cost-based choice of a sequential scan is unsurprising. The forced index plan proves the index can serve the ordering; disabling sequential scans does not establish a speed advantage. These are single-run, machine-dependent timings, not benchmarks. The SQL restores planner settings and the transactional drop leaves the index intact.
+
+The view calls for `v_prospect_board` and `fn_match_prospects_for_team` return zero rows by design: Phase 3 does not populate prospects. Their Phase 2 behavior is exercised by the rolled-back fixtures instead. The imported position field is incomplete, so position-based results cover only players with a safely matched position.
+
+## Captured execution plans
+
+The three full `EXPLAIN (ANALYZE, BUFFERS)` outputs from the run above follow. The primary-key index in the InitPlan only chooses the anchor; the scan under the outer `Limit` is the vector retrieval scan.
+
+### Without HNSW
+
+```text
+QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=26.30..26.32 rows=5 width=16) (actual time=0.345..0.346 rows=5 loops=1)
+   Buffers: shared hit=504
+   InitPlan 1 (returns $0)
+     ->  Limit  (cost=0.14..0.81 rows=1 width=26) (actual time=0.003..0.003 rows=1 loops=1)
+           Buffers: shared hit=2
+           ->  Index Scan using scouting_report_pkey on scouting_report anchor  (cost=0.14..80.20 rows=120 width=26) (actual time=0.003..0.003 rows=1 loops=1)
+                 Filter: (embedding IS NOT NULL)
+                 Buffers: shared hit=2
+   ->  Sort  (cost=25.49..25.79 rows=120 width=16) (actual time=0.345..0.345 rows=5 loops=1)
+         Sort Key: ((sr.embedding <=> $0))
+         Sort Method: top-N heapsort  Memory: 25kB
+         Buffers: shared hit=504
+         ->  Seq Scan on scouting_report sr  (cost=0.00..23.50 rows=120 width=16) (actual time=0.011..0.335 rows=120 loops=1)
+               Filter: (embedding IS NOT NULL)
+               Buffers: shared hit=504
+ Planning:
+   Buffers: shared hit=5
+ Planning Time: 0.044 ms
+ Execution Time: 0.353 ms
 ```
 
-The file first runs read-only showcase statements and then the existing Phase
-2 acceptance transaction, which creates temporary fixtures and rolls them
-back. The acceptance block also relies on the Phase 2 triggers and functions.
+### HNSW available, default planner
 
-## Query catalog
+```text
+QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=26.30..26.32 rows=5 width=16) (actual time=0.324..0.324 rows=5 loops=1)
+   Buffers: shared hit=504
+   InitPlan 1 (returns $0)
+     ->  Limit  (cost=0.14..0.81 rows=1 width=26) (actual time=0.002..0.002 rows=1 loops=1)
+           Buffers: shared hit=2
+           ->  Index Scan using scouting_report_pkey on scouting_report anchor  (cost=0.14..80.20 rows=120 width=26) (actual time=0.002..0.002 rows=1 loops=1)
+                 Filter: (embedding IS NOT NULL)
+                 Buffers: shared hit=2
+   ->  Sort  (cost=25.49..25.79 rows=120 width=16) (actual time=0.323..0.324 rows=5 loops=1)
+         Sort Key: ((sr.embedding <=> $0))
+         Sort Method: top-N heapsort  Memory: 25kB
+         Buffers: shared hit=504
+         ->  Seq Scan on scouting_report sr  (cost=0.00..23.50 rows=120 width=16) (actual time=0.008..0.314 rows=120 loops=1)
+               Filter: (embedding IS NOT NULL)
+               Buffers: shared hit=504
+ Planning:
+   Buffers: shared hit=18
+ Planning Time: 0.062 ms
+ Execution Time: 0.330 ms
+```
 
-| # | SQL concept | Purpose |
-| --- | --- | --- |
-| 1 | Multi-table `JOIN` | Displays real NBA game-level player output with position, season, date, and the team the player represented in that game. The `external_id LIKE 'nba:%'` filter keeps the result set scoped to imported games. |
-| 2 | `GROUP BY` + `HAVING` | Finds players with at least 10 imported game appearances and an average of at least 20 points per game. |
-| 3 | `ORDER BY` + `LIMIT` | Shows the 10 highest scoring player averages in the imported game sample. |
-| 4 | Correlated subquery | Compares each player's average points against the average of player-level scoring averages for that same position. |
-| 5 | `EXISTS` subqueries | Returns players who have both scouting reports and imported NBA appearances, without multiplying rows from either relationship. |
-| 6 | CTE + window function | Ranks players within each position by points average and returns the top three at each position. |
-| 7 | Full-text search | Uses `plainto_tsquery` against the generated `scouting_report.search_vector` and ranks keyword matches with `ts_rank_cd`. The terms are chosen from the generated reports' common statistics language. |
-| 8 | Pure vector similarity | Uses cosine distance (`<=>`) to find the reports nearest to an existing embedded report, excluding the anchor itself. Similarity is shown as `1 - distance`. |
-| 9 | Hybrid query | Uses the same-position report as an anchor, filters candidates to that position and embedding model, and ranks the joined reports by vector similarity in one query. |
-| 10–11 | `EXPLAIN ANALYZE` | Runs the same nearest-neighbor query once with the report HNSW index temporarily removed (then rolled back) and once with the index available. |
+### HNSW available, sequential scans discouraged
 
-## Representative output
-
-The result values depend on the imported subset and generated reports. These
-are output shapes, not captured measurements from a particular database run.
-
-**Query 1 — joined game performances**
-
-| player_id | f_name | l_name | position | season | team_name | minutes | points |
-| ---: | --- | --- | --- | ---: | --- | ---: | ---: |
-| 101 | Example | Player | SG | 2019 | Example City Example | 31.5 | 22 |
-
-**Query 2 — players meeting the scoring threshold**
-
-| player_id | f_name | l_name | position | games_played | avg_points |
-| ---: | --- | --- | --- | ---: | ---: |
-| 102 | Example | Scorer | SF | 42 | 24.31 |
-
-**Query 4 — above-position-average scorers**
-
-| position | player_id | f_name | l_name | avg_points |
-| --- | ---: | --- | --- | ---: |
-| PG | 103 | Example | Guard | 21.08 |
-
-**Query 6 — top players within position**
-
-| position | position_rank | player_id | f_name | l_name | games_played | avg_points |
-| --- | ---: | ---: | --- | --- | ---: | ---: |
-| C | 1 | 104 | Example | Center | 38 | 18.42 |
-
-**Query 7 — keyword report matches**
-
-| report_id | f_name | l_name | keyword_rank | summary |
-| ---: | --- | --- | ---: | --- |
-| 201 | Example | Player | 0.1 | Generated demo scouting text ... |
-
-**Query 9 — hybrid nearest reports**
-
-| report_id | player_id | position | cosine_similarity |
-| ---: | ---: | --- | ---: |
-| 202 | 105 | SG | 0.82 |
-
-On an empty, unimported, or not-yet-embedded database, result sets can be
-empty. The vector examples need at least one embedded report; the HNSW
-comparison needs the Phase 3C index.
-
-## Comparing vector query plans
-
-Queries 10 and 11 in `07_queries.sql` run `EXPLAIN (ANALYZE, BUFFERS)` for the
-same nearest-neighbor ordering:
-
-- Query 10 temporarily drops the report HNSW index inside a transaction, runs
-  the plan, and rolls back. The index is restored automatically.
-- Query 11 runs with the Phase 3C HNSW index present and sequential scans
-  discouraged so the planner considers the HNSW path.
-- The planner setting is reset immediately afterward.
-
-Inspect the actual plan node, `Execution Time`, shared buffer counts, and
-whether the HNSW index appears. PostgreSQL may still prefer a sequential scan
-for a small table; disabling sequential scans is a planner preference, not an
-absolute guarantee. Query 10 uses transactional DDL and briefly takes a table
-lock, so run the comparison only on the demo database without concurrent
-application traffic. Do not compare invented timings: capture the output from
-the database used for the demo, since timings depend on data volume and
-hardware.
-
-The Phase 2 acceptance transaction at the end of `07_queries.sql` is kept
-separate from these read-only showcase queries and ends with `ROLLBACK`.
+```text
+QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=125.71..129.44 rows=5 width=16) (actual time=0.517..0.530 rows=5 loops=1)
+   Buffers: shared hit=192
+   InitPlan 1 (returns $0)
+     ->  Limit  (cost=0.14..0.81 rows=1 width=26) (actual time=0.003..0.004 rows=1 loops=1)
+           Buffers: shared hit=2
+           ->  Index Scan using scouting_report_pkey on scouting_report anchor  (cost=0.14..80.20 rows=120 width=26) (actual time=0.003..0.003 rows=1 loops=1)
+                 Filter: (embedding IS NOT NULL)
+                 Buffers: shared hit=2
+   ->  Index Scan using idx_scouting_report_embedding_hnsw on scouting_report sr  (cost=124.90..214.40 rows=120 width=16) (actual time=0.517..0.529 rows=5 loops=1)
+         Order By: (embedding <=> $0)
+         Buffers: shared hit=192
+ Planning:
+   Buffers: shared hit=1
+ Planning Time: 0.032 ms
+ Execution Time: 0.536 ms
+```
