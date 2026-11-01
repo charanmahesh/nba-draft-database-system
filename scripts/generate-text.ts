@@ -19,6 +19,9 @@ interface PlayerProfile {
   avg_blocks: number;
   avg_steals: number;
   production_per_minute: number;
+  three_made: number;
+  three_attempts: number;
+  three_pct: number;
   height_cm: number | null;
   weight_kg: number | null;
   wingspan_cm: number | null;
@@ -57,100 +60,46 @@ const ARTICLES_TO_GENERATE = 60;
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 const archetypes: Archetype[] = [
-  {
-    key: "rim_protector",
-    query: "athletic rim protector who blocks shots",
-    score: (player) =>
-      player.avg_blocks * 10 +
-      (player.position === "C" || player.position === "PF" ? 4 : 0) +
-      (player.height_cm ?? 0) / 100,
-    observations: (player) => [
-      `An athletic rim protector who blocks shots: the box-score sample records ${format(player.avg_blocks)} blocks per game, with ${player.position ?? "an unlisted"} position and ${measurement(player.height_cm, "cm", "listed height")}.`,
-      `An athletic paint protector contests shots; ${format(player.avg_blocks)} blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample.`,
-      `A rim protector who blocks shots: the selected games show ${format(player.avg_blocks)} blocks per game; the position listing is ${player.position ?? "not available"}.`,
-    ],
-  },
-  {
-    key: "high_volume_scorer",
-    query: "high scoring player who creates offense",
-    score: (player) =>
-      player.avg_points + (player.position === "SG" || player.position === "SF" ? 1 : 0),
-    observations: (player) => [
-      `A high scoring offensive creator: scoring volume stands out at ${format(player.avg_points)} points per game, without making a claim about shooting efficiency.`,
-      `This high scoring player creates offense; the imported box scores show ${format(player.avg_points)} points per appearance across ${player.games_played} games.`,
-      `A high scoring player who creates offense: among the recorded per-game figures, ${format(player.avg_points)} points is the most prominent offensive output.`,
-    ],
-  },
-  {
-    key: "playmaking_guard",
-    query: "playmaking guard who creates chances for teammates",
-    score: (player) =>
-      player.avg_assists * 2 +
-      (player.position === "PG" || player.position === "SG" ? 3 : 0),
-    observations: (player) => [
-      `A playmaking guard creates chances for teammates; ${format(player.avg_assists)} assists per game provide a box-score view of passing and play creation.`,
-      `The playmaking guard creates opportunities for teammates; NBA appearances record ${format(player.avg_assists)} assists per game alongside ${format(player.avg_points)} points.`,
-      `A guard whose playmaking creates chances for teammates: at ${format(player.avg_assists)} assists per appearance, the passing line is a notable part of this statistical profile.`,
-    ],
-  },
-  {
-    key: "two_way_wing",
-    query: "two way wing who contributes scoring and defense",
-    score: (player) =>
-      player.avg_points * 0.3 +
-      player.avg_steals * 3 +
-      (player.position === "SG" || player.position === "SF" ? 4 : 0),
-    observations: (player) => [
-      `A two-way wing contributes scoring and defense; the recorded line combines ${format(player.avg_points)} points and ${format(player.avg_steals)} steals per game.`,
-      `This two-way wing combines offense and defensive activity: ${format(player.avg_points)} points and ${format(player.avg_steals)} steals describe the available scoring and disruption outputs.`,
-      `A wing with scoring and defense: the position listing is ${player.position ?? "not available"}; the box scores show ${format(player.avg_points)} points and ${format(player.avg_steals)} steals per appearance.`,
-    ],
-  },
-  {
-    key: "rebounding_big",
-    query: "frontcourt player who controls the rebounds",
-    score: (player) =>
-      player.avg_rebounds * 2 +
-      (player.position === "C" || player.position === "PF" ? 4 : 0),
-    observations: (player) => [
-      `A frontcourt player who controls the rebounds: ${format(player.avg_rebounds)} rebounds per game are the leading figure in this profile.`,
-      `A rebounding frontcourt player controls the glass; box scores record ${format(player.avg_rebounds)} rebounds and ${format(player.avg_points)} points per appearance.`,
-      `A frontcourt rebounder controls the boards; rebounding volume is ${format(player.avg_rebounds)} per game over ${player.games_played} selected-subset appearances.`,
-    ],
-  },
-  {
-    key: "defensive_disruptor",
-    query: "defensive player with steals and blocks",
-    score: (player) => player.avg_steals * 2 + player.avg_blocks * 3,
-    observations: (player) => [
-      `A defensive disruptor records steals and blocks: the box-score sample records ${format(player.avg_steals)} steals and ${format(player.avg_blocks)} blocks per game.`,
-      `This defensive player contributes steals and blocks; they total ${format(player.avg_steals + player.avg_blocks)} per appearance in the available defensive counting stats.`,
-      `Defensive disruption through steals and blocks: the recorded line includes ${format(player.avg_steals)} steals, ${format(player.avg_blocks)} blocks, and ${format(player.avg_rebounds)} rebounds per game.`,
-    ],
-  },
-  {
-    key: "per_minute_contributor",
-    query: "productive player who contributes across the box score",
-    score: (player) => player.production_per_minute * 100,
-    observations: (player) => [
-      `The recorded points, rebounds, assists, steals, and blocks sum to ${format(player.production_per_minute)} per minute.`,
-      `Across ${format(player.avg_minutes)} minutes per appearance, the selected box-score categories produce ${format(player.production_per_minute)} combined contributions per minute.`,
-      `This profile uses only points, rebounds, assists, steals, and blocks; their combined rate is ${format(player.production_per_minute)} per minute.`,
-    ],
-  },
-  {
-    key: "measured_profile",
-    query: "player physical profile with verified combine measurements",
-    score: (player) =>
-      (player.vertical_leap_cm ?? 0) +
-      (player.wingspan_cm ?? 0) / 10 +
-      (player.height_cm ?? 0) / 10,
-    observations: (player) => [
-      `The available player record lists ${measurement(player.height_cm, "cm", "height")}, ${measurement(player.weight_kg, "kg", "weight")}, and ${measurement(player.wingspan_cm, "cm", "wingspan")}.`,
-      `Safely matched combine data lists ${measurement(player.vertical_leap_cm, "cm", "vertical leap")} and ${measurement(player.wingspan_cm, "cm", "wingspan")}; missing measurements are not estimated.`,
-      `The physical details available for this player are ${measurement(player.height_cm, "cm", "height")} and ${measurement(player.weight_kg, "kg", "weight")}.`,
-    ],
-  },
+  { key: "rim_protector", query: "interior defender who contests attempts near the basket", score: p => p.avg_blocks * 10 + (p.position === "C" || p.position === "PF" ? 4 : 0), observations: p => [
+    `Paint anchor who challenges close-range attempts and protects the basket: ${format(p.avg_blocks)} rejections per game suggest activity around the basket.`,
+    `Defensive big who contests layups and protects the basket: ${format(p.avg_blocks)} blocks per appearance offer a proxy for deterring drives.`,
+    `Paint defense against shots near the basket is suggested by ${format(p.avg_blocks)} swats per outing; positioning requires film review.`,
+  ] },
+  { key: "sharpshooter", query: "perimeter shooting specialist with long range accuracy", score: p => p.three_attempts >= 2 ? p.three_made * 4 + p.three_pct * 5 : -1, observations: p => [
+    `Accurate outside marksman and distance shooter: ${format(p.three_made)} triples made on ${format(p.three_attempts)} attempts per game.`,
+    `Accurate outside shooting supplies floor spacing beyond the arc, with ${(p.three_pct * 100).toFixed(1)}% on recorded three-point attempts.`,
+    `The accurate long-distance shooting profile includes ${format(p.three_made)} makes per outing; shot difficulty is not in this sample.`,
+  ] },
+  { key: "playmaking_guard", query: "backcourt creator who sets up teammates", score: p => p.avg_assists * 2 + (p.position === "PG" || p.position === "SG" ? 3 : 0), observations: p => [
+    `A backcourt floor leader orchestrating opportunities for others: ${format(p.avg_assists)} assists per game point to passing involvement.`,
+    `Backcourt floor leadership and distribution: a passing facilitator with ${format(p.avg_assists)} assists per appearance; decision quality needs video review.`,
+    `A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at ${format(p.avg_assists)} assists an outing.`,
+  ] },
+  { key: "two_way_wing", query: "versatile wing contributing on offense and defense", score: p => p.avg_points * .3 + p.avg_steals * 3 + (p.position === "SG" || p.position === "SF" ? 4 : 0), observations: p => [
+    `A wing with scoring and defensive contributions at both ends: ${format(p.avg_points)} points and ${format(p.avg_steals)} steals per game.`,
+    `A wing active on offense and defense: this scoring and disruption profile combines ${format(p.avg_points)} points with ${format(p.avg_steals)} takeaways per outing.`,
+    `A wing scoring and defending: the box-score blend of ${format(p.avg_points)} points and ${format(p.avg_steals)} steals merits a closer look at both ends.`,
+  ] },
+  { key: "slasher", query: "attacker who drives to the basket", score: p => p.avg_points * 0.7 + (p.position === "SG" || p.position === "SF" ? 2 : 0), observations: p => [
+    `An attacking scorer driving toward the basket: ${format(p.avg_points)} points per game indicate scoring volume, not a verified shot diet.`,
+    `An attacking threat driving toward the basket based on ${format(p.avg_points)} points per appearance; drives need film confirmation.`,
+    `Attacking the basket is a hypothesis for this ${format(p.avg_points)}-point scorer, not a tracked statistic.`,
+  ] },
+  { key: "stretch_big", query: "frontcourt player who spaces the floor from deep", score: p => (p.position === "C" || p.position === "PF") && p.three_attempts >= 1 ? 10 + p.three_made * 4 + p.three_pct * 4 : -1, observations: p => [
+    `A frontcourt center or forward with outside range and floor spacing: ${format(p.three_made)} triples on ${format(p.three_attempts)} attempts per game.`,
+    `A frontcourt center or forward spacing the floor with perimeter range, converting ${(p.three_pct * 100).toFixed(1)}% of recorded attempts from beyond the arc.`,
+    `A frontcourt floor-spacer offering a long-distance shooting indicator: ${format(p.three_made)} makes per outing.`,
+  ] },
+  { key: "defensive_stopper", query: "perimeter defender who disrupts opposing scorers", score: p => p.avg_steals * 4 + (p.position === "PG" || p.position === "SG" || p.position === "SF" ? 3 : 0), observations: p => [
+    `A perimeter stopper applying defensive pressure: ${format(p.avg_steals)} steals per game track only one part of on-ball resistance.`,
+    `A potential defensive stopper and point-of-attack pest, with ${format(p.avg_steals)} takeaways per appearance; coverage requires film.`,
+    `A perimeter stopper whose passing-lane disruption appears in ${format(p.avg_steals)} steals an outing, not a complete measure of guarding.`,
+  ] },
+  { key: "raw_athlete", query: "explosive athlete with physical upside", score: p => p.vertical_leap_cm === null ? -1 : p.vertical_leap_cm + (p.wingspan_cm ?? 0) * .1, observations: p => [
+    `Developmental physical tools: a verified ${format(p.vertical_leap_cm ?? 0)} cm vertical and ${measurement(p.wingspan_cm, "cm", "wingspan")}.`,
+    `A physical-upside candidate on combine testing alone: ${format(p.vertical_leap_cm ?? 0)} cm leap; basketball skills need separate review.`,
+    `Measured burst and length offer a starting point: ${format(p.vertical_leap_cm ?? 0)} cm vertical, ${measurement(p.wingspan_cm, "cm", "wingspan")}.`,
+  ] },
 ];
 
 function format(value: number): string {
@@ -179,14 +128,9 @@ function buildReport(
     `In ${player.games_played} selected-subset appearances, ${name} recorded per-game averages of ${format(player.avg_points)} points, ${format(player.avg_rebounds)} rebounds, and ${format(player.avg_assists)} assists.`,
     `The real box-score inputs for ${name} show ${format(player.avg_points)} points, ${format(player.avg_rebounds)} rebounds, and ${format(player.avg_assists)} assists over ${player.games_played} appearances.`,
   ];
-  const measurementNotes = [
-    `Combine context: ${measurement(player.height_cm, "cm", "height")}; ${measurement(player.weight_kg, "kg", "weight")}; ${measurement(player.wingspan_cm, "cm", "wingspan")}.`,
-    `Where a safe combine match exists, the recorded vertical leap is ${measurement(player.vertical_leap_cm, "cm", "vertical leap")}; no missing value is inferred.`,
-    `Physical measurements are source-backed only: height ${measurement(player.height_cm, "cm", "height")}, weight ${measurement(player.weight_kg, "kg", "weight")}.`,
-    `Combine measurements are optional and safely matched; this row has ${measurement(player.wingspan_cm, "cm", "wingspan")} and ${measurement(player.vertical_leap_cm, "cm", "vertical leap")}.`,
-  ];
 
-  return `${REPORT_MARKER} ${openings[reportNumber % openings.length]} ${observations[reportNumber % observations.length]} ${measurementNotes[reportNumber % measurementNotes.length]}`;
+
+  return `${REPORT_MARKER} ${observations[reportNumber % observations.length]} ${observations[(reportNumber + 1) % observations.length]} ${openings[reportNumber % openings.length]}`;
 }
 
 function buildArticle(player: PlayerProfile, articleNumber: number): {
@@ -217,6 +161,15 @@ function buildArticle(player: PlayerProfile, articleNumber: number): {
 
 async function loadProfiles(): Promise<PlayerProfile[]> {
   const result = await pool.query<PlayerProfile>(`
+    WITH shooting AS (
+      SELECT trim(d.player_id) AS source_player_id,
+             SUM(CASE WHEN d.fg3m ~ '^[0-9]+([.][0-9]+)?$' THEN d.fg3m::numeric ELSE 0 END) AS made,
+             SUM(CASE WHEN d.fg3a ~ '^[0-9]+([.][0-9]+)?$' THEN d.fg3a::numeric ELSE 0 END) AS attempts,
+             COUNT(*)::numeric AS games
+      FROM stg_nba_game_detail d
+      JOIN game source_game ON source_game.external_id = 'nba:' || trim(d.game_id)
+      GROUP BY trim(d.player_id)
+    )
     SELECT
       p.player_id::text,
       p.f_name,
@@ -237,10 +190,14 @@ async function loadProfiles(): Promise<PlayerProfile[]> {
       p.height_cm::double precision,
       p.weight_kg::double precision,
       measurements.wingspan_cm,
-      measurements.vertical_leap_cm
+      measurements.vertical_leap_cm,
+      COALESCE(shooting.made / NULLIF(shooting.games, 0), 0)::double precision AS three_made,
+      COALESCE(shooting.attempts / NULLIF(shooting.games, 0), 0)::double precision AS three_attempts,
+      COALESCE(shooting.made / NULLIF(shooting.attempts, 0), 0)::double precision AS three_pct
     FROM player p
     JOIN game_performance gp ON gp.player_id = p.player_id
     JOIN game g ON g.game_id = gp.game_id AND g.external_id LIKE 'nba:%'
+    LEFT JOIN shooting ON 'nba:' || shooting.source_player_id = p.external_id
     LEFT JOIN LATERAL (
       SELECT
         (MAX(cm.value) FILTER (WHERE cm.measurement_type = 'wingspan_cm'))::double precision AS wingspan_cm,
@@ -250,7 +207,7 @@ async function loadProfiles(): Promise<PlayerProfile[]> {
     ) measurements ON true
     GROUP BY
       p.player_id, p.f_name, p.l_name, p.position, p.height_cm, p.weight_kg,
-      measurements.wingspan_cm, measurements.vertical_leap_cm
+      measurements.wingspan_cm, measurements.vertical_leap_cm, shooting.made, shooting.attempts, shooting.games
     HAVING COUNT(gp.performance_id) > 0
     ORDER BY p.player_id
   `);
@@ -374,6 +331,7 @@ async function main(): Promise<void> {
   const archetypeProfiles = archetypes.map((archetype) => ({
     archetype,
     players: [...players]
+      .filter((player) => archetype.score(player) >= 0)
       .sort((left, right) => {
         const scoreDifference = archetype.score(right) - archetype.score(left);
         return scoreDifference || left.player_id.localeCompare(right.player_id);
@@ -382,6 +340,7 @@ async function main(): Promise<void> {
   }));
 
   for (const { archetype, players: rankedPlayers } of archetypeProfiles) {
+    if (rankedPlayers.length < REPORTS_PER_ARCHETYPE) throw new Error(`Not enough eligible players for ${archetype.key}`);
     for (let index = 0; index < REPORTS_PER_ARCHETYPE; index += 1) {
       const player = rankedPlayers[index % rankedPlayers.length];
       reportInputs.push({

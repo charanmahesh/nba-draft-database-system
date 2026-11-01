@@ -30,6 +30,18 @@ interface ArchetypeResult {
   precisionAtFive: number;
 }
 
+// Alternate phrasings are separate from the standard query set.
+const PARAPHRASED_QUERIES: Record<string, string> = {
+  rim_protector: "erases shots at the rim",
+  sharpshooter: "deadeye shooter from downtown",
+  playmaking_guard: "floor general who creates chances for teammates",
+  two_way_wing: "versatile wing who scores and defends",
+  slasher: "attacker who drives to the hoop",
+  stretch_big: "center who spaces the floor from deep",
+  defensive_stopper: "lockdown defender who disrupts opponents",
+  raw_athlete: "explosive athlete with physical upside",
+};
+
 const TOP_K = 5;
 const HNSW_EF_SEARCH = 100;
 const MINIMUM_PRECISION_AT_FIVE = 0.6;
@@ -69,7 +81,7 @@ function parseReportsFile(jsonText: string): GeneratedReportsFile {
   return { reports: reports as GeneratedReport[] };
 }
 
-async function runEvaluation(client: PoolClient): Promise<ArchetypeResult[]> {
+async function runEvaluation(client: PoolClient, paraphrased: boolean): Promise<ArchetypeResult[]> {
   const reportsPath = process.argv[2]
     ? resolve(process.argv[2])
     : DEFAULT_REPORTS_PATH;
@@ -104,7 +116,8 @@ async function runEvaluation(client: PoolClient): Promise<ArchetypeResult[]> {
       );
     }
 
-    const query = reports[0].query;
+    const query = paraphrased ? PARAPHRASED_QUERIES[archetype] : reports[0].query;
+    if (!query) throw new Error(`Missing paraphrased query for ${archetype}`);
     const queryEmbedding = await embedText(query);
     const retrieved = await client.query<RetrievedReport>(
       `SELECT report_id::text
@@ -156,8 +169,10 @@ async function main(): Promise<void> {
 
   const client = await pool.connect();
   try {
-    const results = await runEvaluation(client);
-    console.log("Retrieval evaluation (top five nearest reports per archetype):");
+    let allSetsPassed = true;
+    for (const paraphrased of [false, true]) {
+    const results = await runEvaluation(client, paraphrased);
+    console.log(`Retrieval evaluation (${paraphrased ? "paraphrased" : "standard"}; top five nearest reports):`);
     for (const result of results) {
       const passed = result.precisionAtFive >= MINIMUM_PRECISION_AT_FIVE;
       console.log(
@@ -175,7 +190,9 @@ async function main(): Promise<void> {
       `Macro precision@${TOP_K}: ${(macroPrecision * 100).toFixed(1)}%; required per archetype: ${(MINIMUM_PRECISION_AT_FIVE * 100).toFixed(0)}%.`,
     );
 
-    if (!allPassed) {
+    allSetsPassed &&= allPassed;
+    }
+    if (!allSetsPassed) {
       throw new Error(
         "Retrieval evaluation failed: each archetype must have a majority of matching labels in its top five results.",
       );

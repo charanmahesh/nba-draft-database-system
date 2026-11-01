@@ -11,3 +11,9 @@ On macOS with PostgreSQL 16 in pgvector Docker, Node 22 and Homebrew psql 18:
 - Supporting rows: 4 persons, 1 each subtype, 150 needs, 30 app-managed rosters, 120 reports, 60 articles and 60 mentions. `draft_prospect` and `injury_history` both contain zero rows.
 
 The retrieval queries share vocabulary with generated text; this synthetic evaluation is a demo check, not evidence of general retrieval quality. npm reported seven dependency audit findings.
+
+## Retrieval hardening — 2026-11-01
+
+Re-ran `npm run seed` after replacing the eight archetypes and adding a second paraphrased query set; the full command passed. `npx tsc --noEmit` passed. Precision@5 by role (standard / paraphrased): rim protector 5/5 / 5/5; sharpshooter 5/5 / 5/5; playmaking guard 5/5 / 5/5; two-way wing 5/5 / 5/5; slasher 5/5 / 5/5; stretch big 5/5 / 5/5; defensive stopper 5/5 / 3/5; raw athlete 5/5 / 5/5. Macro precision: 100% / 95%; every query meets the 60% threshold.
+
+Descriptions were iteratively revised using both query sets, so these figures are in-sample development results, not an independent estimate. Shooting counts in the source use decimal formatting and are parsed accordingly. A prior test incorrectly excluded those values and its results were discarded. See the selected, rechecked result lists and proxy limitations in [vector-search.md](vector-search.md).
