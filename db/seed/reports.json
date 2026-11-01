@@ -1,0 +1,845 @@
+{
+  "generatedAt": "2026-11-01T06:46:20.926Z",
+  "reports": [
+    {
+      "player_id": "563",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint anchor who challenges close-range attempts and protects the basket: 2.3 rejections per game suggest activity around the basket. Defensive big who contests layups and protects the basket: 2.3 blocks per appearance offer a proxy for deterring drives. Across 237 imported NBA appearances, Anthony Davis averaged 26.4 points, 10.6 rebounds, and 3.0 assists.",
+      "report_id": "1"
+    },
+    {
+      "player_id": "37",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Defensive big who contests layups and protects the basket: 2.2 blocks per appearance offer a proxy for deterring drives. Paint defense against shots near the basket is suggested by 2.2 swats per outing; positioning requires film review. The selected box-score sample covers 227 games for Myles Turner: 12.7 points, 6.7 rebounds, and 1.3 assists per appearance.",
+      "report_id": "2"
+    },
+    {
+      "player_id": "628",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint defense against shots near the basket is suggested by 2.2 swats per outing; positioning requires film review. Paint anchor who challenges close-range attempts and protects the basket: 2.2 rejections per game suggest activity around the basket. Rudy Gobert's imported NBA line is based on 239 appearances and includes 14.9 points, 12.1 rebounds, and 1.6 assists per game.",
+      "report_id": "3"
+    },
+    {
+      "player_id": "520",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint anchor who challenges close-range attempts and protects the basket: 2.1 rejections per game suggest activity around the basket. Defensive big who contests layups and protects the basket: 2.1 blocks per appearance offer a proxy for deterring drives. In 219 selected-subset appearances, Hassan Whiteside recorded per-game averages of 13.3 points, 11.6 rebounds, and 0.9 assists.",
+      "report_id": "4"
+    },
+    {
+      "player_id": "288",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Defensive big who contests layups and protects the basket: 2.2 blocks per appearance offer a proxy for deterring drives. Paint defense against shots near the basket is suggested by 2.2 swats per outing; positioning requires film review. The real box-score inputs for Mitchell Robinson show 8.3 points, 6.6 rebounds, and 0.6 assists over 134 appearances.",
+      "report_id": "5"
+    },
+    {
+      "player_id": "703",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint defense against shots near the basket is suggested by 2.1 swats per outing; positioning requires film review. Paint anchor who challenges close-range attempts and protects the basket: 2.1 rejections per game suggest activity around the basket. Across 116 imported NBA appearances, Kristaps Porzingis averaged 21.0 points, 8.1 rebounds, and 1.5 assists.",
+      "report_id": "6"
+    },
+    {
+      "player_id": "570",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint anchor who challenges close-range attempts and protects the basket: 1.6 rejections per game suggest activity around the basket. Defensive big who contests layups and protects the basket: 1.6 blocks per appearance offer a proxy for deterring drives. The selected box-score sample covers 230 games for Andre Drummond: 16.6 points, 15.5 rebounds, and 2.3 assists per appearance.",
+      "report_id": "7"
+    },
+    {
+      "player_id": "460",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Defensive big who contests layups and protects the basket: 1.9 blocks per appearance offer a proxy for deterring drives. Paint defense against shots near the basket is suggested by 1.9 swats per outing; positioning requires film review. Brook Lopez's imported NBA line is based on 261 appearances and includes 12.5 points, 4.6 rebounds, and 1.4 assists per game.",
+      "report_id": "8"
+    },
+    {
+      "player_id": "505",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint defense against shots near the basket is suggested by 1.5 swats per outing; positioning requires film review. Paint anchor who challenges close-range attempts and protects the basket: 1.5 rejections per game suggest activity around the basket. In 90 selected-subset appearances, DeMarcus Cousins recorded per-game averages of 20.3 points, 10.3 rebounds, and 4.4 assists.",
+      "report_id": "9"
+    },
+    {
+      "player_id": "651",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint anchor who challenges close-range attempts and protects the basket: 1.5 rejections per game suggest activity around the basket. Defensive big who contests layups and protects the basket: 1.5 blocks per appearance offer a proxy for deterring drives. The real box-score inputs for Norvel Pelle show 2.9 points, 3.1 rebounds, and 0.3 assists over 32 appearances.",
+      "report_id": "10"
+    },
+    {
+      "player_id": "171",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Defensive big who contests layups and protects the basket: 1.3 blocks per appearance offer a proxy for deterring drives. Paint defense against shots near the basket is suggested by 1.3 swats per outing; positioning requires film review. Across 245 imported NBA appearances, Jarrett Allen averaged 10.1 points, 7.8 rebounds, and 1.2 assists.",
+      "report_id": "11"
+    },
+    {
+      "player_id": "698",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint defense against shots near the basket is suggested by 1.7 swats per outing; positioning requires film review. Paint anchor who challenges close-range attempts and protects the basket: 1.7 rejections per game suggest activity around the basket. The selected box-score sample covers 220 games for Clint Capela: 14.3 points, 11.8 rebounds, and 1.2 assists per appearance.",
+      "report_id": "12"
+    },
+    {
+      "player_id": "379",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint anchor who challenges close-range attempts and protects the basket: 1.3 rejections per game suggest activity around the basket. Defensive big who contests layups and protects the basket: 1.3 blocks per appearance offer a proxy for deterring drives. Daniel Gafford's imported NBA line is based on 48 appearances and includes 5.3 points, 2.6 rebounds, and 0.4 assists per game.",
+      "report_id": "13"
+    },
+    {
+      "player_id": "576",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Defensive big who contests layups and protects the basket: 1.3 blocks per appearance offer a proxy for deterring drives. Paint defense against shots near the basket is suggested by 1.3 swats per outing; positioning requires film review. In 140 selected-subset appearances, John Henson recorded per-game averages of 7.4 points, 5.6 rebounds, and 1.4 assists.",
+      "report_id": "14"
+    },
+    {
+      "player_id": "691",
+      "archetype": "rim_protector",
+      "query": "interior defender who contests attempts near the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paint defense against shots near the basket is suggested by 1.7 swats per outing; positioning requires film review. Paint anchor who challenges close-range attempts and protects the basket: 1.7 rejections per game suggest activity around the basket. The real box-score inputs for Joel Embiid show 24.1 points, 11.8 rebounds, and 3.2 assists over 210 appearances.",
+      "report_id": "15"
+    },
+    {
+      "player_id": "482",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside marksman and distance shooter: 4.4 triples made on 10.5 attempts per game. Accurate outside shooting supplies floor spacing beyond the arc, with 41.9% on recorded three-point attempts. Across 174 imported NBA appearances, Stephen Curry averaged 26.5 points, 5.3 rebounds, and 5.5 assists.",
+      "report_id": "16"
+    },
+    {
+      "player_id": "479",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside shooting supplies floor spacing beyond the arc, with 35.9% on recorded three-point attempts. The accurate long-distance shooting profile includes 4.1 makes per outing; shot difficulty is not in this sample. The selected box-score sample covers 274 games for James Harden: 32.7 points, 6.1 rebounds, and 7.8 assists per appearance.",
+      "report_id": "17"
+    },
+    {
+      "player_id": "510",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The accurate long-distance shooting profile includes 3.2 makes per outing; shot difficulty is not in this sample. Accurate outside marksman and distance shooter: 3.2 triples made on 8.2 attempts per game. Paul George's imported NBA line is based on 237 appearances and includes 23.9 points, 6.5 rebounds, and 3.7 assists per game.",
+      "report_id": "18"
+    },
+    {
+      "player_id": "568",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside marksman and distance shooter: 3.1 triples made on 8.3 attempts per game. Accurate outside shooting supplies floor spacing beyond the arc, with 37.6% on recorded three-point attempts. In 257 selected-subset appearances, Damian Lillard recorded per-game averages of 26.6 points, 4.4 rebounds, and 6.9 assists.",
+      "report_id": "19"
+    },
+    {
+      "player_id": "536",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside shooting supplies floor spacing beyond the arc, with 42.7% on recorded three-point attempts. The accurate long-distance shooting profile includes 3.0 makes per outing; shot difficulty is not in this sample. The real box-score inputs for Klay Thompson show 20.6 points, 3.8 rebounds, and 2.4 assists over 201 appearances.",
+      "report_id": "20"
+    },
+    {
+      "player_id": "82",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The accurate long-distance shooting profile includes 3.0 makes per outing; shot difficulty is not in this sample. Accurate outside marksman and distance shooter: 3.0 triples made on 7.3 attempts per game. Across 252 imported NBA appearances, Buddy Hield averaged 17.5 points, 4.4 rebounds, and 2.5 assists.",
+      "report_id": "21"
+    },
+    {
+      "player_id": "535",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside marksman and distance shooter: 2.9 triples made on 7.9 attempts per game. Accurate outside shooting supplies floor spacing beyond the arc, with 36.9% on recorded three-point attempts. The selected box-score sample covers 248 games for Kemba Walker: 22.2 points, 3.8 rebounds, and 5.3 assists per appearance.",
+      "report_id": "22"
+    },
+    {
+      "player_id": "428",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside shooting supplies floor spacing beyond the arc, with 42.3% on recorded three-point attempts. The accurate long-distance shooting profile includes 2.8 makes per outing; shot difficulty is not in this sample. JJ Redick's imported NBA line is based on 242 appearances and includes 16.5 points, 2.3 rebounds, and 2.5 assists per game.",
+      "report_id": "23"
+    },
+    {
+      "player_id": "458",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The accurate long-distance shooting profile includes 2.8 makes per outing; shot difficulty is not in this sample. Accurate outside marksman and distance shooter: 2.8 triples made on 8.0 attempts per game. In 229 selected-subset appearances, Eric Gordon recorded per-game averages of 16.4 points, 2.3 rebounds, and 1.9 assists.",
+      "report_id": "24"
+    },
+    {
+      "player_id": "431",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside marksman and distance shooter: 2.6 triples made on 7.0 attempts per game. Accurate outside shooting supplies floor spacing beyond the arc, with 36.9% on recorded three-point attempts. The real box-score inputs for Kyle Lowry show 16.3 points, 5.1 rebounds, and 7.4 assists over 257 appearances.",
+      "report_id": "25"
+    },
+    {
+      "player_id": "331",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside shooting supplies floor spacing beyond the arc, with 42.0% on recorded three-point attempts. The accurate long-distance shooting profile includes 2.5 makes per outing; shot difficulty is not in this sample. Across 123 imported NBA appearances, Duncan Robinson averaged 11.4 points, 2.8 rebounds, and 1.3 assists.",
+      "report_id": "26"
+    },
+    {
+      "player_id": "565",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The accurate long-distance shooting profile includes 2.5 makes per outing; shot difficulty is not in this sample. Accurate outside marksman and distance shooter: 2.5 triples made on 7.0 attempts per game. The selected box-score sample covers 239 games for Bradley Beal: 25.2 points, 4.5 rebounds, and 5.1 assists per appearance.",
+      "report_id": "27"
+    },
+    {
+      "player_id": "528",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside marksman and distance shooter: 2.5 triples made on 6.2 attempts per game. Accurate outside shooting supplies floor spacing beyond the arc, with 39.9% on recorded three-point attempts. Kyrie Irving's imported NBA line is based on 163 appearances and includes 23.9 points, 4.4 rebounds, and 6.1 assists per game.",
+      "report_id": "28"
+    },
+    {
+      "player_id": "27",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Accurate outside shooting supplies floor spacing beyond the arc, with 35.8% on recorded three-point attempts. The accurate long-distance shooting profile includes 2.5 makes per outing; shot difficulty is not in this sample. In 191 selected-subset appearances, D'Angelo Russell recorded per-game averages of 19.9 points, 3.8 rebounds, and 6.1 assists.",
+      "report_id": "29"
+    },
+    {
+      "player_id": "632",
+      "archetype": "sharpshooter",
+      "query": "perimeter shooting specialist with long range accuracy",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The accurate long-distance shooting profile includes 2.5 makes per outing; shot difficulty is not in this sample. Accurate outside marksman and distance shooter: 2.5 triples made on 7.0 attempts per game. The real box-score inputs for Tim Hardaway Jr. show 16.8 points, 3.4 rebounds, and 2.3 assists over 217 appearances.",
+      "report_id": "30"
+    },
+    {
+      "player_id": "501",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt floor leader orchestrating opportunities for others: 9.1 assists per game point to passing involvement. Backcourt floor leadership and distribution: a passing facilitator with 9.1 assists per appearance; decision quality needs video review. Across 86 imported NBA appearances, John Wall averaged 20.0 points, 3.7 rebounds, and 9.1 assists.",
+      "report_id": "31"
+    },
+    {
+      "player_id": "302",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Backcourt floor leadership and distribution: a passing facilitator with 8.4 assists per appearance; decision quality needs video review. A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 8.4 assists an outing. The selected box-score sample covers 151 games for Trae Young: 23.1 points, 3.9 rebounds, and 8.4 assists per appearance.",
+      "report_id": "32"
+    },
+    {
+      "player_id": "479",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 7.8 assists an outing. A backcourt floor leader orchestrating opportunities for others: 7.8 assists per game point to passing involvement. James Harden's imported NBA line is based on 274 appearances and includes 32.7 points, 6.1 rebounds, and 7.8 assists per game.",
+      "report_id": "33"
+    },
+    {
+      "player_id": "455",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt floor leader orchestrating opportunities for others: 9.2 assists per game point to passing involvement. Backcourt floor leadership and distribution: a passing facilitator with 9.2 assists per appearance; decision quality needs video review. In 238 selected-subset appearances, Russell Westbrook recorded per-game averages of 24.5 points, 9.5 rebounds, and 9.2 assists.",
+      "report_id": "34"
+    },
+    {
+      "player_id": "720",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Backcourt floor leadership and distribution: a passing facilitator with 9.0 assists per appearance; decision quality needs video review. A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 9.0 assists an outing. The real box-score inputs for LeBron James show 26.9 points, 8.4 rebounds, and 9.0 assists over 258 appearances.",
+      "report_id": "35"
+    },
+    {
+      "player_id": "568",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 6.9 assists an outing. A backcourt floor leader orchestrating opportunities for others: 6.9 assists per game point to passing involvement. Across 257 imported NBA appearances, Damian Lillard averaged 26.6 points, 4.4 rebounds, and 6.9 assists.",
+      "report_id": "36"
+    },
+    {
+      "player_id": "661",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt floor leader orchestrating opportunities for others: 6.8 assists per game point to passing involvement. Backcourt floor leadership and distribution: a passing facilitator with 6.8 assists per appearance; decision quality needs video review. The selected box-score sample covers 163 games for Elfrid Payton: 10.9 points, 4.7 rebounds, and 6.8 assists per appearance.",
+      "report_id": "37"
+    },
+    {
+      "player_id": "485",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Backcourt floor leadership and distribution: a passing facilitator with 6.5 assists per appearance; decision quality needs video review. A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 6.5 assists an outing. Jrue Holiday's imported NBA line is based on 233 appearances and includes 19.5 points, 4.6 rebounds, and 6.5 assists per game.",
+      "report_id": "38"
+    },
+    {
+      "player_id": "487",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 6.5 assists an outing. A backcourt floor leader orchestrating opportunities for others: 6.5 assists per game point to passing involvement. In 188 selected-subset appearances, Jeff Teague recorded per-game averages of 12.4 points, 2.7 rebounds, and 6.5 assists.",
+      "report_id": "39"
+    },
+    {
+      "player_id": "73",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt floor leader orchestrating opportunities for others: 7.8 assists per game point to passing involvement. Backcourt floor leadership and distribution: a passing facilitator with 7.8 assists per appearance; decision quality needs video review. The real box-score inputs for Ben Simmons show 15.9 points, 8.2 rebounds, and 7.8 assists over 252 appearances.",
+      "report_id": "40"
+    },
+    {
+      "player_id": "156",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Backcourt floor leadership and distribution: a passing facilitator with 6.1 assists per appearance; decision quality needs video review. A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 6.1 assists an outing. Across 218 imported NBA appearances, De'Aaron Fox averaged 15.9 points, 3.4 rebounds, and 6.1 assists.",
+      "report_id": "41"
+    },
+    {
+      "player_id": "528",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 6.1 assists an outing. A backcourt floor leader orchestrating opportunities for others: 6.1 assists per game point to passing involvement. The selected box-score sample covers 163 games for Kyrie Irving: 23.9 points, 4.4 rebounds, and 6.1 assists per appearance.",
+      "report_id": "42"
+    },
+    {
+      "player_id": "27",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt floor leader orchestrating opportunities for others: 6.1 assists per game point to passing involvement. Backcourt floor leadership and distribution: a passing facilitator with 6.1 assists per appearance; decision quality needs video review. D'Angelo Russell's imported NBA line is based on 191 appearances and includes 19.9 points, 3.8 rebounds, and 6.1 assists per game.",
+      "report_id": "43"
+    },
+    {
+      "player_id": "34",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Backcourt floor leadership and distribution: a passing facilitator with 6.0 assists per appearance; decision quality needs video review. A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 6.0 assists an outing. In 197 selected-subset appearances, Devin Booker recorded per-game averages of 25.6 points, 4.2 rebounds, and 6.0 assists.",
+      "report_id": "44"
+    },
+    {
+      "player_id": "431",
+      "archetype": "playmaking_guard",
+      "query": "backcourt creator who sets up teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A backcourt orchestrator creating opportunities for others: distribution stands out in the box score at 7.4 assists an outing. A backcourt floor leader orchestrating opportunities for others: 7.4 assists per game point to passing involvement. The real box-score inputs for Kyle Lowry show 16.3 points, 5.1 rebounds, and 7.4 assists over 257 appearances.",
+      "report_id": "45"
+    },
+    {
+      "player_id": "479",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing with scoring and defensive contributions at both ends: 32.7 points and 1.9 steals per game. A wing active on offense and defense: this scoring and disruption profile combines 32.7 points with 1.9 takeaways per outing. Across 274 imported NBA appearances, James Harden averaged 32.7 points, 6.1 rebounds, and 7.8 assists.",
+      "report_id": "46"
+    },
+    {
+      "player_id": "540",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing active on offense and defense: this scoring and disruption profile combines 26.2 points with 1.8 takeaways per outing. A wing scoring and defending: the box-score blend of 26.2 points and 1.8 steals merits a closer look at both ends. The selected box-score sample covers 171 games for Kawhi Leonard: 26.2 points, 7.3 rebounds, and 4.0 assists per appearance.",
+      "report_id": "47"
+    },
+    {
+      "player_id": "510",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing scoring and defending: the box-score blend of 23.9 points and 1.9 steals merits a closer look at both ends. A wing with scoring and defensive contributions at both ends: 23.9 points and 1.9 steals per game. Paul George's imported NBA line is based on 237 appearances and includes 23.9 points, 6.5 rebounds, and 3.7 assists per game.",
+      "report_id": "48"
+    },
+    {
+      "player_id": "636",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing with scoring and defensive contributions at both ends: 20.4 points and 1.9 steals per game. A wing active on offense and defense: this scoring and disruption profile combines 20.4 points with 1.9 takeaways per outing. In 149 selected-subset appearances, Victor Oladipo recorded per-game averages of 20.4 points, 5.2 rebounds, and 4.3 assists.",
+      "report_id": "49"
+    },
+    {
+      "player_id": "549",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing active on offense and defense: this scoring and disruption profile combines 20.0 points with 1.8 takeaways per outing. A wing scoring and defending: the box-score blend of 20.0 points and 1.8 steals merits a closer look at both ends. The real box-score inputs for Jimmy Butler show 20.0 points, 5.8 rebounds, and 5.0 assists over 228 appearances.",
+      "report_id": "50"
+    },
+    {
+      "player_id": "565",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing scoring and defending: the box-score blend of 25.2 points and 1.3 steals merits a closer look at both ends. A wing with scoring and defensive contributions at both ends: 25.2 points and 1.3 steals per game. Across 239 imported NBA appearances, Bradley Beal averaged 25.2 points, 4.5 rebounds, and 5.1 assists.",
+      "report_id": "51"
+    },
+    {
+      "player_id": "163",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing with scoring and defensive contributions at both ends: 22.8 points and 1.3 steals per game. A wing active on offense and defense: this scoring and disruption profile combines 22.8 points with 1.3 takeaways per outing. The selected box-score sample covers 261 games for Donovan Mitchell: 22.8 points, 4.1 rebounds, and 4.0 assists per appearance.",
+      "report_id": "52"
+    },
+    {
+      "player_id": "34",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing active on offense and defense: this scoring and disruption profile combines 25.6 points with 0.8 takeaways per outing. A wing scoring and defending: the box-score blend of 25.6 points and 0.8 steals merits a closer look at both ends. Devin Booker's imported NBA line is based on 197 appearances and includes 25.6 points, 4.2 rebounds, and 6.0 assists per game.",
+      "report_id": "53"
+    },
+    {
+      "player_id": "483",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing scoring and defending: the box-score blend of 21.6 points and 1.0 steals merits a closer look at both ends. A wing with scoring and defensive contributions at both ends: 21.6 points and 1.0 steals per game. In 257 selected-subset appearances, DeMar DeRozan recorded per-game averages of 21.6 points, 5.0 rebounds, and 5.4 assists.",
+      "report_id": "54"
+    },
+    {
+      "player_id": "588",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing with scoring and defensive contributions at both ends: 19.4 points and 1.1 steals per game. A wing active on offense and defense: this scoring and disruption profile combines 19.4 points with 1.1 takeaways per outing. The real box-score inputs for Khris Middleton show 19.4 points, 5.8 rebounds, and 4.2 assists over 267 appearances.",
+      "report_id": "55"
+    },
+    {
+      "player_id": "536",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing active on offense and defense: this scoring and disruption profile combines 20.6 points with 1.0 takeaways per outing. A wing scoring and defending: the box-score blend of 20.6 points and 1.0 steals merits a closer look at both ends. Across 201 imported NBA appearances, Klay Thompson averaged 20.6 points, 3.8 rebounds, and 2.4 assists.",
+      "report_id": "56"
+    },
+    {
+      "player_id": "680",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing scoring and defending: the box-score blend of 18.8 points and 1.1 steals merits a closer look at both ends. A wing with scoring and defensive contributions at both ends: 18.8 points and 1.1 steals per game. The selected box-score sample covers 192 games for T.J. Warren: 18.8 points, 4.4 rebounds, and 1.4 assists per appearance.",
+      "report_id": "57"
+    },
+    {
+      "player_id": "627",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing with scoring and defensive contributions at both ends: 12.1 points and 1.7 steals per game. A wing active on offense and defense: this scoring and disruption profile combines 12.1 points with 1.7 takeaways per outing. Robert Covington's imported NBA line is based on 221 appearances and includes 12.1 points, 5.8 rebounds, and 1.6 assists per game.",
+      "report_id": "58"
+    },
+    {
+      "player_id": "455",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing active on offense and defense: this scoring and disruption profile combines 24.5 points with 1.8 takeaways per outing. A wing scoring and defending: the box-score blend of 24.5 points and 1.8 steals merits a closer look at both ends. In 238 selected-subset appearances, Russell Westbrook recorded per-game averages of 24.5 points, 9.5 rebounds, and 9.2 assists.",
+      "report_id": "59"
+    },
+    {
+      "player_id": "563",
+      "archetype": "two_way_wing",
+      "query": "versatile wing contributing on offense and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A wing scoring and defending: the box-score blend of 26.4 points and 1.5 steals merits a closer look at both ends. A wing with scoring and defensive contributions at both ends: 26.4 points and 1.5 steals per game. The real box-score inputs for Anthony Davis show 26.4 points, 10.6 rebounds, and 3.0 assists over 237 appearances.",
+      "report_id": "60"
+    },
+    {
+      "player_id": "479",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking scorer driving toward the basket: 32.7 points per game indicate scoring volume, not a verified shot diet. An attacking threat driving toward the basket based on 32.7 points per appearance; drives need film confirmation. Across 274 imported NBA appearances, James Harden averaged 32.7 points, 6.1 rebounds, and 7.8 assists.",
+      "report_id": "61"
+    },
+    {
+      "player_id": "540",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking threat driving toward the basket based on 26.2 points per appearance; drives need film confirmation. Attacking the basket is a hypothesis for this 26.2-point scorer, not a tracked statistic. The selected box-score sample covers 171 games for Kawhi Leonard: 26.2 points, 7.3 rebounds, and 4.0 assists per appearance.",
+      "report_id": "62"
+    },
+    {
+      "player_id": "34",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Attacking the basket is a hypothesis for this 25.6-point scorer, not a tracked statistic. An attacking scorer driving toward the basket: 25.6 points per game indicate scoring volume, not a verified shot diet. Devin Booker's imported NBA line is based on 197 appearances and includes 25.6 points, 4.2 rebounds, and 6.0 assists per game.",
+      "report_id": "63"
+    },
+    {
+      "player_id": "565",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking scorer driving toward the basket: 25.2 points per game indicate scoring volume, not a verified shot diet. An attacking threat driving toward the basket based on 25.2 points per appearance; drives need film confirmation. In 239 selected-subset appearances, Bradley Beal recorded per-game averages of 25.2 points, 4.5 rebounds, and 5.1 assists.",
+      "report_id": "64"
+    },
+    {
+      "player_id": "637",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking threat driving toward the basket based on 27.5 points per appearance; drives need film confirmation. Attacking the basket is a hypothesis for this 27.5-point scorer, not a tracked statistic. The real box-score inputs for Giannis Antetokounmpo show 27.5 points, 11.8 rebounds, and 5.4 assists over 252 appearances.",
+      "report_id": "65"
+    },
+    {
+      "player_id": "720",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Attacking the basket is a hypothesis for this 26.9-point scorer, not a tracked statistic. An attacking scorer driving toward the basket: 26.9 points per game indicate scoring volume, not a verified shot diet. Across 258 imported NBA appearances, LeBron James averaged 26.9 points, 8.4 rebounds, and 9.0 assists.",
+      "report_id": "66"
+    },
+    {
+      "player_id": "510",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking scorer driving toward the basket: 23.9 points per game indicate scoring volume, not a verified shot diet. An attacking threat driving toward the basket based on 23.9 points per appearance; drives need film confirmation. The selected box-score sample covers 237 games for Paul George: 23.9 points, 6.5 rebounds, and 3.7 assists per appearance.",
+      "report_id": "67"
+    },
+    {
+      "player_id": "568",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking threat driving toward the basket based on 26.6 points per appearance; drives need film confirmation. Attacking the basket is a hypothesis for this 26.6-point scorer, not a tracked statistic. Damian Lillard's imported NBA line is based on 257 appearances and includes 26.6 points, 4.4 rebounds, and 6.9 assists per game.",
+      "report_id": "68"
+    },
+    {
+      "player_id": "435",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Attacking the basket is a hypothesis for this 26.5-point scorer, not a tracked statistic. An attacking scorer driving toward the basket: 26.5 points per game indicate scoring volume, not a verified shot diet. In 186 selected-subset appearances, Kevin Durant recorded per-game averages of 26.5 points, 6.5 rebounds, and 5.4 assists.",
+      "report_id": "69"
+    },
+    {
+      "player_id": "482",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking scorer driving toward the basket: 26.5 points per game indicate scoring volume, not a verified shot diet. An attacking threat driving toward the basket based on 26.5 points per appearance; drives need film confirmation. The real box-score inputs for Stephen Curry show 26.5 points, 5.3 rebounds, and 5.5 assists over 174 appearances.",
+      "report_id": "70"
+    },
+    {
+      "player_id": "563",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking threat driving toward the basket based on 26.4 points per appearance; drives need film confirmation. Attacking the basket is a hypothesis for this 26.4-point scorer, not a tracked statistic. Across 237 imported NBA appearances, Anthony Davis averaged 26.4 points, 10.6 rebounds, and 3.0 assists.",
+      "report_id": "71"
+    },
+    {
+      "player_id": "163",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Attacking the basket is a hypothesis for this 22.8-point scorer, not a tracked statistic. An attacking scorer driving toward the basket: 22.8 points per game indicate scoring volume, not a verified shot diet. The selected box-score sample covers 261 games for Donovan Mitchell: 22.8 points, 4.1 rebounds, and 4.0 assists per appearance.",
+      "report_id": "72"
+    },
+    {
+      "player_id": "304",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking scorer driving toward the basket: 24.5 points per game indicate scoring volume, not a verified shot diet. An attacking threat driving toward the basket based on 24.5 points per appearance; drives need film confirmation. Luka Doncic's imported NBA line is based on 149 appearances and includes 24.5 points, 8.5 rebounds, and 7.2 assists per game.",
+      "report_id": "73"
+    },
+    {
+      "player_id": "455",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). An attacking threat driving toward the basket based on 24.5 points per appearance; drives need film confirmation. Attacking the basket is a hypothesis for this 24.5-point scorer, not a tracked statistic. In 238 selected-subset appearances, Russell Westbrook recorded per-game averages of 24.5 points, 9.5 rebounds, and 9.2 assists.",
+      "report_id": "74"
+    },
+    {
+      "player_id": "483",
+      "archetype": "slasher",
+      "query": "attacker who drives to the basket",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Attacking the basket is a hypothesis for this 21.6-point scorer, not a tracked statistic. An attacking scorer driving toward the basket: 21.6 points per game indicate scoring volume, not a verified shot diet. The real box-score inputs for DeMar DeRozan show 21.6 points, 5.0 rebounds, and 5.4 assists over 257 appearances.",
+      "report_id": "75"
+    },
+    {
+      "player_id": "478",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward with outside range and floor spacing: 2.0 triples on 5.7 attempts per game. A frontcourt center or forward spacing the floor with perimeter range, converting 34.7% of recorded attempts from beyond the arc. Across 162 imported NBA appearances, Blake Griffin averaged 22.0 points, 6.9 rebounds, and 5.2 assists.",
+      "report_id": "76"
+    },
+    {
+      "player_id": "679",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward spacing the floor with perimeter range, converting 33.3% of recorded attempts from beyond the arc. A frontcourt floor-spacer offering a long-distance shooting indicator: 1.4 makes per outing. The selected box-score sample covers 220 games for Aaron Gordon: 15.7 points, 7.5 rebounds, and 3.2 assists per appearance.",
+      "report_id": "77"
+    },
+    {
+      "player_id": "121",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt floor-spacer offering a long-distance shooting indicator: 1.3 makes per outing. A frontcourt center or forward with outside range and floor spacing: 1.3 triples on 3.3 attempts per game. Kyle Wiltjer's imported NBA line is based on 3 appearances and includes 4.0 points, 0.3 rebounds, and 0.3 assists per game.",
+      "report_id": "78"
+    },
+    {
+      "player_id": "505",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward with outside range and floor spacing: 1.4 triples on 4.2 attempts per game. A frontcourt center or forward spacing the floor with perimeter range, converting 33.0% of recorded attempts from beyond the arc. In 90 selected-subset appearances, DeMarcus Cousins recorded per-game averages of 20.3 points, 10.3 rebounds, and 4.4 assists.",
+      "report_id": "79"
+    },
+    {
+      "player_id": "618",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward spacing the floor with perimeter range, converting 37.2% of recorded attempts from beyond the arc. A frontcourt floor-spacer offering a long-distance shooting indicator: 1.3 makes per outing. The real box-score inputs for Kelly Olynyk show 9.9 points, 5.0 rebounds, and 2.1 assists over 261 appearances.",
+      "report_id": "80"
+    },
+    {
+      "player_id": "587",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt floor-spacer offering a long-distance shooting indicator: 1.2 makes per outing. A frontcourt center or forward with outside range and floor spacing: 1.2 triples on 3.6 attempts per game. Across 84 imported NBA appearances, Quincy Acy averaged 5.5 points, 3.6 rebounds, and 0.8 assists.",
+      "report_id": "81"
+    },
+    {
+      "player_id": "491",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward with outside range and floor spacing: 1.2 triples on 3.4 attempts per game. A frontcourt center or forward spacing the floor with perimeter range, converting 34.8% of recorded attempts from beyond the arc. The selected box-score sample covers 183 games for DeMarre Carroll: 10.5 points, 5.3 rebounds, and 1.5 assists per appearance.",
+      "report_id": "82"
+    },
+    {
+      "player_id": "541",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward spacing the floor with perimeter range, converting 33.6% of recorded attempts from beyond the arc. A frontcourt floor-spacer offering a long-distance shooting indicator: 1.2 makes per outing. Nikola Vucevic's imported NBA line is based on 225 appearances and includes 18.7 points, 10.5 rebounds, and 3.5 assists per game.",
+      "report_id": "83"
+    },
+    {
+      "player_id": "41",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt floor-spacer offering a long-distance shooting indicator: 1.1 makes per outing. A frontcourt center or forward with outside range and floor spacing: 1.1 triples on 3.1 attempts per game. In 203 selected-subset appearances, Bobby Portis recorded per-game averages of 12.4 points, 6.5 rebounds, and 1.5 assists.",
+      "report_id": "84"
+    },
+    {
+      "player_id": "538",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward with outside range and floor spacing: 1.1 triples on 3.0 attempts per game. A frontcourt center or forward spacing the floor with perimeter range, converting 36.3% of recorded attempts from beyond the arc. The real box-score inputs for Markieff Morris show 9.7 points, 4.6 rebounds, and 1.5 assists over 229 appearances.",
+      "report_id": "85"
+    },
+    {
+      "player_id": "600",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward spacing the floor with perimeter range, converting 38.7% of recorded attempts from beyond the arc. A frontcourt floor-spacer offering a long-distance shooting indicator: 1.0 makes per outing. Across 216 imported NBA appearances, JaMychal Green averaged 8.6 points, 6.6 rebounds, and 1.0 assists.",
+      "report_id": "86"
+    },
+    {
+      "player_id": "590",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt floor-spacer offering a long-distance shooting indicator: 1.0 makes per outing. A frontcourt center or forward with outside range and floor spacing: 1.0 triples on 2.7 attempts per game. The selected box-score sample covers 257 games for Mike Scott: 6.8 points, 3.4 rebounds, and 0.9 assists per appearance.",
+      "report_id": "87"
+    },
+    {
+      "player_id": "37",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward with outside range and floor spacing: 1.0 triples on 2.9 attempts per game. A frontcourt center or forward spacing the floor with perimeter range, converting 36.1% of recorded attempts from beyond the arc. Myles Turner's imported NBA line is based on 227 appearances and includes 12.7 points, 6.7 rebounds, and 1.3 assists per game.",
+      "report_id": "88"
+    },
+    {
+      "player_id": "117",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt center or forward spacing the floor with perimeter range, converting 32.3% of recorded attempts from beyond the arc. A frontcourt floor-spacer offering a long-distance shooting indicator: 1.0 makes per outing. In 281 selected-subset appearances, Pascal Siakam recorded per-game averages of 14.9 points, 6.1 rebounds, and 2.7 assists.",
+      "report_id": "89"
+    },
+    {
+      "player_id": "623",
+      "archetype": "stretch_big",
+      "query": "frontcourt player who spaces the floor from deep",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A frontcourt floor-spacer offering a long-distance shooting indicator: 1.0 makes per outing. A frontcourt center or forward with outside range and floor spacing: 1.0 triples on 2.8 attempts per game. The real box-score inputs for Mike Muscala show 6.5 points, 3.5 rebounds, and 1.0 assists over 180 appearances.",
+      "report_id": "90"
+    },
+    {
+      "player_id": "479",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper applying defensive pressure: 1.9 steals per game track only one part of on-ball resistance. A potential defensive stopper and point-of-attack pest, with 1.9 takeaways per appearance; coverage requires film. Across 274 imported NBA appearances, James Harden averaged 32.7 points, 6.1 rebounds, and 7.8 assists.",
+      "report_id": "91"
+    },
+    {
+      "player_id": "636",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A potential defensive stopper and point-of-attack pest, with 1.9 takeaways per appearance; coverage requires film. A perimeter stopper whose passing-lane disruption appears in 1.9 steals an outing, not a complete measure of guarding. The selected box-score sample covers 149 games for Victor Oladipo: 20.4 points, 5.2 rebounds, and 4.3 assists per appearance.",
+      "report_id": "92"
+    },
+    {
+      "player_id": "510",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper whose passing-lane disruption appears in 1.9 steals an outing, not a complete measure of guarding. A perimeter stopper applying defensive pressure: 1.9 steals per game track only one part of on-ball resistance. Paul George's imported NBA line is based on 237 appearances and includes 23.9 points, 6.5 rebounds, and 3.7 assists per game.",
+      "report_id": "93"
+    },
+    {
+      "player_id": "80",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper applying defensive pressure: 1.8 steals per game track only one part of on-ball resistance. A potential defensive stopper and point-of-attack pest, with 1.8 takeaways per appearance; coverage requires film. In 162 selected-subset appearances, Kris Dunn recorded per-game averages of 10.4 points, 4.0 rebounds, and 5.0 assists.",
+      "report_id": "94"
+    },
+    {
+      "player_id": "540",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A potential defensive stopper and point-of-attack pest, with 1.8 takeaways per appearance; coverage requires film. A perimeter stopper whose passing-lane disruption appears in 1.8 steals an outing, not a complete measure of guarding. The real box-score inputs for Kawhi Leonard show 26.2 points, 7.3 rebounds, and 4.0 assists over 171 appearances.",
+      "report_id": "95"
+    },
+    {
+      "player_id": "549",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper whose passing-lane disruption appears in 1.8 steals an outing, not a complete measure of guarding. A perimeter stopper applying defensive pressure: 1.8 steals per game track only one part of on-ball resistance. Across 228 imported NBA appearances, Jimmy Butler averaged 20.0 points, 5.8 rebounds, and 5.0 assists.",
+      "report_id": "96"
+    },
+    {
+      "player_id": "627",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper applying defensive pressure: 1.7 steals per game track only one part of on-ball resistance. A potential defensive stopper and point-of-attack pest, with 1.7 takeaways per appearance; coverage requires film. The selected box-score sample covers 221 games for Robert Covington: 12.1 points, 5.8 rebounds, and 1.6 assists per appearance.",
+      "report_id": "97"
+    },
+    {
+      "player_id": "681",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A potential defensive stopper and point-of-attack pest, with 1.6 takeaways per appearance; coverage requires film. A perimeter stopper whose passing-lane disruption appears in 1.6 steals an outing, not a complete measure of guarding. Marcus Smart's imported NBA line is based on 240 appearances and includes 10.5 points, 3.4 rebounds, and 4.4 assists per game.",
+      "report_id": "98"
+    },
+    {
+      "player_id": "485",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper whose passing-lane disruption appears in 1.5 steals an outing, not a complete measure of guarding. A perimeter stopper applying defensive pressure: 1.5 steals per game track only one part of on-ball resistance. In 233 selected-subset appearances, Jrue Holiday recorded per-game averages of 19.5 points, 4.6 rebounds, and 6.5 assists.",
+      "report_id": "99"
+    },
+    {
+      "player_id": "501",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper applying defensive pressure: 1.5 steals per game track only one part of on-ball resistance. A potential defensive stopper and point-of-attack pest, with 1.5 takeaways per appearance; coverage requires film. The real box-score inputs for John Wall show 20.0 points, 3.7 rebounds, and 9.1 assists over 86 appearances.",
+      "report_id": "100"
+    },
+    {
+      "player_id": "515",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A potential defensive stopper and point-of-attack pest, with 1.5 takeaways per appearance; coverage requires film. A perimeter stopper whose passing-lane disruption appears in 1.5 steals an outing, not a complete measure of guarding. Across 252 imported NBA appearances, Eric Bledsoe averaged 15.6 points, 4.3 rebounds, and 5.2 assists.",
+      "report_id": "101"
+    },
+    {
+      "player_id": "482",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper whose passing-lane disruption appears in 1.4 steals an outing, not a complete measure of guarding. A perimeter stopper applying defensive pressure: 1.4 steals per game track only one part of on-ball resistance. The selected box-score sample covers 174 games for Stephen Curry: 26.5 points, 5.3 rebounds, and 5.5 assists per appearance.",
+      "report_id": "102"
+    },
+    {
+      "player_id": "488",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper applying defensive pressure: 1.4 steals per game track only one part of on-ball resistance. A potential defensive stopper and point-of-attack pest, with 1.4 takeaways per appearance; coverage requires film. Darren Collison's imported NBA line is based on 162 appearances and includes 11.5 points, 2.8 rebounds, and 5.6 assists per game.",
+      "report_id": "103"
+    },
+    {
+      "player_id": "156",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A potential defensive stopper and point-of-attack pest, with 1.4 takeaways per appearance; coverage requires film. A perimeter stopper whose passing-lane disruption appears in 1.4 steals an outing, not a complete measure of guarding. In 218 selected-subset appearances, De'Aaron Fox recorded per-game averages of 15.9 points, 3.4 rebounds, and 6.1 assists.",
+      "report_id": "104"
+    },
+    {
+      "player_id": "668",
+      "archetype": "defensive_stopper",
+      "query": "perimeter defender who disrupts opposing scorers",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A perimeter stopper whose passing-lane disruption appears in 1.3 steals an outing, not a complete measure of guarding. A perimeter stopper applying defensive pressure: 1.3 steals per game track only one part of on-ball resistance. The real box-score inputs for Gary Harris show 13.3 points, 2.8 rebounds, and 2.3 assists over 218 appearances.",
+      "report_id": "105"
+    },
+    {
+      "player_id": "56",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Developmental physical tools: a verified 111.8 cm vertical and 203.2 cm. A physical-upside candidate on combine testing alone: 111.8 cm leap; basketball skills need separate review. Across 252 imported NBA appearances, Pat Connaughton averaged 5.8 points, 3.4 rebounds, and 1.5 assists.",
+      "report_id": "106"
+    },
+    {
+      "player_id": "660",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A physical-upside candidate on combine testing alone: 110.5 cm leap; basketball skills need separate review. Measured burst and length offer a starting point: 110.5 cm vertical, 205.1 cm. The selected box-score sample covers 4 games for Markel Brown: 1.3 points, 1.3 rebounds, and 0.5 assists per appearance.",
+      "report_id": "107"
+    },
+    {
+      "player_id": "106",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Measured burst and length offer a starting point: 111.8 cm vertical, 189.2 cm. Developmental physical tools: a verified 111.8 cm vertical and 189.2 cm. Kay Felder's imported NBA line is based on 22 appearances and includes 4.9 points, 1.2 rebounds, and 2.0 assists per game.",
+      "report_id": "108"
+    },
+    {
+      "player_id": "19",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Developmental physical tools: a verified 109.2 cm vertical and 212.7 cm. A physical-upside candidate on combine testing alone: 109.2 cm leap; basketball skills need separate review. In 116 selected-subset appearances, Justin Anderson recorded per-game averages of 4.6 points, 2.1 rebounds, and 0.6 assists.",
+      "report_id": "109"
+    },
+    {
+      "player_id": "84",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A physical-upside candidate on combine testing alone: 110.5 cm leap; basketball skills need separate review. Measured burst and length offer a starting point: 110.5 cm vertical, 196.8 cm. The real box-score inputs for Demetrius Jackson show 2.8 points, 1.0 rebounds, and 1.2 assists over 31 appearances.",
+      "report_id": "110"
+    },
+    {
+      "player_id": "630",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Measured burst and length offer a starting point: 111.8 cm vertical, 179.7 cm. Developmental physical tools: a verified 111.8 cm vertical and 179.7 cm. Across 69 imported NBA appearances, Shane Larkin averaged 4.3 points, 1.5 rebounds, and 1.8 assists.",
+      "report_id": "111"
+    },
+    {
+      "player_id": "388",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Developmental physical tools: a verified 109.2 cm vertical and 204.5 cm. A physical-upside candidate on combine testing alone: 109.2 cm leap; basketball skills need separate review. The selected box-score sample covers 8 games for Jalen Lecque: 2.6 points, 0.4 rebounds, and 0.4 assists per appearance.",
+      "report_id": "112"
+    },
+    {
+      "player_id": "283",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A physical-upside candidate on combine testing alone: 106.7 cm leap; basketball skills need separate review. Measured burst and length offer a starting point: 106.7 cm vertical, 213.4 cm. Josh Okogie's imported NBA line is based on 145 appearances and includes 8.0 points, 3.6 rebounds, and 1.4 assists per game.",
+      "report_id": "113"
+    },
+    {
+      "player_id": "542",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Measured burst and length offer a starting point: 106.7 cm vertical, 207.0 cm. Developmental physical tools: a verified 106.7 cm vertical and 207.0 cm. In 101 selected-subset appearances, Iman Shumpert recorded per-game averages of 6.3 points, 2.8 rebounds, and 1.4 assists.",
+      "report_id": "114"
+    },
+    {
+      "player_id": "636",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Developmental physical tools: a verified 106.7 cm vertical and 206.4 cm. A physical-upside candidate on combine testing alone: 106.7 cm leap; basketball skills need separate review. The real box-score inputs for Victor Oladipo show 20.4 points, 5.2 rebounds, and 4.3 assists over 149 appearances.",
+      "report_id": "115"
+    },
+    {
+      "player_id": "374",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A physical-upside candidate on combine testing alone: 108.0 cm leap; basketball skills need separate review. Measured burst and length offer a starting point: 108.0 cm vertical, 191.1 cm. Across 12 imported NBA appearances, Jordan Bone averaged 1.3 points, 0.3 rebounds, and 0.7 assists.",
+      "report_id": "116"
+    },
+    {
+      "player_id": "608",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Measured burst and length offer a starting point: 106.7 cm vertical, 202.6 cm. Developmental physical tools: a verified 106.7 cm vertical and 202.6 cm. The selected box-score sample covers 170 games for Ben McLemore: 8.0 points, 2.0 rebounds, and 0.7 assists per appearance.",
+      "report_id": "117"
+    },
+    {
+      "player_id": "205",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Developmental physical tools: a verified 105.4 cm vertical and 215.3 cm. A physical-upside candidate on combine testing alone: 105.4 cm leap; basketball skills need separate review. Devin Robinson's imported NBA line is based on 11 appearances and includes 5.9 points, 2.8 rebounds, and 0.7 assists per game.",
+      "report_id": "118"
+    },
+    {
+      "player_id": "187",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). A physical-upside candidate on combine testing alone: 106.7 cm leap; basketball skills need separate review. Measured burst and length offer a starting point: 106.7 cm vertical, 201.9 cm. In 133 selected-subset appearances, Frank Jackson recorded per-game averages of 7.6 points, 1.8 rebounds, and 1.1 assists.",
+      "report_id": "119"
+    },
+    {
+      "player_id": "257",
+      "archetype": "raw_athlete",
+      "query": "explosive athlete with physical upside",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Measured burst and length offer a starting point: 106.7 cm vertical, 198.1 cm. Developmental physical tools: a verified 106.7 cm vertical and 198.1 cm. The real box-score inputs for Donte DiVincenzo show 7.9 points, 4.0 rebounds, and 1.9 assists over 115 appearances.",
+      "report_id": "120"
+    }
+  ]
+}

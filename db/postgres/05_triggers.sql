@@ -212,3 +212,18 @@ CREATE TRIGGER scouting_report_clear_embedding
 BEFORE UPDATE OF summary ON scouting_report
 FOR EACH ROW
 EXECUTE FUNCTION trg_clear_stale_report_embedding();
+
+CREATE OR REPLACE FUNCTION trg_clear_stale_news_embedding()
+RETURNS TRIGGER LANGUAGE plpgsql AS $$
+BEGIN
+  IF NEW.title IS DISTINCT FROM OLD.title OR NEW.summary IS DISTINCT FROM OLD.summary THEN
+    NEW.embedding := NULL;
+    NEW.embedding_model := NULL;
+    NEW.embedded_at := NULL;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+DROP TRIGGER IF EXISTS news_article_clear_embedding ON news_article;
+CREATE TRIGGER news_article_clear_embedding BEFORE UPDATE OF title, summary ON news_article
+FOR EACH ROW EXECUTE FUNCTION trg_clear_stale_news_embedding();

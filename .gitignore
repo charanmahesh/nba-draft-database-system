@@ -77,3 +77,11 @@ coverage
 data/raw/*
 !data/raw/.gitkeep
 dataset/
+reference/
+.DS_Store
+
+.next-fail
+.next-check
+
+# Local browser failure screenshots
+tests/ui-failures/

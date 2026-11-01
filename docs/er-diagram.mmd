@@ -1,0 +1,80 @@
+erDiagram
+    PERSON ||--o{ PERSON_PHONE : has
+    PERSON ||--o| SCOUT : subtype
+    PERSON ||--o| ANALYST : subtype
+    PERSON ||--o| TEAM_MANAGER : subtype
+    PERSON ||--o| ADMIN : subtype
+    TEAM ||--o{ TEAM_MANAGER : employs
+    TEAM ||--o{ TEAM_NEED : has
+    TEAM ||--o{ ROSTER : maintains
+    ROSTER ||--o{ ROSTER_PLAYER : contains
+    PLAYER ||--o{ ROSTER_PLAYER : joins
+    PLAYER ||--o| DRAFT_PROSPECT : future_extension
+    PLAYER ||--o{ COMBINED_MEASUREMENT : has
+    PLAYER ||--o{ SCOUTING_REPORT : has
+    SCOUT ||--o{ SCOUTING_REPORT : writes
+    PLAYER ||--o{ INJURY_HISTORY : has
+    TEAM ||--o{ GAME : home_team
+    TEAM ||--o{ GAME : away_team
+    GAME ||--o{ GAME_PERFORMANCE : has
+    PLAYER ||--o{ GAME_PERFORMANCE : records
+    TEAM ||--o{ GAME_PERFORMANCE : represents
+    NEWS_ARTICLE ||--o{ ARTICLE_MENTION : has
+    PLAYER ||--o{ ARTICLE_MENTION : mentioned
+    PERSON o|--o{ AUDIT_LOG : changed_by
+    PERSON {
+        bigint person_id PK
+        string email UK
+        string password_hash
+        person_role role
+        string street
+        string city
+        string state
+        string zip
+    }
+    TEAM {
+        bigint team_id PK
+        string external_id UK
+        string team_name UK
+    }
+    PLAYER {
+        bigint player_id PK
+        string external_id UK
+        player_position position
+        player_position secondary_position
+    }
+    ROSTER {
+        bigint roster_id PK
+        bigint team_id FK
+        int season
+        boolean is_historical
+    }
+    ROSTER_PLAYER {
+        bigint roster_id PK,FK
+        bigint player_id PK,FK
+        int season FK
+    }
+    GAME_PERFORMANCE {
+        bigint performance_id PK
+        bigint game_id FK
+        bigint player_id FK
+        bigint team_id FK
+        numeric minutes
+    }
+    SCOUTING_REPORT {
+        bigint report_id PK
+        bigint player_id FK
+        bigint scout_id FK
+        string summary
+        vector embedding
+    }
+    NEWS_ARTICLE {
+        bigint article_id PK
+        string title
+        string summary
+        vector embedding
+    }
+    ARTICLE_MENTION {
+        bigint article_id PK,FK
+        bigint player_id PK,FK
+    }

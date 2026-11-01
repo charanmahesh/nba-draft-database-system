@@ -61,3 +61,6 @@ From the repository root, after applying the Phase 1 and Phase 2 SQL files:
 The final queries in `02_transform.sql` are the required import report,
 including unmatched/ambiguous combine records. `injury_history` is untouched;
 no injuries are fabricated.
+
+Physical height and weight values outside the schema's valid ranges (including
+source zeroes) are treated as missing rather than inserted as measurements.

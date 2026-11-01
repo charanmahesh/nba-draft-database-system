@@ -1,0 +1,545 @@
+{
+  "generatedAt": "2026-11-01T06:46:20.926Z",
+  "articles": [
+    {
+      "title": "[Generated demo article] Andrew Bogut: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 54 imported NBA appearances, Andrew Bogut averaged 2.4 points, 3.8 rebounds, and 0.9 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "1"
+      ],
+      "article_id": "1",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Marvin Williams's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.7 steals and 0.6 blocks per game for Marvin Williams, alongside 8.5 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "2"
+      ],
+      "article_id": "2",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Chris Paul in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Chris Paul's recorded rate across points, rebounds, assists, steals, and blocks is 1.0 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "3"
+      ],
+      "article_id": "3",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Raymond Felton's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "4"
+      ],
+      "article_id": "4",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Channing Frye",
+      "summary": "Generated demo article (synthetic; not real news material). Across 11.8 minutes per appearance, the imported sample records 4.4 points and 2.3 rebounds for Channing Frye. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "5"
+      ],
+      "article_id": "5",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Gerald Green: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 151 imported NBA appearances, Gerald Green averaged 9.1 points, 2.6 rebounds, and 0.5 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "6"
+      ],
+      "article_id": "6",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Jarrett Jack's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.6 steals and 0.1 blocks per game for Jarrett Jack, alongside 7.2 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "7"
+      ],
+      "article_id": "7",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Ian Mahinmi in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Ian Mahinmi's recorded rate across points, rebounds, assists, steals, and blocks is 0.7 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "8"
+      ],
+      "article_id": "8",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: CJ Miles's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "9"
+      ],
+      "article_id": "9",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Ersan Ilyasova",
+      "summary": "Generated demo article (synthetic; not real news material). Across 19.6 minutes per appearance, the imported sample records 8.1 points and 5.1 rebounds for Ersan Ilyasova. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "10"
+      ],
+      "article_id": "10",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Lou Williams: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 247 imported NBA appearances, Lou Williams averaged 19.8 points, 2.8 rebounds, and 5.3 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "11"
+      ],
+      "article_id": "11",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Amir Johnson's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.5 steals and 0.4 blocks per game for Amir Johnson, alongside 4.3 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "12"
+      ],
+      "article_id": "12",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Marcin Gortat in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Marcin Gortat's recorded rate across points, rebounds, assists, steals, and blocks is 0.8 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "13"
+      ],
+      "article_id": "13",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Jose Calderon's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "14"
+      ],
+      "article_id": "14",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Jahlil Okafor",
+      "summary": "Generated demo article (synthetic; not real news material). Across 15.1 minutes per appearance, the imported sample records 7.8 points and 4.2 rebounds for Jahlil Okafor. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "15"
+      ],
+      "article_id": "15",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Emmanuel Mudiay: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 195 imported NBA appearances, Emmanuel Mudiay averaged 9.9 points, 2.7 rebounds, and 3.1 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "16"
+      ],
+      "article_id": "16",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Tyus Jones's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 1.1 steals and 0.1 blocks per game for Tyus Jones, alongside 6.3 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "17"
+      ],
+      "article_id": "17",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Cliff Alexander in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Cliff Alexander's recorded rate across points, rebounds, assists, steals, and blocks is 0.8 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "18"
+      ],
+      "article_id": "18",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Justin Anderson's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 196.2 cm and 104.6 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "19"
+      ],
+      "article_id": "19",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Anthony Brown",
+      "summary": "Generated demo article (synthetic; not real news material). Across 5.1 minutes per appearance, the imported sample records 1.0 points and 0.7 rebounds for Anthony Brown. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "20"
+      ],
+      "article_id": "20",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Montrezl Harrell: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 251 imported NBA appearances, Montrezl Harrell averaged 14.8 points, 5.6 rebounds, and 1.5 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "21"
+      ],
+      "article_id": "21",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Andrew Harrison's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.6 steals and 0.3 blocks per game for Andrew Harrison, alongside 7.5 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "22"
+      ],
+      "article_id": "22",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Aaron Harrison in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Aaron Harrison's recorded rate across points, rebounds, assists, steals, and blocks is 0.5 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "23"
+      ],
+      "article_id": "23",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Delon Wright's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 193.7 cm and 82.3 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "24"
+      ],
+      "article_id": "24",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: RJ Hunter",
+      "summary": "Generated demo article (synthetic; not real news material). Across 9.3 minutes per appearance, the imported sample records 4.2 points and 0.9 rebounds for RJ Hunter. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "25"
+      ],
+      "article_id": "25",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Sam Dekker: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 126 imported NBA appearances, Sam Dekker averaged 5.0 points, 2.7 rebounds, and 0.7 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "26"
+      ],
+      "article_id": "26",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at D'Angelo Russell's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 1.1 steals and 0.3 blocks per game for D'Angelo Russell, alongside 19.9 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "27"
+      ],
+      "article_id": "27",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Karl-Anthony Towns in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Karl-Anthony Towns's recorded rate across points, rebounds, assists, steals, and blocks is 1.2 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "28"
+      ],
+      "article_id": "28",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Richaun Holmes's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 203.8 cm and 110.1 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "29"
+      ],
+      "article_id": "29",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Justise Winslow",
+      "summary": "Generated demo article (synthetic; not real news material). Across 27.3 minutes per appearance, the imported sample records 10.0 points and 5.5 rebounds for Justise Winslow. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "30"
+      ],
+      "article_id": "30",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Willie Cauley-Stein: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 219 imported NBA appearances, Willie Cauley-Stein averaged 10.9 points, 7.1 rebounds, and 2.0 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "31"
+      ],
+      "article_id": "31",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Kelly Oubre Jr.'s NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 1.1 steals and 0.7 blocks per game for Kelly Oubre Jr., alongside 14.5 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "32"
+      ],
+      "article_id": "32",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Frank Kaminsky in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Frank Kaminsky's recorded rate across points, rebounds, assists, steals, and blocks is 0.8 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "33"
+      ],
+      "article_id": "33",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Devin Booker's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 194.3 cm and 93.3 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "34"
+      ],
+      "article_id": "34",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Brandon Ashley",
+      "summary": "Generated demo article (synthetic; not real news material). Across 13.9 minutes per appearance, the imported sample records 3.2 points and 2.8 rebounds for Brandon Ashley. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "35"
+      ],
+      "article_id": "35",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Cameron Payne: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 83 imported NBA appearances, Cameron Payne averaged 7.3 points, 2.4 rebounds, and 3.2 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "36"
+      ],
+      "article_id": "36",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Myles Turner's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.7 steals and 2.2 blocks per game for Myles Turner, alongside 12.7 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "37"
+      ],
+      "article_id": "37",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Trey Lyles in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Trey Lyles's recorded rate across points, rebounds, assists, steals, and blocks is 0.8 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "38"
+      ],
+      "article_id": "38",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Stanley Johnson's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 195.6 cm and 109.7 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "39"
+      ],
+      "article_id": "39",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Jerian Grant",
+      "summary": "Generated demo article (synthetic; not real news material). Across 19.1 minutes per appearance, the imported sample records 6.4 points and 2.1 rebounds for Jerian Grant. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "40"
+      ],
+      "article_id": "40",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Bobby Portis: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 203 imported NBA appearances, Bobby Portis averaged 12.4 points, 6.5 rebounds, and 1.5 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "41"
+      ],
+      "article_id": "41",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Kevon Looney's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.6 steals and 0.6 blocks per game for Kevon Looney, alongside 5.1 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "42"
+      ],
+      "article_id": "42",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Rashad Vaughn in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Rashad Vaughn's recorded rate across points, rebounds, assists, steals, and blocks is 0.6 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "43"
+      ],
+      "article_id": "43",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Christian Wood's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 206.4 cm and 98.0 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "44"
+      ],
+      "article_id": "44",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Jordan Mickey",
+      "summary": "Generated demo article (synthetic; not real news material). Across 12.3 minutes per appearance, the imported sample records 4.3 points and 3.5 rebounds for Jordan Mickey. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "45"
+      ],
+      "article_id": "45",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Dakari Johnson: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 36 imported NBA appearances, Dakari Johnson averaged 1.8 points, 1.2 rebounds, and 0.3 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "46"
+      ],
+      "article_id": "46",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Rondae Hollis-Jefferson's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.8 steals and 0.5 blocks per game for Rondae Hollis-Jefferson, alongside 9.8 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "47"
+      ],
+      "article_id": "47",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Terry Rozier in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Terry Rozier's recorded rate across points, rebounds, assists, steals, and blocks is 0.8 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "48"
+      ],
+      "article_id": "48",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Norman Powell's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 190.5 cm and 97.7 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "49"
+      ],
+      "article_id": "49",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Chasson Randle",
+      "summary": "Generated demo article (synthetic; not real news material). Across 14.8 minutes per appearance, the imported sample records 5.2 points and 1.1 rebounds for Chasson Randle. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "51"
+      ],
+      "article_id": "50",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Jarell Martin: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 130 imported NBA appearances, Jarell Martin averaged 6.0 points, 3.5 rebounds, and 0.8 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "52"
+      ],
+      "article_id": "51",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Michael Frazier's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 0.1 steals and 0.0 blocks per game for Michael Frazier, alongside 1.9 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "53"
+      ],
+      "article_id": "52",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Quinn Cook in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Quinn Cook's recorded rate across points, rebounds, assists, steals, and blocks is 0.7 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "54"
+      ],
+      "article_id": "53",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Chris McCullough's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 203.8 cm and 90.3 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "55"
+      ],
+      "article_id": "54",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Pat Connaughton",
+      "summary": "Generated demo article (synthetic; not real news material). Across 19.0 minutes per appearance, the imported sample records 5.8 points and 3.4 rebounds for Pat Connaughton. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "56"
+      ],
+      "article_id": "55",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Willy Hernangomez: selected-season box-score snapshot",
+      "summary": "Generated demo article (synthetic; not real news material). In 151 imported NBA appearances, Willy Hernangomez averaged 6.4 points, 4.6 rebounds, and 0.9 assists. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "57"
+      ],
+      "article_id": "56",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] A statistical look at Josh Richardson's NBA appearances",
+      "summary": "Generated demo article (synthetic; not real news material). The selected box scores list 1.2 steals and 0.7 blocks per game for Josh Richardson, alongside 14.2 points. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "58"
+      ],
+      "article_id": "57",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Joe Young in the imported NBA sample",
+      "summary": "Generated demo article (synthetic; not real news material). Joe Young's recorded rate across points, rebounds, assists, steals, and blocks is 0.6 combined contributions per minute. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "59"
+      ],
+      "article_id": "58",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] Numbers note: Treveon Graham's recorded production",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 193.0 cm and 99.5 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "60"
+      ],
+      "article_id": "59",
+      "publish_date": "2026-11-01"
+    },
+    {
+      "title": "[Generated demo article] DraftBoard demo profile: Larry Nance Jr.",
+      "summary": "Generated demo article (synthetic; not real news material). Across 23.7 minutes per appearance, the imported sample records 8.7 points and 7.1 rebounds for Larry Nance Jr.. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "mentioned_player_ids": [
+        "61"
+      ],
+      "article_id": "60",
+      "publish_date": "2026-11-01"
+    }
+  ]
+}

@@ -68,16 +68,16 @@ Write PL/pgSQL functions in `04_functions.sql` and trigger functions/triggers in
 
 Application validation improves user experience, but database validation is the final authority. Row locking handles races, while the unique constraint remains the real protection against two teams acquiring the same player in a season.
 
-## Phase 3 — real data, synthetic data, and embeddings — planned
+## Phase 3 — real data, synthetic data, and embeddings — implemented and locally verified
 
 ### Decisions
 
-- Use a documented Kaggle subset for teams, players, games, performances, measurements, prospects, and historical rosters.
-- Use synthetic seed data for users, roles, current rosters, needs, and injuries where real data is unavailable.
+- Use a documented Kaggle subset for teams, players, games, performances, measurements and historical rosters.
+- Use synthetic seed data for users, roles, current rosters and needs; injury histories are not fabricated.
 - Generate scouting reports and news from real statistics, but label them clearly as generated text rather than real scouting material.
 - Load raw CSVs into all-text staging tables with `psql \\copy`, then transform with SQL.
 - Use external IDs for idempotent imports and log ambiguous/unmatched player identity matches instead of guessing.
-- Never link combine classes 2023–2026 to box-score veterans; those classes become the draft prospect pool.
+- Never link combine classes 2023–2026 to box-score veterans; unmatched rows are logged; draft prospects remain a future extension.
 
 ### Build approach
 
@@ -97,7 +97,7 @@ Demonstrate the DBMS syllabus directly: joins, grouping and `HAVING`, ordering a
 
 Keep executable examples in `07_queries.sql` and explain their purpose and sample output in `docs/queries.md`. The hybrid query performs vector ordering and relational filtering in one SQL statement, showing why structured and semantic retrieval belong together.
 
-## Phase 5 — authentication and roles — planned
+## Phase 5 — authentication and roles — implemented (core API stubs pending Phase 6)
 
 ### Decisions
 
@@ -109,7 +109,7 @@ Keep executable examples in `07_queries.sql` and explain their purpose and sampl
 
 Implement login, logout, and current-user routes. Centralize authorization in `lib/auth/guard.ts`. A team manager is additionally restricted to their own team, and a scout must receive 403 for draft actions. Passwords and JWT secrets always come from environment variables.
 
-## Phase 6 — core API — planned
+## Phase 6 — core API — done
 
 ### Decisions
 
@@ -120,21 +120,23 @@ Implement login, logout, and current-user routes. Centralize authorization in `l
 
 ### Build approach
 
-Build route handlers for the core entities, draft board, draft transaction, keyword search, semantic search, similar reports/prospects, and related news. Convert database constraint and trigger failures into readable client errors. Use the pgvector `toSql` helper and `::vector` casts for vector parameters.
+The current scouting API provides the implemented player, team, game, performance, measurement, injury, needs, roster, person, report, news, matching and search routes documented in `api.md`. It maps database constraint and trigger failures to client errors and uses pgvector `toSql` with `::vector` casts. Draft workflows and prospect endpoints remain future work under the current scouting scope. Some resources expose collection operations only; see `api.md` for the exact methods. The final local acceptance matrix passed 200 checks.
 
-## Phase 7 — UI — planned
+## Phase 7 — UI — done (current NBA scouting scope)
 
 ### Decisions
 
-- Use plain Tailwind components and Recharts; avoid a heavy UI kit.
-- Make the UI role-aware but never rely on it for authorization.
-- Show keyword and semantic search side by side to make the vector feature demonstrable.
+- Use plain Tailwind components and Recharts, with role checks enforced by the backend.
+- Show keyword and semantic search side by side; use Team Match for NBA players and keep draft workflows as a future extension.
+- Clearly identify seeded needs and rosters as synthetic and seeded reports and news as generated demonstrations.
 
-### Build approach
+### Build approach and evidence
 
-Implement login, role dashboards, paginated player/prospect tables, detail pages, report forms with embedding status, the manager draft board, semantic search filters, keyword comparison, and related-news views. Pagination belongs in SQL because the real dataset can be large.
+The landing page, sign-in, role dashboards, player index and details, reports, games, teams, Team Match, search, news and article details are implemented. The SQL showcase runs fixed examples and includes admin-only audit and rollback demonstrations; it never accepts arbitrary SQL. The detailed mapping and remaining scope boundaries are in `ui-port-plan.md`.
 
-## Phase 8 — tests — planned
+The full browser suite passed 42 checks; simulated empty, 403 and server-error states passed 33 checks. Playwright checked 56 role/page combinations at 375px and saved screenshots in `docs/screenshots/`. TypeScript and the production build passed with the dev server stopped. Backfill remains a Phase 3 script; draft and prospect workflows remain future work.
+
+## Phase 8 — tests — done
 
 ### Decisions
 
@@ -142,9 +144,9 @@ Test the database as a source of truth, not only the HTTP layer. Cover constrain
 
 ### Build approach
 
-Use Vitest for API, SQL, vector, retrieval, and import tests. Record commands, environment assumptions, pass/fail results, and any unavailable infrastructure in `docs/test-results.md`.
+Vitest covers SQL, vector, retrieval and import tests. The API acceptance matrix and Playwright browser matrix cover HTTP roles, validation and workflows. `npm run test:all` runs all three against isolated test databases and temporary servers; results and limitations are recorded in `docs/test-results.md`.
 
-## Phase 9 — documentation and polish — planned
+## Phase 9 — documentation and polish — done
 
 ### Decisions
 
@@ -152,7 +154,7 @@ Make the project reproducible and explainable: README setup, data provenance, da
 
 ### Build approach
 
-Complete the documentation only after the implementation and tests reflect the final behavior. The demo should move from ER corrections and data provenance to constraints, database functions/triggers, vector indexes and hybrid queries, role-based workflow, and the semantic-search comparison.
+The ER diagram and its source, schema dictionary, database rationale, vector design, architecture, SQL examples, data sources, README and screenshots document the implemented scouting scope. The demo moves from ER corrections and provenance to constraints, functions and triggers, hybrid search, role workflows and the semantic-search comparison. Draft workflows remain future work.
 
 ## Cross-phase principles to repeat in the viva
 
