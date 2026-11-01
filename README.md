@@ -67,3 +67,7 @@ an error if any archetype has fewer than three matching reports in its top
 five. For individual steps, see [docs/vector-search.md](./docs/vector-search.md).
 
 For the Phase 6 API acceptance matrix, start two local development servers against the same seeded database: `npm run dev -- -p 3020` and `NEXT_DIST_DIR=.next-fail EMBEDDING_FORCE_FAIL=1 npm run dev -- -p 3021`. Then run `DEMO_PASSWORD='<demo password>' TEST_BASE_URL=http://localhost:3020 TEST_FAIL_BASE_URL=http://localhost:3021 npm run check:api`. The failure flag works only outside production. The check invokes `npm run embed -- --missing`, which backfills all pending documents in the configured database, and cleans up its own fixtures.
+
+### Isolated SQL tests
+
+Run `npm test` with the `PG_*` connection values configured in `.env` and PostgreSQL 16 with pgvector available. The configured PostgreSQL user must have `CREATEDB` permission and permission to install the `vector` extension. Vitest creates a uniquely named `draftboard_test_<pid>_<random>` database, applies the project schema and functions, loads deterministic synthetic SQL fixtures, and drops that exact database after the run. It does not reset or seed the configured development database. An interrupted process may leave a test database behind; inspect it before removing it. Real datasets and the embedding model are not needed for these SQL tests.

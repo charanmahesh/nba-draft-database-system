@@ -88,3 +88,9 @@ The full UI suite passed **38 checks, 0 failed**, including the exact-mention pl
 - `npx tsc --noEmit` and `npm run build` passed with the dev server stopped; it was restarted afterward. Existing databases need the updated `db/postgres/04_functions.sql` applied. Draft/prospect workflows and Phase 3 embedding backfill remain outside the current UI scope.
 
 Run the browser scripts with `DEMO_PASSWORD` set to the local demo password and the dev server running. The screenshots show seeded demo data; screenshots cover the initial viewport, not every interactive state. Failure screenshots are saved separately under ignored `tests/ui-failures/`.
+
+## Phase 8 isolated SQL tests — 2026-11-01
+
+`npm test` passed **18 tests in 2 files** against a fresh, uniquely named PostgreSQL 16/pgvector test database. The global setup applies the project's schema, views, functions and triggers and a small synthetic fixture; teardown drops the generated test database. The suite covers CHECK/FK/UNIQUE constraints, composite roster-season integrity, deferred subtype validation at commit, 70/71 minutes, game-team validation, managed and historical roster caps, audit attribution, transaction rollback, player efficiency and team-match scores/order/eligibility. `npx tsc --noEmit` also passed. After the run, the configured development database still had 30 teams and 739 players, and no `draftboard_test_` databases remained. The configured PostgreSQL user needs CREATEDB and vector-extension privileges.
+
+Vitest 5 initially failed to start because its Rolldown native optional dependency was unavailable locally; Vitest 3.2.7 ran successfully. The installation reported ten npm audit findings; no dependency audit remediation was attempted as part of this task.
