@@ -55,3 +55,7 @@ After adding report ownership filtering, game box scores, person listing and tea
 ## Phase 7 scout browser check — 2026-11-01
 
 `npm run check:ui` passed **9 checks, 0 failed** against the seeded local database and development server. It verifies real login, own reports, indexing and re-indexing, similar reports, access-denied screens for games and teams, sidebar navigation and browser console errors. Test reports and the other-scout fixture are removed after the run. Set `DEMO_PASSWORD` as in the README; failure screenshots are written to `tests/ui-failures/`.
+
+## Phase 7 analyst browser check — 2026-11-01
+
+The scout and analyst Playwright suite passed **13 checks, 0 failed**. The analyst signed in through the login page, opened a game box score, saw a readable error for 71 minutes, and saved a 70-minute performance. The test removed the performance it created and checked the browser console for errors.
