@@ -50,7 +50,7 @@ After adding report ownership filtering, game box scores, person listing and tea
 
 ## Playwright dependency — 2026-11-01
 
-`@playwright/test` is a development dependency for browser acceptance checks, including the planned Phase 8 UI tests. Chromium was installed locally for those checks. The scout-only browser acceptance suite is implemented; the other role checks remain to be added.
+`@playwright/test` is a development dependency for browser acceptance checks, including the planned Phase 8 UI tests. Chromium was installed locally for those checks. Browser acceptance checks cover the four demo roles; sidebar navigation is currently checked for the scout role.
 
 ## Phase 7 scout browser check — 2026-11-01
 
@@ -63,3 +63,7 @@ The scout and analyst Playwright suite passed **13 checks, 0 failed**. The analy
 ## Phase 7 manager browser check — 2026-11-01
 
 The scout, analyst and manager browser suite passed **19 checks, 0 failed**. The manager saw only their assigned team, received an access-denied page and API 403 for another team's needs, added and edited a need, and received the roster-cap message on a 16th member. Cleanup removed the test need and memberships and verified that the original managed roster was restored; audit entries remain as normal evidence of roster writes.
+
+## Phase 7 admin browser check — 2026-11-01
+
+The complete scout, analyst, manager and admin suite passed **25 checks, 0 failed**. The admin created a team and a scout, then signed out and authenticated as that scout through the login page. The suite verified removal of both admin fixtures. Manager fixture cleanup retains the manager session cookie independently after switching accounts; roster audit entries remain.
