@@ -2,6 +2,7 @@ import "dotenv/config";
 import { pool } from "../lib/db/pg";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { readFile } from "node:fs/promises";
 const execFileAsync = promisify(execFile);
 
 const base = process.env.TEST_BASE_URL ?? "http://localhost:3000";
@@ -66,6 +67,7 @@ async function main() {
   for (const [name,path,role,status] of [["own",`/api/team-match?teamId=${team}`,"manager",200],["cross-team",`/api/team-match?teamId=${other}`,"manager",403],["admin",`/api/team-match?teamId=${team}`,"admin",200],["scout",`/api/team-match?teamId=${team}`,"scout",403],["analyst",`/api/team-match?teamId=${team}`,"analyst",403],["invalid","/api/team-match?teamId=bad","admin",400]] as const) await check(`team-match: ${name}`,async()=>{await request(role,path,status);});
   for (const [name,path,role,status] of [["own",`/api/teams/${team}/matches`,"manager",200],["cross-team",`/api/teams/${other}/matches`,"manager",403],["scout",`/api/teams/${team}/matches`,"scout",403],["analyst",`/api/teams/${team}/matches`,"analyst",403],["invalid","/api/teams/bad/matches","admin",400]] as const) await check(`team matches alias: ${name}`,async()=>{await request(role,path,status);});
   await documentChecks(player);
+  await searchChecks();
   const roster=(await pool.query("SELECT roster_id, season FROM roster WHERE team_id=$1 AND NOT is_historical ORDER BY roster_id LIMIT 1",[team])).rows[0];
   if (!roster) throw new Error("Manager needs an app-managed roster");
   const candidates=(await pool.query("SELECT player_id FROM player p WHERE NOT EXISTS (SELECT 1 FROM roster_player rp WHERE rp.player_id=p.player_id AND rp.season=$1) ORDER BY player_id LIMIT 16",[roster.season])).rows.map(r=>String(r.player_id));
@@ -94,6 +96,23 @@ async function main() {
   }
   if (added.length) await check("roster: delete audit actor",async()=>{const row=await pool.query("SELECT 1 FROM audit_log WHERE table_name='roster_player' AND action='DELETE' AND changed_by=$1 AND old_data->>'roster_id'=$2 AND old_data->>'player_id'=$3 AND audit_id > $4",[actor,String(roster.roster_id),added[0],auditBaseline]);if(!row.rowCount)throw new Error("audit actor missing");});
 }
+async function searchChecks() {
+  const labels=JSON.parse(await readFile("db/seed/reports.json","utf8")) as {reports:{report_id:string;archetype:string}[]};
+  const demos=[["protects the basket from opposing layups","rim_protector"],["facilitator who sets up teammates","playmaking_guard"],["lockdown perimeter defender","defensive_stopper"]] as const;
+  const ordered=(rows:{similarity:number}[])=>rows.every((row,i)=>i===0||Number(rows[i-1].similarity)>=Number(row.similarity));
+  for(const [query,archetype] of demos) await check(`search demo: ${archetype}`,async()=>{const q=encodeURIComponent(query);const keyword=await request("scout",`/api/search/keyword?q=${q}&k=5`,200);const semantic=await request("scout",`/api/search/reports?q=${q}&k=5`,200);const relevant=new Set(labels.reports.filter(r=>r.archetype===archetype).map(r=>r.report_id));if(keyword.length!==0||semantic.length!==5||!ordered(semantic)||semantic.filter((r:{report_id:string})=>relevant.has(String(r.report_id))).length<3)throw new Error("expected no keyword hits and at least 3 relevant ordered semantic hits");});
+  await check("search: position filter and k",async()=>{const rows=await request("analyst","/api/search/reports?q=guard&position=PG&k=3",200);if(rows.length!==3||!ordered(rows)||rows.some((r:{position:string})=>r.position!=="PG"))throw new Error("position, k or order incorrect");});
+  await check("search: injury filter",async()=>{const sample=await request("scout","/api/search/reports?q=guard&k=1",200);if(sample.length!==1)throw new Error("no fixture report");const player=String(sample[0].player_id);const injury=await pool.query("INSERT INTO injury_history (player_id,injury_date,description,severity) VALUES ($1,'2026-01-01','API filter fixture','severe') RETURNING injury_id",[player]);try{const rows=await request("scout","/api/search/reports?q=guard&maxInjurySeverity=moderate&k=100",200);if(rows.some((r:{player_id:string})=>String(r.player_id)===player))throw new Error("severe injury not excluded");}finally{await pool.query("DELETE FROM injury_history WHERE injury_id=$1",[injury.rows[0].injury_id]);}});
+  const source=await pool.query("SELECT report_id,player_id FROM scouting_report WHERE embedding IS NOT NULL ORDER BY report_id LIMIT 1");const report=String(source.rows[0].report_id),player=String(source.rows[0].player_id);
+  await check("similar reports: k, order and exclusion",async()=>{const rows=await request("scout",`/api/reports/${report}/similar?k=3`,200);if(rows.length!==3||!ordered(rows)||rows.some((r:{report_id:string})=>String(r.report_id)===report))throw new Error("invalid neighbours");});
+  await check("similar players: k, order and exclusion",async()=>{const rows=await request("scout",`/api/players/${player}/similar?k=3`,200);if(rows.length!==3||!ordered(rows)||rows.some((r:{player_id:string})=>String(r.player_id)===player))throw new Error("invalid neighbours");});
+  await check("player news: exact mention and semantic results",async()=>{const fixture=await pool.query("SELECT m.player_id, m.article_id FROM article_mention m WHERE EXISTS (SELECT 1 FROM scouting_report r WHERE r.player_id=m.player_id AND r.embedding IS NOT NULL) ORDER BY m.article_id LIMIT 1");const id=String(fixture.rows[0].player_id),article=String(fixture.rows[0].article_id);const rows=await request("scout",`/api/players/${id}/news?k=100`,200);if(!rows.length||!rows.some((r:{article_id:string;exact_mention:boolean})=>String(r.article_id)===article&&r.exact_mention)||!rows.some((r:{similarity:number|null})=>r.similarity!==null))throw new Error("missing exact mention or semantic results");});
+  await check("player news: k and similarity order",async()=>{const rows=await request("scout",`/api/players/${player}/news?k=3`,200);if(rows.length!==3||!ordered(rows))throw new Error("invalid news order or limit");});
+  await check("keyword: rank and headline",async()=>{const rows=await request("scout","/api/search/keyword?q=guard&k=3",200);if(!rows.length||rows.some((r:{rank:number;headline:string},i:number)=>!r.headline.includes("<mark>")||(i>0&&Number(rows[i-1].rank)<Number(r.rank))))throw new Error("missing headline or rank order");});
+  for(const path of ["/api/search/reports?q=", "/api/search/reports?q=guard&position=invalid", "/api/search/reports?q=guard&maxInjurySeverity=invalid", "/api/search/keyword?q=", `/api/reports/${report}/similar?k=0`, `/api/players/${player}/similar?k=101`, `/api/players/${player}/news?k=bad`]) await check(`search invalid: ${path}`,async()=>{await request("scout",path,400);});
+  for(const path of ["/api/search/reports?q=guard", "/api/search/keyword?q=guard", `/api/reports/${report}/similar`, `/api/players/${player}/similar`, `/api/players/${player}/news`]) await check(`search anonymous: ${path}`,async()=>{await request("anonymous",path,401);});
+}
+
 async function documentChecks(player:string) {
   if (!failBase) { await check("embedding failure server configured",async()=>{throw new Error("Set TEST_FAIL_BASE_URL to a separate development server started with EMBEDDING_FORCE_FAIL=1");}); return; }
   const scout = await request("scout","/api/auth/me",200);

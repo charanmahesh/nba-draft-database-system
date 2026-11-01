@@ -29,3 +29,7 @@ Reproduce with a running server and `DEMO_PASSWORD` set to the README's local de
 ## Phase 6 chunk 4 — 2026-11-01
 
 `npm run check:api` passed 154 checks against the seeded local database, using normal and forced-failure development servers. Report and news creation, failed embedding, backfill, edited text invalidation and re-embedding, report ownership, and the team matches alias were exercised; fixtures were removed. `npx tsc --noEmit` and `npm run build` passed. The backfill command processes all pending documents in the configured database.
+
+## Phase 6 chunk 5 — 2026-11-01
+
+The expanded API matrix passed 176 checks against seeded data. It checked the three selected keyword-miss/semantic-hit examples against their generated archetype labels, similarity ordering and limits, position and injury filters, self-exclusion, exact news mentions, keyword rank and headlines, and invalid or anonymous requests. These examples remain in-sample demonstrations as described in `vector-search.md`.
