@@ -65,9 +65,9 @@ const archetypes: Archetype[] = [
       (player.position === "C" || player.position === "PF" ? 4 : 0) +
       (player.height_cm ?? 0) / 100,
     observations: (player) => [
-      `The box-score sample records ${format(player.avg_blocks)} blocks per game, with ${player.position ?? "an unlisted"} position and ${measurement(player.height_cm, "cm", "listed height")}.`,
-      `${format(player.avg_blocks)} blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample.`,
-      `The selected games show ${format(player.avg_blocks)} blocks per game; the position listing is ${player.position ?? "not available"}.`,
+      `An athletic rim protector who blocks shots: the box-score sample records ${format(player.avg_blocks)} blocks per game, with ${player.position ?? "an unlisted"} position and ${measurement(player.height_cm, "cm", "listed height")}.`,
+      `An athletic paint protector contests shots; ${format(player.avg_blocks)} blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample.`,
+      `A rim protector who blocks shots: the selected games show ${format(player.avg_blocks)} blocks per game; the position listing is ${player.position ?? "not available"}.`,
     ],
   },
   {
@@ -76,9 +76,9 @@ const archetypes: Archetype[] = [
     score: (player) =>
       player.avg_points + (player.position === "SG" || player.position === "SF" ? 1 : 0),
     observations: (player) => [
-      `Scoring volume stands out at ${format(player.avg_points)} points per game, without making a claim about shooting efficiency.`,
-      `The imported box scores show ${format(player.avg_points)} points per appearance across ${player.games_played} games.`,
-      `Among the recorded per-game figures, ${format(player.avg_points)} points is the most prominent offensive output.`,
+      `A high scoring offensive creator: scoring volume stands out at ${format(player.avg_points)} points per game, without making a claim about shooting efficiency.`,
+      `This high scoring player creates offense; the imported box scores show ${format(player.avg_points)} points per appearance across ${player.games_played} games.`,
+      `A high scoring player who creates offense: among the recorded per-game figures, ${format(player.avg_points)} points is the most prominent offensive output.`,
     ],
   },
   {
@@ -88,9 +88,9 @@ const archetypes: Archetype[] = [
       player.avg_assists * 2 +
       (player.position === "PG" || player.position === "SG" ? 3 : 0),
     observations: (player) => [
-      `${format(player.avg_assists)} assists per game provide a box-score view of passing and play creation.`,
-      `The selected NBA appearances record ${format(player.avg_assists)} assists per game alongside ${format(player.avg_points)} points.`,
-      `At ${format(player.avg_assists)} assists per appearance, the passing line is a notable part of this statistical profile.`,
+      `A playmaking guard creates chances for teammates; ${format(player.avg_assists)} assists per game provide a box-score view of passing and play creation.`,
+      `The playmaking guard creates opportunities for teammates; NBA appearances record ${format(player.avg_assists)} assists per game alongside ${format(player.avg_points)} points.`,
+      `A guard whose playmaking creates chances for teammates: at ${format(player.avg_assists)} assists per appearance, the passing line is a notable part of this statistical profile.`,
     ],
   },
   {
@@ -101,9 +101,9 @@ const archetypes: Archetype[] = [
       player.avg_steals * 3 +
       (player.position === "SG" || player.position === "SF" ? 4 : 0),
     observations: (player) => [
-      `The recorded line combines ${format(player.avg_points)} points and ${format(player.avg_steals)} steals per game.`,
-      `Across the imported appearances, ${format(player.avg_points)} points and ${format(player.avg_steals)} steals describe the available scoring and disruption outputs.`,
-      `The position listing is ${player.position ?? "not available"}; the box scores show ${format(player.avg_points)} points and ${format(player.avg_steals)} steals per appearance.`,
+      `A two-way wing contributes scoring and defense; the recorded line combines ${format(player.avg_points)} points and ${format(player.avg_steals)} steals per game.`,
+      `This two-way wing combines offense and defensive activity: ${format(player.avg_points)} points and ${format(player.avg_steals)} steals describe the available scoring and disruption outputs.`,
+      `A wing with scoring and defense: the position listing is ${player.position ?? "not available"}; the box scores show ${format(player.avg_points)} points and ${format(player.avg_steals)} steals per appearance.`,
     ],
   },
   {
@@ -113,9 +113,9 @@ const archetypes: Archetype[] = [
       player.avg_rebounds * 2 +
       (player.position === "C" || player.position === "PF" ? 4 : 0),
     observations: (player) => [
-      `${format(player.avg_rebounds)} rebounds per game are the leading figure in this profile.`,
-      `The imported box scores record ${format(player.avg_rebounds)} rebounds and ${format(player.avg_points)} points per appearance.`,
-      `Rebounding volume is ${format(player.avg_rebounds)} per game over ${player.games_played} selected-subset appearances.`,
+      `A frontcourt player who controls the rebounds: ${format(player.avg_rebounds)} rebounds per game are the leading figure in this profile.`,
+      `A rebounding frontcourt player controls the glass; box scores record ${format(player.avg_rebounds)} rebounds and ${format(player.avg_points)} points per appearance.`,
+      `A frontcourt rebounder controls the boards; rebounding volume is ${format(player.avg_rebounds)} per game over ${player.games_played} selected-subset appearances.`,
     ],
   },
   {
@@ -123,9 +123,9 @@ const archetypes: Archetype[] = [
     query: "defensive player with steals and blocks",
     score: (player) => player.avg_steals * 2 + player.avg_blocks * 3,
     observations: (player) => [
-      `The box-score sample records ${format(player.avg_steals)} steals and ${format(player.avg_blocks)} blocks per game.`,
-      `Steals and blocks total ${format(player.avg_steals + player.avg_blocks)} per appearance in the available defensive counting stats.`,
-      `The recorded line includes ${format(player.avg_steals)} steals, ${format(player.avg_blocks)} blocks, and ${format(player.avg_rebounds)} rebounds per game.`,
+      `A defensive disruptor records steals and blocks: the box-score sample records ${format(player.avg_steals)} steals and ${format(player.avg_blocks)} blocks per game.`,
+      `This defensive player contributes steals and blocks; they total ${format(player.avg_steals + player.avg_blocks)} per appearance in the available defensive counting stats.`,
+      `Defensive disruption through steals and blocks: the recorded line includes ${format(player.avg_steals)} steals, ${format(player.avg_blocks)} blocks, and ${format(player.avg_rebounds)} rebounds per game.`,
     ],
   },
   {

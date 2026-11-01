@@ -1,0 +1,845 @@
+{
+  "generatedAt": "2026-11-01T06:39:25.778Z",
+  "reports": [
+    {
+      "player_id": "563",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 237 imported NBA appearances, Anthony Davis averaged 26.4 points, 10.6 rebounds, and 3.0 assists. An athletic rim protector who blocks shots: the box-score sample records 2.3 blocks per game, with PF position and 206.4 cm. Combine context: 206.4 cm; 100.6 kg; 227.3 cm.",
+      "report_id": "1"
+    },
+    {
+      "player_id": "37",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 227 games for Myles Turner: 12.7 points, 6.7 rebounds, and 1.3 assists per appearance. An athletic paint protector contests shots; 2.2 blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "2"
+    },
+    {
+      "player_id": "628",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Rudy Gobert's imported NBA line is based on 239 appearances and includes 14.9 points, 12.1 rebounds, and 1.6 assists per game. A rim protector who blocks shots: the selected games show 2.2 blocks per game; the position listing is C. Physical measurements are source-backed only: height 214.6 cm, weight 107.8 kg.",
+      "report_id": "3"
+    },
+    {
+      "player_id": "520",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 219 selected-subset appearances, Hassan Whiteside recorded per-game averages of 13.3 points, 11.6 rebounds, and 0.9 assists. An athletic rim protector who blocks shots: the box-score sample records 2.1 blocks per game, with C position and 209.6 cm. Combine measurements are optional and safely matched; this row has 231.1 cm and 80.0 cm.",
+      "report_id": "4"
+    },
+    {
+      "player_id": "570",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Andre Drummond show 16.6 points, 15.5 rebounds, and 2.3 assists over 230 appearances. An athletic paint protector contests shots; 1.6 blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample. Combine context: 207.7 cm; 126.4 kg; 229.2 cm.",
+      "report_id": "5"
+    },
+    {
+      "player_id": "288",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 134 imported NBA appearances, Mitchell Robinson averaged 8.3 points, 6.6 rebounds, and 0.6 assists. A rim protector who blocks shots: the selected games show 2.2 blocks per game; the position listing is not available. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "6"
+    },
+    {
+      "player_id": "505",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 90 games for DeMarcus Cousins: 20.3 points, 10.3 rebounds, and 4.4 assists per appearance. An athletic rim protector who blocks shots: the box-score sample records 1.5 blocks per game, with C position and 207.0 cm. Physical measurements are source-backed only: height 207.0 cm, weight 132.4 kg.",
+      "report_id": "7"
+    },
+    {
+      "player_id": "651",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Norvel Pelle's imported NBA line is based on 32 appearances and includes 2.9 points, 3.1 rebounds, and 0.3 assists per game. An athletic paint protector contests shots; 1.5 blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample. Combine measurements are optional and safely matched; this row has 219.7 cm and 87.6 cm.",
+      "report_id": "8"
+    },
+    {
+      "player_id": "703",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 116 selected-subset appearances, Kristaps Porzingis recorded per-game averages of 21.0 points, 8.1 rebounds, and 1.5 assists. A rim protector who blocks shots: the selected games show 2.1 blocks per game; the position listing is not available. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "9"
+    },
+    {
+      "player_id": "171",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Jarrett Allen show 10.1 points, 7.8 rebounds, and 1.2 assists over 245 appearances. An athletic rim protector who blocks shots: the box-score sample records 1.3 blocks per game, with C position and 205.7 cm. Where a safe combine match exists, the recorded vertical leap is 90.2 cm; no missing value is inferred.",
+      "report_id": "10"
+    },
+    {
+      "player_id": "460",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 261 imported NBA appearances, Brook Lopez averaged 12.5 points, 4.6 rebounds, and 1.4 assists. An athletic paint protector contests shots; 1.9 blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "11"
+    },
+    {
+      "player_id": "379",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 48 games for Daniel Gafford: 5.3 points, 2.6 rebounds, and 0.4 assists per appearance. A rim protector who blocks shots: the selected games show 1.3 blocks per game; the position listing is PF. Combine measurements are optional and safely matched; this row has 219.1 cm and 92.7 cm.",
+      "report_id": "12"
+    },
+    {
+      "player_id": "576",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). John Henson's imported NBA line is based on 140 appearances and includes 7.4 points, 5.6 rebounds, and 1.4 assists per game. An athletic rim protector who blocks shots: the box-score sample records 1.3 blocks per game, with PF position and 205.7 cm. Combine context: 205.7 cm; 98.0 kg; 226.1 cm.",
+      "report_id": "13"
+    },
+    {
+      "player_id": "603",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 192 selected-subset appearances, Nerlens Noel recorded per-game averages of 5.6 points, 4.7 rebounds, and 0.7 assists. An athletic paint protector contests shots; 1.2 blocks per appearance provide the clearest recorded indicator of paint-side defensive activity in this sample. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "14"
+    },
+    {
+      "player_id": "354",
+      "archetype": "rim_protector",
+      "query": "athletic rim protector who blocks shots",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Bol Bol show 7.1 points, 3.1 rebounds, and 0.8 assists over 14 appearances. A rim protector who blocks shots: the selected games show 1.2 blocks per game; the position listing is C. Physical measurements are source-backed only: height 215.3 cm, weight 94.3 kg.",
+      "report_id": "15"
+    },
+    {
+      "player_id": "479",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 274 imported NBA appearances, James Harden averaged 32.7 points, 6.1 rebounds, and 7.8 assists. A high scoring offensive creator: scoring volume stands out at 32.7 points per game, without making a claim about shooting efficiency. Combine context: 193.0 cm; 100.7 kg; 210.2 cm.",
+      "report_id": "16"
+    },
+    {
+      "player_id": "637",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 252 games for Giannis Antetokounmpo: 27.5 points, 11.8 rebounds, and 5.4 assists per appearance. This high scoring player creates offense; the imported box scores show 27.5 points per appearance across 252 games. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "17"
+    },
+    {
+      "player_id": "540",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Kawhi Leonard's imported NBA line is based on 171 appearances and includes 26.2 points, 7.3 rebounds, and 4.0 assists per game. A high scoring player who creates offense: among the recorded per-game figures, 26.2 points is the most prominent offensive output. Physical measurements are source-backed only: height 198.1 cm, weight 103.2 kg.",
+      "report_id": "18"
+    },
+    {
+      "player_id": "720",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 258 selected-subset appearances, LeBron James recorded per-game averages of 26.9 points, 8.4 rebounds, and 9.0 assists. A high scoring offensive creator: scoring volume stands out at 26.9 points per game, without making a claim about shooting efficiency. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "19"
+    },
+    {
+      "player_id": "568",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Damian Lillard show 26.6 points, 4.4 rebounds, and 6.9 assists over 257 appearances. This high scoring player creates offense; the imported box scores show 26.6 points per appearance across 257 games. Combine context: 187.3 cm; 85.6 kg; 202.6 cm.",
+      "report_id": "20"
+    },
+    {
+      "player_id": "34",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 197 imported NBA appearances, Devin Booker averaged 25.6 points, 4.2 rebounds, and 6.0 assists. A high scoring player who creates offense: among the recorded per-game figures, 25.6 points is the most prominent offensive output. Where a safe combine match exists, the recorded vertical leap is 87.6 cm; no missing value is inferred.",
+      "report_id": "21"
+    },
+    {
+      "player_id": "435",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 186 games for Kevin Durant: 26.5 points, 6.5 rebounds, and 5.4 assists per appearance. A high scoring offensive creator: scoring volume stands out at 26.5 points per game, without making a claim about shooting efficiency. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "22"
+    },
+    {
+      "player_id": "482",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Stephen Curry's imported NBA line is based on 174 appearances and includes 26.5 points, 5.3 rebounds, and 5.5 assists per game. This high scoring player creates offense; the imported box scores show 26.5 points per appearance across 174 games. Combine measurements are optional and safely matched; this row has 191.8 cm and 90.2 cm.",
+      "report_id": "23"
+    },
+    {
+      "player_id": "563",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 237 selected-subset appearances, Anthony Davis recorded per-game averages of 26.4 points, 10.6 rebounds, and 3.0 assists. A high scoring player who creates offense: among the recorded per-game figures, 26.4 points is the most prominent offensive output. Combine context: 206.4 cm; 100.6 kg; 227.3 cm.",
+      "report_id": "24"
+    },
+    {
+      "player_id": "565",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Bradley Beal show 25.2 points, 4.5 rebounds, and 5.1 assists over 239 appearances. A high scoring offensive creator: scoring volume stands out at 25.2 points per game, without making a claim about shooting efficiency. Where a safe combine match exists, the recorded vertical leap is 99.1 cm; no missing value is inferred.",
+      "report_id": "25"
+    },
+    {
+      "player_id": "510",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 237 imported NBA appearances, Paul George averaged 23.9 points, 6.5 rebounds, and 3.7 assists. This high scoring player creates offense; the imported box scores show 23.9 points per appearance across 237 games. Physical measurements are source-backed only: height 202.6 cm, weight 97.3 kg.",
+      "report_id": "26"
+    },
+    {
+      "player_id": "304",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 149 games for Luka Doncic: 24.5 points, 8.5 rebounds, and 7.2 assists per appearance. A high scoring player who creates offense: among the recorded per-game figures, 24.5 points is the most prominent offensive output. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "27"
+    },
+    {
+      "player_id": "455",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Russell Westbrook's imported NBA line is based on 238 appearances and includes 24.5 points, 9.5 rebounds, and 9.2 assists per game. A high scoring offensive creator: scoring volume stands out at 24.5 points per game, without making a claim about shooting efficiency. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "28"
+    },
+    {
+      "player_id": "691",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 210 selected-subset appearances, Joel Embiid recorded per-game averages of 24.1 points, 11.8 rebounds, and 3.2 assists. This high scoring player creates offense; the imported box scores show 24.1 points per appearance across 210 games. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "29"
+    },
+    {
+      "player_id": "528",
+      "archetype": "high_volume_scorer",
+      "query": "high scoring player who creates offense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Kyrie Irving show 23.9 points, 4.4 rebounds, and 6.1 assists over 163 appearances. A high scoring player who creates offense: among the recorded per-game figures, 23.9 points is the most prominent offensive output. Physical measurements are source-backed only: height 187.3 cm, weight 86.6 kg.",
+      "report_id": "30"
+    },
+    {
+      "player_id": "501",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 86 imported NBA appearances, John Wall averaged 20.0 points, 3.7 rebounds, and 9.1 assists. A playmaking guard creates chances for teammates; 9.1 assists per game provide a box-score view of passing and play creation. Combine context: 189.9 cm; 88.7 kg; 206.4 cm.",
+      "report_id": "31"
+    },
+    {
+      "player_id": "302",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 151 games for Trae Young: 23.1 points, 3.9 rebounds, and 8.4 assists per appearance. The playmaking guard creates opportunities for teammates; NBA appearances record 8.4 assists per game alongside 23.1 points. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "32"
+    },
+    {
+      "player_id": "479",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). James Harden's imported NBA line is based on 274 appearances and includes 32.7 points, 6.1 rebounds, and 7.8 assists per game. A guard whose playmaking creates chances for teammates: at 7.8 assists per appearance, the passing line is a notable part of this statistical profile. Physical measurements are source-backed only: height 193.0 cm, weight 100.7 kg.",
+      "report_id": "33"
+    },
+    {
+      "player_id": "455",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 238 selected-subset appearances, Russell Westbrook recorded per-game averages of 24.5 points, 9.5 rebounds, and 9.2 assists. A playmaking guard creates chances for teammates; 9.2 assists per game provide a box-score view of passing and play creation. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "34"
+    },
+    {
+      "player_id": "720",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for LeBron James show 26.9 points, 8.4 rebounds, and 9.0 assists over 258 appearances. The playmaking guard creates opportunities for teammates; NBA appearances record 9.0 assists per game alongside 26.9 points. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "35"
+    },
+    {
+      "player_id": "568",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 257 imported NBA appearances, Damian Lillard averaged 26.6 points, 4.4 rebounds, and 6.9 assists. A guard whose playmaking creates chances for teammates: at 6.9 assists per appearance, the passing line is a notable part of this statistical profile. Where a safe combine match exists, the recorded vertical leap is 100.3 cm; no missing value is inferred.",
+      "report_id": "36"
+    },
+    {
+      "player_id": "661",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 163 games for Elfrid Payton: 10.9 points, 4.7 rebounds, and 6.8 assists per appearance. A playmaking guard creates chances for teammates; 6.8 assists per game provide a box-score view of passing and play creation. Physical measurements are source-backed only: height 189.2 cm, weight 84.1 kg.",
+      "report_id": "37"
+    },
+    {
+      "player_id": "485",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Jrue Holiday's imported NBA line is based on 233 appearances and includes 19.5 points, 4.6 rebounds, and 6.5 assists per game. The playmaking guard creates opportunities for teammates; NBA appearances record 6.5 assists per game alongside 19.5 points. Combine measurements are optional and safely matched; this row has 200.7 cm and 86.4 cm.",
+      "report_id": "38"
+    },
+    {
+      "player_id": "487",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 188 selected-subset appearances, Jeff Teague recorded per-game averages of 12.4 points, 2.7 rebounds, and 6.5 assists. A guard whose playmaking creates chances for teammates: at 6.5 assists per appearance, the passing line is a notable part of this statistical profile. Combine context: 183.5 cm; 79.5 kg; 201.9 cm.",
+      "report_id": "39"
+    },
+    {
+      "player_id": "73",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Ben Simmons show 15.9 points, 8.2 rebounds, and 7.8 assists over 252 appearances. A playmaking guard creates chances for teammates; 7.8 assists per game provide a box-score view of passing and play creation. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "40"
+    },
+    {
+      "player_id": "156",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 218 imported NBA appearances, De'Aaron Fox averaged 15.9 points, 3.4 rebounds, and 6.1 assists. The playmaking guard creates opportunities for teammates; NBA appearances record 6.1 assists per game alongside 15.9 points. Physical measurements are source-backed only: height 188.0 cm, weight 76.9 kg.",
+      "report_id": "41"
+    },
+    {
+      "player_id": "528",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 163 games for Kyrie Irving: 23.9 points, 4.4 rebounds, and 6.1 assists per appearance. A guard whose playmaking creates chances for teammates: at 6.1 assists per appearance, the passing line is a notable part of this statistical profile. Combine measurements are optional and safely matched; this row has 193.0 cm and no safely matched vertical leap recorded.",
+      "report_id": "42"
+    },
+    {
+      "player_id": "27",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). D'Angelo Russell's imported NBA line is based on 191 appearances and includes 19.9 points, 3.8 rebounds, and 6.1 assists per game. A playmaking guard creates chances for teammates; 6.1 assists per game provide a box-score view of passing and play creation. Combine context: 191.1 cm; 87.7 kg; 207.7 cm.",
+      "report_id": "43"
+    },
+    {
+      "player_id": "34",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 197 selected-subset appearances, Devin Booker recorded per-game averages of 25.6 points, 4.2 rebounds, and 6.0 assists. The playmaking guard creates opportunities for teammates; NBA appearances record 6.0 assists per game alongside 25.6 points. Where a safe combine match exists, the recorded vertical leap is 87.6 cm; no missing value is inferred.",
+      "report_id": "44"
+    },
+    {
+      "player_id": "431",
+      "archetype": "playmaking_guard",
+      "query": "playmaking guard who creates chances for teammates",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Kyle Lowry show 16.3 points, 5.1 rebounds, and 7.4 assists over 257 appearances. A guard whose playmaking creates chances for teammates: at 7.4 assists per appearance, the passing line is a notable part of this statistical profile. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "45"
+    },
+    {
+      "player_id": "479",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 274 imported NBA appearances, James Harden averaged 32.7 points, 6.1 rebounds, and 7.8 assists. A two-way wing contributes scoring and defense; the recorded line combines 32.7 points and 1.9 steals per game. Combine context: 193.0 cm; 100.7 kg; 210.2 cm.",
+      "report_id": "46"
+    },
+    {
+      "player_id": "540",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 171 games for Kawhi Leonard: 26.2 points, 7.3 rebounds, and 4.0 assists per appearance. This two-way wing combines offense and defensive activity: 26.2 points and 1.8 steals describe the available scoring and disruption outputs. Where a safe combine match exists, the recorded vertical leap is 81.3 cm; no missing value is inferred.",
+      "report_id": "47"
+    },
+    {
+      "player_id": "510",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Paul George's imported NBA line is based on 237 appearances and includes 23.9 points, 6.5 rebounds, and 3.7 assists per game. A wing with scoring and defense: the position listing is SF; the box scores show 23.9 points and 1.9 steals per appearance. Physical measurements are source-backed only: height 202.6 cm, weight 97.3 kg.",
+      "report_id": "48"
+    },
+    {
+      "player_id": "636",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 149 selected-subset appearances, Victor Oladipo recorded per-game averages of 20.4 points, 5.2 rebounds, and 4.3 assists. A two-way wing contributes scoring and defense; the recorded line combines 20.4 points and 1.9 steals per game. Combine measurements are optional and safely matched; this row has 206.4 cm and 106.7 cm.",
+      "report_id": "49"
+    },
+    {
+      "player_id": "549",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Jimmy Butler show 20.0 points, 5.8 rebounds, and 5.0 assists over 228 appearances. This two-way wing combines offense and defensive activity: 20.0 points and 1.8 steals describe the available scoring and disruption outputs. Combine context: 198.1 cm; 100.8 kg; 201.9 cm.",
+      "report_id": "50"
+    },
+    {
+      "player_id": "565",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 239 imported NBA appearances, Bradley Beal averaged 25.2 points, 4.5 rebounds, and 5.1 assists. A wing with scoring and defense: the position listing is SG; the box scores show 25.2 points and 1.3 steals per appearance. Where a safe combine match exists, the recorded vertical leap is 99.1 cm; no missing value is inferred.",
+      "report_id": "51"
+    },
+    {
+      "player_id": "163",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 261 games for Donovan Mitchell: 22.8 points, 4.1 rebounds, and 4.0 assists per appearance. A two-way wing contributes scoring and defense; the recorded line combines 22.8 points and 1.3 steals per game. Physical measurements are source-backed only: height 186.1 cm, weight 95.9 kg.",
+      "report_id": "52"
+    },
+    {
+      "player_id": "34",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Devin Booker's imported NBA line is based on 197 appearances and includes 25.6 points, 4.2 rebounds, and 6.0 assists per game. This two-way wing combines offense and defensive activity: 25.6 points and 0.8 steals describe the available scoring and disruption outputs. Combine measurements are optional and safely matched; this row has 203.8 cm and 87.6 cm.",
+      "report_id": "53"
+    },
+    {
+      "player_id": "483",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 257 selected-subset appearances, DeMar DeRozan recorded per-game averages of 21.6 points, 5.0 rebounds, and 5.4 assists. A wing with scoring and defense: the position listing is SG; the box scores show 21.6 points and 1.0 steals per appearance. Combine context: 196.8 cm; 95.8 kg; 205.7 cm.",
+      "report_id": "54"
+    },
+    {
+      "player_id": "588",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Khris Middleton show 19.4 points, 5.8 rebounds, and 4.2 assists over 267 appearances. A two-way wing contributes scoring and defense; the recorded line combines 19.4 points and 1.1 steals per game. Where a safe combine match exists, the recorded vertical leap is 78.7 cm; no missing value is inferred.",
+      "report_id": "55"
+    },
+    {
+      "player_id": "536",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 201 imported NBA appearances, Klay Thompson averaged 20.6 points, 3.8 rebounds, and 2.4 assists. This two-way wing combines offense and defensive activity: 20.6 points and 1.0 steals describe the available scoring and disruption outputs. Physical measurements are source-backed only: height 197.5 cm, weight 93.3 kg.",
+      "report_id": "56"
+    },
+    {
+      "player_id": "680",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 192 games for T.J. Warren: 18.8 points, 4.4 rebounds, and 1.4 assists per appearance. A wing with scoring and defense: the position listing is SF; the box scores show 18.8 points and 1.1 steals per appearance. Combine measurements are optional and safely matched; this row has 208.9 cm and 90.2 cm.",
+      "report_id": "57"
+    },
+    {
+      "player_id": "627",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Robert Covington's imported NBA line is based on 221 appearances and includes 12.1 points, 5.8 rebounds, and 1.6 assists per game. A two-way wing contributes scoring and defense; the recorded line combines 12.1 points and 1.7 steals per game. Combine context: 198.8 cm; 94.6 kg; 217.8 cm.",
+      "report_id": "58"
+    },
+    {
+      "player_id": "455",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 238 selected-subset appearances, Russell Westbrook recorded per-game averages of 24.5 points, 9.5 rebounds, and 9.2 assists. This two-way wing combines offense and defensive activity: 24.5 points and 1.8 steals describe the available scoring and disruption outputs. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "59"
+    },
+    {
+      "player_id": "563",
+      "archetype": "two_way_wing",
+      "query": "two way wing who contributes scoring and defense",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Anthony Davis show 26.4 points, 10.6 rebounds, and 3.0 assists over 237 appearances. A wing with scoring and defense: the position listing is PF; the box scores show 26.4 points and 1.5 steals per appearance. Physical measurements are source-backed only: height 206.4 cm, weight 100.6 kg.",
+      "report_id": "60"
+    },
+    {
+      "player_id": "570",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 230 imported NBA appearances, Andre Drummond averaged 16.6 points, 15.5 rebounds, and 2.3 assists. A frontcourt player who controls the rebounds: 15.5 rebounds per game are the leading figure in this profile. Combine context: 207.7 cm; 126.4 kg; 229.2 cm.",
+      "report_id": "61"
+    },
+    {
+      "player_id": "628",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 239 games for Rudy Gobert: 14.9 points, 12.1 rebounds, and 1.6 assists per appearance. A rebounding frontcourt player controls the glass; box scores record 12.1 rebounds and 14.9 points per appearance. Where a safe combine match exists, the recorded vertical leap is 73.7 cm; no missing value is inferred.",
+      "report_id": "62"
+    },
+    {
+      "player_id": "520",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Hassan Whiteside's imported NBA line is based on 219 appearances and includes 13.3 points, 11.6 rebounds, and 0.9 assists per game. A frontcourt rebounder controls the boards; rebounding volume is 11.6 per game over 219 selected-subset appearances. Physical measurements are source-backed only: height 209.6 cm, weight 102.8 kg.",
+      "report_id": "63"
+    },
+    {
+      "player_id": "473",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 210 selected-subset appearances, DeAndre Jordan recorded per-game averages of 10.6 points, 12.9 rebounds, and 1.9 assists. A frontcourt player who controls the rebounds: 12.9 rebounds per game are the leading figure in this profile. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "64"
+    },
+    {
+      "player_id": "563",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Anthony Davis show 26.4 points, 10.6 rebounds, and 3.0 assists over 237 appearances. A rebounding frontcourt player controls the glass; box scores record 10.6 rebounds and 26.4 points per appearance. Combine context: 206.4 cm; 100.6 kg; 227.3 cm.",
+      "report_id": "65"
+    },
+    {
+      "player_id": "541",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 225 imported NBA appearances, Nikola Vucevic averaged 18.7 points, 10.5 rebounds, and 3.5 assists. A frontcourt rebounder controls the boards; rebounding volume is 10.5 per game over 225 selected-subset appearances. Where a safe combine match exists, the recorded vertical leap is 63.5 cm; no missing value is inferred.",
+      "report_id": "66"
+    },
+    {
+      "player_id": "505",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 90 games for DeMarcus Cousins: 20.3 points, 10.3 rebounds, and 4.4 assists per appearance. A frontcourt player who controls the rebounds: 10.3 rebounds per game are the leading figure in this profile. Physical measurements are source-backed only: height 207.0 cm, weight 132.4 kg.",
+      "report_id": "67"
+    },
+    {
+      "player_id": "691",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Joel Embiid's imported NBA line is based on 210 appearances and includes 24.1 points, 11.8 rebounds, and 3.2 assists per game. A rebounding frontcourt player controls the glass; box scores record 11.8 rebounds and 24.1 points per appearance. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "68"
+    },
+    {
+      "player_id": "637",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 252 selected-subset appearances, Giannis Antetokounmpo recorded per-game averages of 27.5 points, 11.8 rebounds, and 5.4 assists. A frontcourt rebounder controls the boards; rebounding volume is 11.8 per game over 252 selected-subset appearances. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "69"
+    },
+    {
+      "player_id": "698",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Clint Capela show 14.3 points, 11.8 rebounds, and 1.2 assists over 220 appearances. A frontcourt player who controls the rebounds: 11.8 rebounds per game are the leading figure in this profile. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "70"
+    },
+    {
+      "player_id": "28",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 211 imported NBA appearances, Karl-Anthony Towns averaged 23.0 points, 11.8 rebounds, and 3.1 assists. A rebounding frontcourt player controls the glass; box scores record 11.8 rebounds and 23.0 points per appearance. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "71"
+    },
+    {
+      "player_id": "530",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 235 games for Enes Kanter: 11.8 points, 9.2 rebounds, and 1.3 assists per appearance. A frontcourt rebounder controls the boards; rebounding volume is 9.2 per game over 235 selected-subset appearances. Combine measurements are optional and safely matched; this row has 217.2 cm and 82.5 cm.",
+      "report_id": "72"
+    },
+    {
+      "player_id": "631",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Steven Adams's imported NBA line is based on 249 appearances and includes 12.7 points, 9.1 rebounds, and 1.6 assists per game. A frontcourt player who controls the rebounds: 9.1 rebounds per game are the leading figure in this profile. Combine context: 210.2 cm; 115.4 kg; 224.8 cm.",
+      "report_id": "73"
+    },
+    {
+      "player_id": "166",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 187 selected-subset appearances, John Collins recorded per-game averages of 15.8 points, 8.7 rebounds, and 1.5 assists. A rebounding frontcourt player controls the glass; box scores record 8.7 rebounds and 15.8 points per appearance. Where a safe combine match exists, the recorded vertical leap is 95.3 cm; no missing value is inferred.",
+      "report_id": "74"
+    },
+    {
+      "player_id": "686",
+      "archetype": "rebounding_big",
+      "query": "frontcourt player who controls the rebounds",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Julius Randle show 18.7 points, 8.7 rebounds, and 2.9 assists over 233 appearances. A frontcourt rebounder controls the boards; rebounding volume is 8.7 per game over 233 selected-subset appearances. Physical measurements are source-backed only: height 202.6 cm, weight 113.3 kg.",
+      "report_id": "75"
+    },
+    {
+      "player_id": "563",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 237 imported NBA appearances, Anthony Davis averaged 26.4 points, 10.6 rebounds, and 3.0 assists. A defensive disruptor records steals and blocks: the box-score sample records 1.5 steals and 2.3 blocks per game. Combine context: 206.4 cm; 100.6 kg; 227.3 cm.",
+      "report_id": "76"
+    },
+    {
+      "player_id": "288",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 134 games for Mitchell Robinson: 8.3 points, 6.6 rebounds, and 0.6 assists per appearance. This defensive player contributes steals and blocks; they total 3.0 per appearance in the available defensive counting stats. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "77"
+    },
+    {
+      "player_id": "570",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Andre Drummond's imported NBA line is based on 230 appearances and includes 16.6 points, 15.5 rebounds, and 2.3 assists per game. Defensive disruption through steals and blocks: the recorded line includes 1.7 steals, 1.6 blocks, and 15.5 rebounds per game. Physical measurements are source-backed only: height 207.7 cm, weight 126.4 kg.",
+      "report_id": "78"
+    },
+    {
+      "player_id": "37",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 227 selected-subset appearances, Myles Turner recorded per-game averages of 12.7 points, 6.7 rebounds, and 1.3 assists. A defensive disruptor records steals and blocks: the box-score sample records 0.7 steals and 2.2 blocks per game. Combine measurements are optional and safely matched; this row has 223.5 cm and no safely matched vertical leap recorded.",
+      "report_id": "79"
+    },
+    {
+      "player_id": "628",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Rudy Gobert show 14.9 points, 12.1 rebounds, and 1.6 assists over 239 appearances. This defensive player contributes steals and blocks; they total 2.9 per appearance in the available defensive counting stats. Combine context: 214.6 cm; 107.8 kg; 234.9 cm.",
+      "report_id": "80"
+    },
+    {
+      "player_id": "703",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 116 imported NBA appearances, Kristaps Porzingis averaged 21.0 points, 8.1 rebounds, and 1.5 assists. Defensive disruption through steals and blocks: the recorded line includes 0.7 steals, 2.1 blocks, and 8.1 rebounds per game. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "81"
+    },
+    {
+      "player_id": "520",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 219 games for Hassan Whiteside: 13.3 points, 11.6 rebounds, and 0.9 assists per appearance. A defensive disruptor records steals and blocks: the box-score sample records 0.5 steals and 2.1 blocks per game. Physical measurements are source-backed only: height 209.6 cm, weight 102.8 kg.",
+      "report_id": "82"
+    },
+    {
+      "player_id": "505",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). DeMarcus Cousins's imported NBA line is based on 90 appearances and includes 20.3 points, 10.3 rebounds, and 4.4 assists per game. This defensive player contributes steals and blocks; they total 2.9 per appearance in the available defensive counting stats. Combine measurements are optional and safely matched; this row has 228.0 cm and 69.8 cm.",
+      "report_id": "83"
+    },
+    {
+      "player_id": "460",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 261 selected-subset appearances, Brook Lopez recorded per-game averages of 12.5 points, 4.6 rebounds, and 1.4 assists. Defensive disruption through steals and blocks: the recorded line includes 0.6 steals, 1.9 blocks, and 4.6 rebounds per game. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "84"
+    },
+    {
+      "player_id": "627",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Robert Covington show 12.1 points, 5.8 rebounds, and 1.6 assists over 221 appearances. A defensive disruptor records steals and blocks: the box-score sample records 1.7 steals and 1.1 blocks per game. Where a safe combine match exists, the recorded vertical leap is 91.4 cm; no missing value is inferred.",
+      "report_id": "85"
+    },
+    {
+      "player_id": "159",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 157 imported NBA appearances, Jonathan Isaac averaged 9.2 points, 5.4 rebounds, and 1.1 assists. This defensive player contributes steals and blocks; they total 2.5 per appearance in the available defensive counting stats. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "86"
+    },
+    {
+      "player_id": "698",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 220 games for Clint Capela: 14.3 points, 11.8 rebounds, and 1.2 assists per appearance. Defensive disruption through steals and blocks: the recorded line includes 0.7 steals, 1.7 blocks, and 11.8 rebounds per game. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "87"
+    },
+    {
+      "player_id": "637",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Giannis Antetokounmpo's imported NBA line is based on 252 appearances and includes 27.5 points, 11.8 rebounds, and 5.4 assists per game. A defensive disruptor records steals and blocks: the box-score sample records 1.2 steals and 1.3 blocks per game. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "88"
+    },
+    {
+      "player_id": "691",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 210 selected-subset appearances, Joel Embiid recorded per-game averages of 24.1 points, 11.8 rebounds, and 3.2 assists. This defensive player contributes steals and blocks; they total 2.4 per appearance in the available defensive counting stats. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "89"
+    },
+    {
+      "player_id": "586",
+      "archetype": "defensive_disruptor",
+      "query": "defensive player with steals and blocks",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Draymond Green show 9.4 points, 7.7 rebounds, and 7.1 assists over 231 appearances. Defensive disruption through steals and blocks: the recorded line includes 1.4 steals, 1.1 blocks, and 7.7 rebounds per game. Physical measurements are source-backed only: height 197.5 cm, weight 106.9 kg.",
+      "report_id": "90"
+    },
+    {
+      "player_id": "220",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 1 imported NBA appearances, Melo Trimble averaged 4.0 points, 1.0 rebounds, and 0.0 assists. The recorded points, rebounds, assists, steals, and blocks sum to 1.7 per minute. Combine context: 186.1 cm; 88.5 kg; 188.0 cm.",
+      "report_id": "91"
+    },
+    {
+      "player_id": "637",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 252 games for Giannis Antetokounmpo: 27.5 points, 11.8 rebounds, and 5.4 assists per appearance. Across 33.2 minutes per appearance, the selected box-score categories produce 1.4 combined contributions per minute. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "92"
+    },
+    {
+      "player_id": "258",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Trevon Duval's imported NBA line is based on 3 appearances and includes 1.7 points, 0.3 rebounds, and 0.7 assists per game. This profile uses only points, rebounds, assists, steals, and blocks; their combined rate is 1.4 per minute. Physical measurements are source-backed only: height 186.7 cm, weight 86.6 kg.",
+      "report_id": "93"
+    },
+    {
+      "player_id": "593",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 2 selected-subset appearances, Darius Johnson-Odom recorded per-game averages of 2.0 points, 1.5 rebounds, and 1.5 assists. The recorded points, rebounds, assists, steals, and blocks sum to 1.4 per minute. Combine measurements are optional and safely matched; this row has 200.7 cm and 105.4 cm.",
+      "report_id": "94"
+    },
+    {
+      "player_id": "479",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for James Harden show 32.7 points, 6.1 rebounds, and 7.8 assists over 274 appearances. Across 36.1 minutes per appearance, the selected box-score categories produce 1.4 combined contributions per minute. Combine context: 193.0 cm; 100.7 kg; 210.2 cm.",
+      "report_id": "95"
+    },
+    {
+      "player_id": "338",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 1 imported NBA appearances, Marcus Lee averaged 10.0 points, 6.0 rebounds, and 1.0 assists. This profile uses only points, rebounds, assists, steals, and blocks; their combined rate is 1.3 per minute. Where a safe combine match exists, the recorded vertical leap is 90.2 cm; no missing value is inferred.",
+      "report_id": "96"
+    },
+    {
+      "player_id": "691",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 210 games for Joel Embiid: 24.1 points, 11.8 rebounds, and 3.2 assists per appearance. The recorded points, rebounds, assists, steals, and blocks sum to 1.3 per minute. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "97"
+    },
+    {
+      "player_id": "720",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). LeBron James's imported NBA line is based on 258 appearances and includes 26.9 points, 8.4 rebounds, and 9.0 assists per game. Across 35.6 minutes per appearance, the selected box-score categories produce 1.3 combined contributions per minute. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "98"
+    },
+    {
+      "player_id": "304",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 149 selected-subset appearances, Luka Doncic recorded per-game averages of 24.5 points, 8.5 rebounds, and 7.2 assists. This profile uses only points, rebounds, assists, steals, and blocks; their combined rate is 1.3 per minute. Combine context: no safely matched height recorded; no safely matched weight recorded; no safely matched wingspan recorded.",
+      "report_id": "99"
+    },
+    {
+      "player_id": "563",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Anthony Davis show 26.4 points, 10.6 rebounds, and 3.0 assists over 237 appearances. The recorded points, rebounds, assists, steals, and blocks sum to 1.3 per minute. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "100"
+    },
+    {
+      "player_id": "98",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 1 imported NBA appearances, Stephen Zimmerman averaged 2.0 points, 1.0 rebounds, and 1.0 assists. Across 3.1 minutes per appearance, the selected box-score categories produce 1.3 combined contributions per minute. Physical measurements are source-backed only: height 208.9 cm, weight 106.1 kg.",
+      "report_id": "101"
+    },
+    {
+      "player_id": "455",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 238 games for Russell Westbrook: 24.5 points, 9.5 rebounds, and 9.2 assists per appearance. This profile uses only points, rebounds, assists, steals, and blocks; their combined rate is 1.3 per minute. Combine measurements are optional and safely matched; this row has no safely matched wingspan recorded and no safely matched vertical leap recorded.",
+      "report_id": "102"
+    },
+    {
+      "player_id": "505",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). DeMarcus Cousins's imported NBA line is based on 90 appearances and includes 20.3 points, 10.3 rebounds, and 4.4 assists per game. The recorded points, rebounds, assists, steals, and blocks sum to 1.2 per minute. Combine context: 207.0 cm; 132.4 kg; 228.0 cm.",
+      "report_id": "103"
+    },
+    {
+      "player_id": "702",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 275 selected-subset appearances, Nikola Jokic recorded per-game averages of 19.7 points, 10.3 rebounds, and 6.7 assists. Across 32.1 minutes per appearance, the selected box-score categories produce 1.2 combined contributions per minute. Where a safe combine match exists, the recorded vertical leap is no safely matched vertical leap recorded; no missing value is inferred.",
+      "report_id": "104"
+    },
+    {
+      "player_id": "68",
+      "archetype": "per_minute_contributor",
+      "query": "productive player who contributes across the box score",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Boban Marjanovic show 6.9 points, 4.4 rebounds, and 0.7 assists over 172 appearances. This profile uses only points, rebounds, assists, steals, and blocks; their combined rate is 1.2 per minute. Physical measurements are source-backed only: height no safely matched height recorded, weight no safely matched weight recorded.",
+      "report_id": "105"
+    },
+    {
+      "player_id": "56",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 252 imported NBA appearances, Pat Connaughton averaged 5.8 points, 3.4 rebounds, and 1.5 assists. The available player record lists 193.0 cm, 97.5 kg, and 203.2 cm. Combine context: 193.0 cm; 97.5 kg; 203.2 cm.",
+      "report_id": "106"
+    },
+    {
+      "player_id": "19",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 116 games for Justin Anderson: 4.6 points, 2.1 rebounds, and 0.6 assists per appearance. Safely matched combine data lists 109.2 cm and 212.7 cm; missing measurements are not estimated. Where a safe combine match exists, the recorded vertical leap is 109.2 cm; no missing value is inferred.",
+      "report_id": "107"
+    },
+    {
+      "player_id": "660",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Markel Brown's imported NBA line is based on 4 appearances and includes 1.3 points, 1.3 rebounds, and 0.5 assists per game. The physical details available for this player are 189.2 cm and 83.6 kg. Physical measurements are source-backed only: height 189.2 cm, weight 83.6 kg.",
+      "report_id": "108"
+    },
+    {
+      "player_id": "388",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 8 selected-subset appearances, Jalen Lecque recorded per-game averages of 2.6 points, 0.4 rebounds, and 0.4 assists. The available player record lists 189.2 cm, 84.0 kg, and 204.5 cm. Combine measurements are optional and safely matched; this row has 204.5 cm and 109.2 cm.",
+      "report_id": "109"
+    },
+    {
+      "player_id": "84",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Demetrius Jackson show 2.8 points, 1.0 rebounds, and 1.2 assists over 31 appearances. Safely matched combine data lists 110.5 cm and 196.8 cm; missing measurements are not estimated. Combine context: 182.9 cm; 87.9 kg; 196.8 cm.",
+      "report_id": "110"
+    },
+    {
+      "player_id": "106",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 22 imported NBA appearances, Kay Felder averaged 4.9 points, 1.2 rebounds, and 2.0 assists. The physical details available for this player are 173.4 cm and 80.4 kg. Where a safe combine match exists, the recorded vertical leap is 111.8 cm; no missing value is inferred.",
+      "report_id": "111"
+    },
+    {
+      "player_id": "630",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 69 games for Shane Larkin: 4.3 points, 1.5 rebounds, and 1.8 assists per appearance. The available player record lists 178.4 cm, 77.5 kg, and 179.7 cm. Physical measurements are source-backed only: height 178.4 cm, weight 77.5 kg.",
+      "report_id": "112"
+    },
+    {
+      "player_id": "283",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Josh Okogie's imported NBA line is based on 145 appearances and includes 8.0 points, 3.6 rebounds, and 1.4 assists per game. Safely matched combine data lists 106.7 cm and 213.4 cm; missing measurements are not estimated. Combine measurements are optional and safely matched; this row has 213.4 cm and 106.7 cm.",
+      "report_id": "113"
+    },
+    {
+      "player_id": "205",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 11 selected-subset appearances, Devin Robinson recorded per-game averages of 5.9 points, 2.8 rebounds, and 0.7 assists. The physical details available for this player are 200.7 cm and 86.0 kg. Combine context: 200.7 cm; 86.0 kg; 215.3 cm.",
+      "report_id": "114"
+    },
+    {
+      "player_id": "542",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Iman Shumpert show 6.3 points, 2.8 rebounds, and 1.4 assists over 101 appearances. The available player record lists 193.7 cm, 100.6 kg, and 207.0 cm. Where a safe combine match exists, the recorded vertical leap is 106.7 cm; no missing value is inferred.",
+      "report_id": "115"
+    },
+    {
+      "player_id": "636",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Across 149 imported NBA appearances, Victor Oladipo averaged 20.4 points, 5.2 rebounds, and 4.3 assists. Safely matched combine data lists 106.7 cm and 206.4 cm; missing measurements are not estimated. Physical measurements are source-backed only: height 191.1 cm, weight 96.7 kg.",
+      "report_id": "116"
+    },
+    {
+      "player_id": "608",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The selected box-score sample covers 170 games for Ben McLemore: 8.0 points, 2.0 rebounds, and 0.7 assists per appearance. The physical details available for this player are 191.8 cm and 85.8 kg. Combine measurements are optional and safely matched; this row has 202.6 cm and 106.7 cm.",
+      "report_id": "117"
+    },
+    {
+      "player_id": "673",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). Glenn Robinson III's imported NBA line is based on 148 appearances and includes 7.6 points, 2.9 rebounds, and 1.0 assists per game. The available player record lists 196.8 cm, 95.9 kg, and 208.3 cm. Combine context: 196.8 cm; 95.9 kg; 208.3 cm.",
+      "report_id": "118"
+    },
+    {
+      "player_id": "374",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). In 12 selected-subset appearances, Jordan Bone recorded per-game averages of 1.3 points, 0.3 rebounds, and 0.7 assists. Safely matched combine data lists 108.0 cm and 191.1 cm; missing measurements are not estimated. Where a safe combine match exists, the recorded vertical leap is 108.0 cm; no missing value is inferred.",
+      "report_id": "119"
+    },
+    {
+      "player_id": "187",
+      "archetype": "measured_profile",
+      "query": "player physical profile with verified combine measurements",
+      "summary": "Generated demo scouting text (synthetic; not a real scouting report). The real box-score inputs for Frank Jackson show 7.6 points, 1.8 rebounds, and 1.1 assists over 133 appearances. The physical details available for this player are 188.0 cm and 91.4 kg. Physical measurements are source-backed only: height 188.0 cm, weight 91.4 kg.",
+      "report_id": "120"
+    }
+  ]
+}
