@@ -50,4 +50,8 @@ After adding report ownership filtering, game box scores, person listing and tea
 
 ## Playwright dependency — 2026-11-01
 
-`@playwright/test` is a development dependency for browser acceptance checks, including the planned Phase 8 UI tests. Chromium was installed locally for those checks. The UI acceptance suite has not yet been implemented or run.
+`@playwright/test` is a development dependency for browser acceptance checks, including the planned Phase 8 UI tests. Chromium was installed locally for those checks. The scout-only browser acceptance suite is implemented; the other role checks remain to be added.
+
+## Phase 7 scout browser check — 2026-11-01
+
+`npm run check:ui` passed **9 checks, 0 failed** against the seeded local database and development server. It verifies real login, own reports, indexing and re-indexing, similar reports, access-denied screens for games and teams, sidebar navigation and browser console errors. Test reports and the other-scout fixture are removed after the run. Set `DEMO_PASSWORD` as in the README; failure screenshots are written to `tests/ui-failures/`.
