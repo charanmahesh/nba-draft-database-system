@@ -59,3 +59,7 @@ After adding report ownership filtering, game box scores, person listing and tea
 ## Phase 7 analyst browser check — 2026-11-01
 
 The scout and analyst Playwright suite passed **13 checks, 0 failed**. The analyst signed in through the login page, opened a game box score, saw a readable error for 71 minutes, and saved a 70-minute performance. The test removed the performance it created and checked the browser console for errors.
+
+## Phase 7 manager browser check — 2026-11-01
+
+The scout, analyst and manager browser suite passed **19 checks, 0 failed**. The manager saw only their assigned team, received an access-denied page and API 403 for another team's needs, added and edited a need, and received the roster-cap message on a 16th member. Cleanup removed the test need and memberships and verified that the original managed roster was restored; audit entries remain as normal evidence of roster writes.
