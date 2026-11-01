@@ -5,7 +5,7 @@ import { toSql } from "pgvector/pg";
 import type { z } from "zod";
 import type { reportCreate, newsCreate, newsEdit } from "../validators/documents";
 
-export async function listReports(page:number, limit:number) { return (await pool.query("SELECT report_id, player_id, scout_id, report_date, summary, CASE WHEN embedding IS NULL THEN 'pending' ELSE 'indexed' END AS embedding_status FROM scouting_report ORDER BY report_id DESC LIMIT $1 OFFSET $2",[limit,(page-1)*limit])).rows; }
+export async function listReports(page:number, limit:number, scoutId:string|null=null) { return (await pool.query("SELECT * FROM fn_workspace_reports($1,$2,$3)",[limit,(page-1)*limit,scoutId])).rows; }
 export async function listNews(page:number, limit:number) { return (await pool.query("SELECT article_id, title, publish_date, summary, url, CASE WHEN embedding IS NULL THEN 'pending' ELSE 'indexed' END AS embedding_status FROM news_article ORDER BY article_id DESC LIMIT $1 OFFSET $2",[limit,(page-1)*limit])).rows; }
 export async function getReport(id:string) { return (await pool.query("SELECT report_id, player_id, scout_id, report_date, summary, CASE WHEN embedding IS NULL THEN 'pending' ELSE 'indexed' END AS embedding_status FROM scouting_report WHERE report_id=$1",[id])).rows[0]; }
 export async function getNews(id:string) { return (await pool.query("SELECT article_id, title, publish_date, summary, url, CASE WHEN embedding IS NULL THEN 'pending' ELSE 'indexed' END AS embedding_status FROM news_article WHERE article_id=$1",[id])).rows[0]; }

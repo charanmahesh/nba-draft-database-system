@@ -6,3 +6,6 @@ export async function addRosterPlayer(actor: string, team: string, roster: strin
 export async function removeRosterPlayer(actor: string, team: string, roster: string, player: string) { return withUserTx(actor, async client => { const r = await client.query("SELECT is_historical FROM roster WHERE roster_id=$1 AND team_id=$2 FOR UPDATE",[roster,team]); if (!r.rowCount) return null; if(r.rows[0].is_historical) throw Object.assign(new Error('Historical roster'),{code:'HISTORICAL'}); return (await client.query("DELETE FROM roster_player WHERE roster_id=$1 AND player_id=$2 RETURNING *",[roster,player])).rows[0] ?? null; }); }
 
 export async function teamExists(id:string) { return Boolean((await pool.query("SELECT 1 FROM team WHERE team_id=$1",[id])).rowCount); }
+
+export async function updateNeed(teamId:string,needId:string,v:{position?:string;priority?:number;description?:string;is_filled?:boolean}) {return (await pool.query("SELECT * FROM fn_workspace_update_need($1,$2,$3,$4,$5,$6)",[teamId,needId,v.position??null,v.priority??null,v.description??null,v.is_filled??null])).rows[0]??null;}
+export async function deleteNeed(teamId:string,needId:string){return (await pool.query("SELECT * FROM fn_workspace_delete_need($1,$2)",[teamId,needId])).rows[0]??null;}

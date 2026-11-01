@@ -28,6 +28,7 @@ Successful responses use `{ "ok": true, "data": ... }`; errors use `{ "ok": fals
 | POST `/api/teams` | Admin | JSON `team_name`, `city` | `{"ok":true,"data":{"team_id":"31","team_name":"Example","city":"Example"}}` |
 | PATCH `/api/teams/:teamId` | Admin | JSON at least one of `team_name`, `city` | `{"ok":true,"data":{"team_id":"31","team_name":"Example","city":"New City"}}` |
 | GET `/api/games` | All roles | Query `page`, `limit` | `{"ok":true,"data":[]}` |
+| GET `/api/games/:id/performances` | All roles | Game ID | `{"ok":true,"data":[]}` (box score including player and team names) |
 | GET `/api/performances` | All roles | Query `page`, `limit` | `{"ok":true,"data":[]}` |
 | POST `/api/performances` | Admin, analyst | JSON `game_id`, `player_id`, `team_id`, `minutes` (0–70); optional nonnegative `points`, `rebounds`, `assists`, `blocks`, `steals` default to 0 | `{"ok":true,"data":{"performance_id":"1",…}}` |
 | GET `/api/measurements` | All roles | Query `page`, `limit` | `{"ok":true,"data":[]}` |
@@ -41,9 +42,12 @@ Measurement types: `height_cm`, `weight_kg`, `wingspan_cm`, `standing_reach_cm`,
 
 | Method and path | Roles | Parameters | Example response |
 | --- | --- | --- | --- |
+| GET `/api/persons` | Admin | None | `{"ok":true,"data":[]}` (person names, roles and IDs; no password hashes) |
 | POST `/api/persons` | Admin | JSON `f_name`, `l_name`, `email`, `password`, `role`, `subtype` | `{"ok":true,"data":{"person_id":"5","f_name":"Example","l_name":"Scout","email":"scout@example.test","role":"scout"}}` |
 | GET `/api/teams/:teamId/needs` | Admin, own manager | Team ID | `{"ok":true,"data":[]}` |
 | POST `/api/teams/:teamId/needs` | Admin, own manager | JSON `position`, `priority` (1–5), optional `description` | `{"ok":true,"data":{"need_id":"1","team_id":"1","position":"PG",…}}` |
+| PATCH `/api/teams/:teamId/needs/:needId` | Admin, own manager | JSON at least one of `position`, `priority`, `description`, `is_filled` | `{"ok":true,"data":{"need_id":"1",…}}` |
+| DELETE `/api/teams/:teamId/needs/:needId` | Admin, own manager | Team and need IDs | `{"ok":true,"data":{"need_id":"1",…}}` |
 | GET `/api/teams/:teamId/roster` | Admin, own manager | Team ID | `{"ok":true,"data":[{"roster_id":"1","team_id":"1",…, "players":[]}]}` |
 | POST `/api/teams/:teamId/roster` | Admin, own manager | JSON `roster_id`, `player_id` | `{"ok":true,"data":{"roster_id":"1","player_id":"1",…}}` |
 | DELETE `/api/teams/:teamId/roster/:playerId` | Admin, own manager | Query `rosterId` required | `{"ok":true,"data":{"roster_id":"1","player_id":"1",…}}` |
@@ -56,7 +60,7 @@ Person `subtype` must match `role`: `{"role":"admin"}`, `{"role":"scout","experi
 
 | Method and path | Roles | Parameters | Example response |
 | --- | --- | --- | --- |
-| GET `/api/reports` | All roles | Query `page`, `limit` | `{"ok":true,"data":[]}` |
+| GET `/api/reports` | All roles | Query `page`, `limit`, optional `mine=true` for the session author | `{"ok":true,"data":[]}` |
 | POST `/api/reports` | Admin, scout | JSON `player_id`, `summary`; optional `report_date`, `scout_id` (required for admin, must be self for scout) | `{"ok":true,"data":{"report_id":"1","summary":"Example","embedding_status":"indexed",…}}` |
 | GET `/api/reports/:id` | All roles | Report ID | `{"ok":true,"data":{"report_id":"1","summary":"Example","embedding_status":"pending",…}}` |
 | PATCH `/api/reports/:id` | Admin, owning scout | JSON `summary` | `{"ok":true,"data":{"report_id":"1","summary":"Revised","embedding_status":"indexed",…}}` |

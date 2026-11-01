@@ -43,3 +43,7 @@ Results: 200 passed, 0 failed
 ```
 
 `npx tsc --noEmit` and `npm run build` also passed. The matrix covers role and team restrictions, writes and cleanup, 404/409/422 responses, roster cap and audit actor, report/news embedding failure and backfill, production-mode failure-flag behavior, and search filters and retrieval examples. It exercises representative errors; it is not an exhaustive fault-injection test for every database failure. Follow the two-server instructions in the README to reproduce; backfill processes all pending documents in the configured database.
+
+## Phase 7 workspace routes — 2026-11-01
+
+After adding report ownership filtering, game box scores, person listing and team-need updates/deletes, `npm run check:api` passed **216 checks, 0 failed** against the seeded database. The added checks cover box-score completeness, scout report filtering, admin-only person listing, manager need updates/deletes and cross-team denials. `npx tsc --noEmit` and `npm run build` passed. Existing databases need the updated `db/postgres/04_functions.sql` applied before using these routes.

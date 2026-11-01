@@ -12,3 +12,5 @@ export async function createPerson(v:z.infer<typeof personCreate>){
  await client.query("COMMIT");return row;
  }catch(e){await client.query("ROLLBACK");throw e;}finally{client.release();}
 }
+
+export async function listPersons(){return (await pool.query("SELECT * FROM fn_workspace_persons()")).rows;}

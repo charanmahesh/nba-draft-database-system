@@ -63,6 +63,20 @@ async function main() {
     await check(`${resource}: cross-team forbidden`, async () => { await request("manager",`/api/teams/${other}/${resource}`,403); });
     await check(`${resource}: invalid`, async () => { await request("manager",`/api/teams/invalid/${resource}`,400); });
   }
+  await check("game box score matches game",async()=>{const rows=await request("scout",`/api/games/${game.game_id}/performances`,200);const count=Number((await pool.query("SELECT count(*) FROM game_performance WHERE game_id=$1",[game.game_id])).rows[0].count);if(rows.length!==count||rows.some((r:{game_id:string})=>String(r.game_id)!==String(game.game_id)))throw new Error("incorrect game performances");});
+  await check("game box score missing",async()=>{await request("scout","/api/games/9223372036854775807/performances",404);});
+  await check("scout reports filtered",async()=>{const who=await request("scout","/api/auth/me",200);const rows=await request("scout","/api/reports?mine=true&limit=100",200);if(rows.some((r:{scout_id:string})=>String(r.scout_id)!==who.person_id))throw new Error("other scout report included");});
+  await check("admin can list persons",async()=>{await request("admin","/api/persons",200);});
+  for(const role of ["scout","analyst","manager"])await check(`person list ${role} denied`,async()=>{await request(role,"/api/persons",403);});
+  const needFixture=await pool.query("INSERT INTO team_need (team_id,position,priority,description) VALUES ($1,'PG',1,'acceptance fixture') RETURNING need_id",[team]);
+  const fixtureId=String(needFixture.rows[0].need_id);
+  try{
+    await check("need manager update",async()=>{const row=await request("manager",`/api/teams/${team}/needs/${fixtureId}`,200,"PATCH",{priority:3,is_filled:true});if(row.priority!==3||!row.is_filled)throw new Error("need not updated");});
+    for(const role of ["scout","analyst"])for(const method of ["PATCH","DELETE"])await check(`need ${method} ${role} denied`,async()=>{await request(role,`/api/teams/${team}/needs/${fixtureId}`,403,method,method==="PATCH"?{priority:2}:undefined);});
+    for(const method of ["PATCH","DELETE"])await check(`need ${method} cross team denied`,async()=>{await request("manager",`/api/teams/${other}/needs/${fixtureId}`,403,method,method==="PATCH"?{priority:2}:undefined);});
+    await check("need invalid update",async()=>{await request("manager",`/api/teams/${team}/needs/${fixtureId}`,400,"PATCH",{priority:6});});
+    await check("need manager delete",async()=>{await request("manager",`/api/teams/${team}/needs/${fixtureId}`,200,"DELETE");});
+  }finally{await pool.query("DELETE FROM team_need WHERE need_id=$1",[fixtureId]);}
   const needBody = {position:"PG",priority:1,description:"API acceptance fixture"};
   for (const role of ["admin", "manager"]) await check(`needs: ${role} write`, async () => {const row=await request(role,`/api/teams/${team}/needs`,201,"POST",needBody); await pool.query("DELETE FROM team_need WHERE need_id=$1",[row.need_id]);});
   for (const role of ["scout", "analyst"]) await check(`needs: ${role} write forbidden`, async () => {await request(role,`/api/teams/${team}/needs`,403,"POST",needBody);});

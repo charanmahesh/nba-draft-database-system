@@ -236,3 +236,20 @@ BEGIN
   RETURN v_result;
 END;
 $$;
+
+-- Workspace views and mutations used by reports, games and team management.
+CREATE OR REPLACE FUNCTION fn_workspace_persons()
+RETURNS TABLE(person_id bigint,f_name text,l_name text,email text,role person_role)
+LANGUAGE sql STABLE AS $$ SELECT p.person_id,p.f_name,p.l_name,p.email,p.role FROM person p ORDER BY p.l_name,p.f_name,p.person_id $$;
+CREATE OR REPLACE FUNCTION fn_workspace_reports(p_limit integer,p_offset integer,p_scout_id bigint)
+RETURNS TABLE(report_id bigint,player_id bigint,scout_id bigint,report_date date,summary text,embedding_status text)
+LANGUAGE sql STABLE AS $$ SELECT r.report_id,r.player_id,r.scout_id,r.report_date,r.summary,CASE WHEN r.embedding IS NULL THEN 'pending' ELSE 'indexed' END FROM scouting_report r WHERE (p_scout_id IS NULL OR r.scout_id=p_scout_id) ORDER BY r.report_id DESC LIMIT p_limit OFFSET p_offset $$;
+CREATE OR REPLACE FUNCTION fn_workspace_game_exists(p_game_id bigint)
+RETURNS boolean LANGUAGE sql STABLE AS $$ SELECT EXISTS(SELECT 1 FROM game WHERE game_id=p_game_id) $$;
+CREATE OR REPLACE FUNCTION fn_workspace_box_score(p_game_id bigint)
+RETURNS TABLE(performance_id bigint,game_id bigint,player_id bigint,team_id bigint,minutes numeric,points numeric,rebounds numeric,assists numeric,blocks numeric,steals numeric,f_name text,l_name text,team_name text)
+LANGUAGE sql STABLE AS $$ SELECT gp.performance_id,gp.game_id,gp.player_id,gp.team_id,gp.minutes,gp.points,gp.rebounds,gp.assists,gp.blocks,gp.steals,p.f_name,p.l_name,t.team_name FROM game_performance gp JOIN player p USING(player_id) JOIN team t USING(team_id) WHERE gp.game_id=p_game_id ORDER BY t.team_name,gp.minutes DESC,p.l_name,p.f_name $$;
+CREATE OR REPLACE FUNCTION fn_workspace_update_need(p_team_id bigint,p_need_id bigint,p_position player_position,p_priority smallint,p_description text,p_is_filled boolean)
+RETURNS SETOF team_need LANGUAGE sql AS $$ UPDATE team_need SET position=coalesce(p_position,position),priority=coalesce(p_priority,priority),description=coalesce(p_description,description),is_filled=coalesce(p_is_filled,is_filled) WHERE team_id=p_team_id AND need_id=p_need_id RETURNING * $$;
+CREATE OR REPLACE FUNCTION fn_workspace_delete_need(p_team_id bigint,p_need_id bigint)
+RETURNS SETOF team_need LANGUAGE sql AS $$ DELETE FROM team_need WHERE team_id=p_team_id AND need_id=p_need_id RETURNING * $$;
