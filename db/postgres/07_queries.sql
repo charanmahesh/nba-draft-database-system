@@ -54,7 +54,7 @@ GROUP BY p.player_id, p.f_name, p.l_name, p.position
 HAVING COUNT(*) >= 10 AND AVG(gp.points) >= 20
 ORDER BY avg_points DESC, games_played DESC, p.l_name, p.f_name;
 
--- 3. ORDER BY + LIMIT: top 10 players by points per game in the imported sample.
+-- 3. ORDER BY + LIMIT: top 10 players with at least 10 imported appearances.
 SELECT
   p.player_id,
   p.f_name,
@@ -67,6 +67,7 @@ JOIN game g ON g.game_id = gp.game_id
 JOIN player p ON p.player_id = gp.player_id
 WHERE g.external_id LIKE 'nba:%'
 GROUP BY p.player_id, p.f_name, p.l_name, p.position
+HAVING COUNT(*) >= 10
 ORDER BY avg_points DESC, games_played DESC, p.l_name, p.f_name
 LIMIT 10;
 
@@ -260,8 +261,22 @@ ORDER BY sr.embedding <=> (
 LIMIT 5;
 ROLLBACK;
 
--- 11. Same vector query with the Phase 3C HNSW index present.
--- Sequential scans are discouraged to make the index plan visible on demo data.
+-- 11. Same query with the HNSW index present and default planner settings.
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT sr.report_id
+FROM scouting_report sr
+WHERE sr.embedding IS NOT NULL
+ORDER BY sr.embedding <=> (
+  SELECT anchor.embedding
+  FROM scouting_report anchor
+  WHERE anchor.embedding IS NOT NULL
+  ORDER BY anchor.report_id
+  LIMIT 1
+)
+LIMIT 5;
+
+-- 12. The same query with sequential scans discouraged. This demonstrates
+-- HNSW availability; the forced plan is not a normal cost comparison.
 SET enable_seqscan = off;
 EXPLAIN (ANALYZE, BUFFERS)
 SELECT sr.report_id
