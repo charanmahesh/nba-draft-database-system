@@ -1,156 +1,8 @@
 import "dotenv/config";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { EMBEDDING_MODEL } from "../lib/embeddings/config";
-import { embedText } from "../lib/embeddings/embed";
 import { pool } from "../lib/db/pg";
-import { toSql } from "pgvector/pg";
-import type { PoolClient } from "pg";
-
-interface GeneratedReport {
-  report_id: string;
-  archetype: string;
-  query: string;
-}
-
-interface GeneratedReportsFile {
-  reports: GeneratedReport[];
-}
-
-interface RetrievedReport {
-  report_id: string;
-}
-
-interface ArchetypeResult {
-  archetype: string;
-  query: string;
-  expectedCount: number;
-  retrievedCount: number;
-  relevantCount: number;
-  precisionAtFive: number;
-}
-
-// Alternate phrasings are separate from the standard query set.
-const PARAPHRASED_QUERIES: Record<string, string> = {
-  rim_protector: "erases shots at the rim",
-  sharpshooter: "deadeye shooter from downtown",
-  playmaking_guard: "floor general who creates chances for teammates",
-  two_way_wing: "versatile wing who scores and defends",
-  slasher: "attacker who drives to the hoop",
-  stretch_big: "center who spaces the floor from deep",
-  defensive_stopper: "lockdown defender who disrupts opponents",
-  raw_athlete: "explosive athlete with physical upside",
-};
-
-const TOP_K = 5;
-const HNSW_EF_SEARCH = 100;
-const MINIMUM_PRECISION_AT_FIVE = 0.6;
-const DEFAULT_REPORTS_PATH = resolve(process.cwd(), "db", "seed", "reports.json");
-
-function parseReportsFile(jsonText: string): GeneratedReportsFile {
-  const parsed: unknown = JSON.parse(jsonText);
-  if (
-    typeof parsed !== "object" ||
-    parsed === null ||
-    !("reports" in parsed) ||
-    !Array.isArray(parsed.reports)
-  ) {
-    throw new Error("Generated reports JSON must contain a reports array.");
-  }
-
-  const reports = parsed.reports as unknown[];
-  if (
-    reports.some(
-      (report) =>
-        typeof report !== "object" ||
-        report === null ||
-        !("report_id" in report) ||
-        typeof report.report_id !== "string" ||
-        !("archetype" in report) ||
-        typeof report.archetype !== "string" ||
-        !("query" in report) ||
-        typeof report.query !== "string" ||
-        report.query.trim().length === 0,
-    )
-  ) {
-    throw new Error(
-      "Each generated report must include string report_id, archetype, and query fields.",
-    );
-  }
-
-  return { reports: reports as GeneratedReport[] };
-}
-
-async function runEvaluation(client: PoolClient, paraphrased: boolean): Promise<ArchetypeResult[]> {
-  const reportsPath = process.argv[2]
-    ? resolve(process.argv[2])
-    : DEFAULT_REPORTS_PATH;
-  const reportFile = parseReportsFile(await readFile(reportsPath, "utf8"));
-  const reportsByArchetype = new Map<string, GeneratedReport[]>();
-  const allReportIds: string[] = [];
-
-  for (const report of reportFile.reports) {
-    allReportIds.push(report.report_id);
-    const group = reportsByArchetype.get(report.archetype) ?? [];
-    group.push(report);
-    reportsByArchetype.set(report.archetype, group);
-  }
-
-  if (reportsByArchetype.size === 0 || allReportIds.length < TOP_K) {
-    throw new Error(`No generated report labels found in ${reportsPath}.`);
-  }
-  if (new Set(allReportIds).size !== allReportIds.length) {
-    throw new Error("Generated reports JSON contains duplicate report IDs.");
-  }
-
-  await client.query("SELECT set_config('hnsw.ef_search', $1, false)", [
-    String(HNSW_EF_SEARCH),
-  ]);
-
-  const results: ArchetypeResult[] = [];
-  for (const [archetype, reports] of reportsByArchetype) {
-    const queries = new Set(reports.map((report) => report.query));
-    if (queries.size !== 1) {
-      throw new Error(
-        `Archetype "${archetype}" must map to exactly one retrieval query.`,
-      );
-    }
-
-    const query = paraphrased ? PARAPHRASED_QUERIES[archetype] : reports[0].query;
-    if (!query) throw new Error(`Missing paraphrased query for ${archetype}`);
-    const queryEmbedding = await embedText(query);
-    const retrieved = await client.query<RetrievedReport>(
-      `SELECT report_id::text
-       FROM scouting_report
-       WHERE embedding IS NOT NULL
-         AND embedding_model = $2
-         AND report_id = ANY($3::bigint[])
-       ORDER BY embedding <=> $1::vector
-       LIMIT $4`,
-      [toSql(queryEmbedding), EMBEDDING_MODEL, allReportIds, TOP_K],
-    );
-    if (retrieved.rows.length !== TOP_K) {
-      throw new Error(
-        `Archetype "${archetype}" expected ${TOP_K} embedded generated reports, found ${retrieved.rows.length}. Run the embedding backfill and verify reports.json matches the database.`,
-      );
-    }
-
-    const expectedIds = new Set(reports.map((report) => report.report_id));
-    const relevantCount = retrieved.rows.filter((row) =>
-      expectedIds.has(row.report_id),
-    ).length;
-    results.push({
-      archetype,
-      query,
-      expectedCount: reports.length,
-      retrievedCount: retrieved.rows.length,
-      relevantCount,
-      precisionAtFive: relevantCount / TOP_K,
-    });
-  }
-
-  return results;
-}
+import { parseReportsFile, runEvaluation, TOP_K, MINIMUM_PRECISION_AT_FIVE } from "../lib/embeddings/retrieval-eval";
 
 async function main(): Promise<void> {
   const requiredVariables = [
@@ -169,28 +21,29 @@ async function main(): Promise<void> {
 
   const client = await pool.connect();
   try {
+    const reportFile = parseReportsFile(await readFile(process.argv[2] ? resolve(process.argv[2]) : resolve(process.cwd(), "db", "seed", "reports.json"), "utf8"));
     let allSetsPassed = true;
     for (const paraphrased of [false, true]) {
-    const results = await runEvaluation(client, paraphrased);
-    console.log(`Retrieval evaluation (${paraphrased ? "paraphrased" : "standard"}; top five nearest reports):`);
-    for (const result of results) {
-      const passed = result.precisionAtFive >= MINIMUM_PRECISION_AT_FIVE;
-      console.log(
-        `${passed ? "PASS" : "FAIL"} ${result.archetype}: ${result.relevantCount}/${TOP_K} relevant (${(result.precisionAtFive * 100).toFixed(0)}%) — ${result.query}`,
+      const results = await runEvaluation(client, reportFile, paraphrased);
+      console.log(`Retrieval evaluation (${paraphrased ? "paraphrased" : "standard"}; top five nearest reports):`);
+      for (const result of results) {
+        const passed = result.precisionAtFive >= MINIMUM_PRECISION_AT_FIVE;
+        console.log(
+          `${passed ? "PASS" : "FAIL"} ${result.archetype}: ${result.relevantCount}/${TOP_K} relevant (${(result.precisionAtFive * 100).toFixed(0)}%) — ${result.query}`,
+        );
+      }
+
+      const macroPrecision =
+        results.reduce((sum, result) => sum + result.precisionAtFive, 0) /
+        results.length;
+      const allPassed = results.every(
+        (result) => result.precisionAtFive >= MINIMUM_PRECISION_AT_FIVE,
       );
-    }
+      console.log(
+        `Macro precision@${TOP_K}: ${(macroPrecision * 100).toFixed(1)}%; required per archetype: ${(MINIMUM_PRECISION_AT_FIVE * 100).toFixed(0)}%.`,
+      );
 
-    const macroPrecision =
-      results.reduce((sum, result) => sum + result.precisionAtFive, 0) /
-      results.length;
-    const allPassed = results.every(
-      (result) => result.precisionAtFive >= MINIMUM_PRECISION_AT_FIVE,
-    );
-    console.log(
-      `Macro precision@${TOP_K}: ${(macroPrecision * 100).toFixed(1)}%; required per archetype: ${(MINIMUM_PRECISION_AT_FIVE * 100).toFixed(0)}%.`,
-    );
-
-    allSetsPassed &&= allPassed;
+      allSetsPassed &&= allPassed;
     }
     if (!allSetsPassed) {
       throw new Error(
