@@ -1,2 +1,5 @@
-import { teamStub } from "@/lib/auth/team-stub";
-export async function POST(_request: Request, context: { params: Promise<{ teamId: string }> }) { return teamStub(context); }
+import { z } from "zod"; import { NextResponse } from "next/server"; import { requireOwnTeam } from "@/lib/auth/guard"; import { teamIdSchema } from "@/lib/validators/auth"; import { createNeed, getNeeds } from "@/lib/db/team-management"; import { failure } from "@/lib/api/core";
+const schema = z.object({ position: z.enum(["PG","SG","SF","PF","C"]), priority: z.number().int().min(1).max(5), description: z.string().max(5000).optional() }).strict();
+type C = { params: Promise<{teamId: string}> };
+export async function GET(_r: Request,c: C) { const id=teamIdSchema.safeParse((await c.params).teamId); if(!id.success)return NextResponse.json({ok:false,error:"Invalid team ID"},{status:400}); const auth=await requireOwnTeam(id.data); if(auth.error)return auth.error; try{return NextResponse.json({ok:true,data:await getNeeds(id.data)});}catch(e){return failure(e)} }
+export async function POST(r: Request,c: C) { const id=teamIdSchema.safeParse((await c.params).teamId), body=schema.safeParse(await r.json().catch(()=>null)); if(!id.success||!body.success)return NextResponse.json({ok:false,error:"Invalid input"},{status:400}); const auth=await requireOwnTeam(id.data); if(auth.error)return auth.error; try{return NextResponse.json({ok:true,data:await createNeed(id.data,body.data)},{status:201});}catch(e){return failure(e)} }

@@ -1,0 +1,11 @@
+import { pool } from "./pg";
+import type { z } from "zod";
+import type { performanceSchema, measurementSchema, injurySchema } from "../validators/core";
+export async function teams() { return (await pool.query("SELECT team_id, team_name, city FROM team ORDER BY team_name, team_id")).rows; }
+export async function games(page: number, limit: number) { return (await pool.query("SELECT g.*, h.team_name AS home_team, a.team_name AS away_team FROM game g JOIN team h ON h.team_id = g.home_team_id JOIN team a ON a.team_id = g.away_team_id ORDER BY g.game_date DESC, g.game_id DESC LIMIT $1 OFFSET $2", [limit, (page-1)*limit])).rows; }
+export async function performances(page: number, limit: number) { return (await pool.query("SELECT * FROM game_performance ORDER BY performance_id DESC LIMIT $1 OFFSET $2", [limit,(page-1)*limit])).rows; }
+export async function measurements(page: number, limit: number) { return (await pool.query("SELECT * FROM combined_measurement ORDER BY measurement_id DESC LIMIT $1 OFFSET $2", [limit,(page-1)*limit])).rows; }
+export async function injuries(page: number, limit: number) { return (await pool.query("SELECT * FROM injury_history ORDER BY injury_date DESC, injury_id DESC LIMIT $1 OFFSET $2", [limit,(page-1)*limit])).rows; }
+export async function createPerformance(v: z.infer<typeof performanceSchema>) { return (await pool.query("INSERT INTO game_performance (game_id, player_id, team_id, minutes, points, rebounds, assists, blocks, steals) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *", [v.game_id,v.player_id,v.team_id,v.minutes,v.points,v.rebounds,v.assists,v.blocks,v.steals])).rows[0]; }
+export async function createMeasurement(v: z.infer<typeof measurementSchema>) { return (await pool.query("INSERT INTO combined_measurement (player_id, measurement_type, combine_year, measured_on, value, unit) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *", [v.player_id,v.measurement_type,v.combine_year,v.measured_on ?? null,v.value,v.unit])).rows[0]; }
+export async function createInjury(v: z.infer<typeof injurySchema>) { return (await pool.query("INSERT INTO injury_history (player_id, injury_date, description, severity) VALUES ($1,$2,$3,$4) RETURNING *", [v.player_id,v.injury_date,v.description,v.severity])).rows[0]; }
