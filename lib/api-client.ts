@@ -4,7 +4,7 @@ export type Severity = "minor" | "moderate" | "severe";
 export type Id = string;
 export type Numeric = string | number;
 export interface Session { person_id:Id; name:string; email:string; role:Role; team_id:Id|null }
-export interface Player { player_id:Id; f_name:string; l_name:string; position:Position|null; height_cm:Numeric|null; weight_kg:Numeric|null; games:number; avg_points:Numeric|null }
+export interface Player { player_id:Id; f_name:string; l_name:string; position:Position|null; height_cm:Numeric|null; weight_kg:Numeric|null; games:number; avg_minutes:Numeric|null; avg_points:Numeric|null; avg_rebounds:Numeric|null; avg_assists:Numeric|null; avg_steals:Numeric|null; avg_blocks:Numeric|null }
 export interface SeasonAverage { season:number; games:number; minutes:Numeric|null; points:Numeric|null; rebounds:Numeric|null; assists:Numeric|null; steals:Numeric|null; blocks:Numeric|null }
 export interface PlayerDetail { player_id:Id; f_name:string; l_name:string; position:Position|null; secondary_position:Position|null; dob:string|null; height_cm:Numeric|null; weight_kg:Numeric|null; season_averages:SeasonAverage[]; measurements:Measurement[]; injuries:Injury[]; reports:Report[]; news:Article[]; [key:string]:unknown }
 export interface Team { team_id:Id; team_name:string; city:string }
@@ -25,7 +25,7 @@ export interface KeywordReport { report_id:Id; player_id:Id; scout_id:Id; summar
 export interface Person { person_id:Id; f_name:string; l_name:string; email:string; role:Role }
 export type PersonInput = {f_name:string;l_name:string;email:string;password:string} & ({role:"admin";subtype:{role:"admin"}}|{role:"scout";subtype:{role:"scout";experience?:number}}|{role:"analyst";subtype:{role:"analyst";specialization?:string}}|{role:"team_manager";subtype:{role:"team_manager";team_id:Id}});
 export type Page = {page?:number;limit?:number};
-export type PlayerFilters = Page & {position?:Position;team?:Id;season?:number;minGames?:number;name?:string;sort?:"name"|"points"|"games"};
+export type PlayerFilters = Page & {position?:Position;team?:Id;season?:number;minGames?:number;name?:string;sort?:"name"|"points"|"games"|"rebounds"|"assists"|"steals"|"blocks"|"minutes"};
 export type PerformanceInput = {game_id:Id;player_id:Id;team_id:Id;minutes:number;points?:number;rebounds?:number;assists?:number;blocks?:number;steals?:number};
 export type MeasurementInput = {player_id:Id;measurement_type:"height_cm"|"weight_kg"|"wingspan_cm"|"standing_reach_cm"|"vertical_leap_cm"|"bench_press_reps"|"lane_agility_seconds"|"three_quarter_sprint_seconds"|"shuttle_run_seconds";combine_year:number;measured_on?:string|null;value:number;unit:string};
 export type InjuryInput = {player_id:Id;injury_date:string;description:string;severity:Severity};

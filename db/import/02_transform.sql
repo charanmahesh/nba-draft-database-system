@@ -59,10 +59,18 @@ WITH candidate_rows AS (
   FROM stg_nba_game_detail d
   JOIN game g ON g.external_id = 'nba:' || trim(d.game_id)
   WHERE trim(coalesce(d.player_id, '')) <> '' AND trim(coalesce(d.player_name, '')) <> ''
+), source_player_seasons AS (
+  SELECT trim(player_id) AS source_player_id, min(trim(season)::smallint) AS first_seen_season
+  FROM stg_nba_player
+  WHERE trim(coalesce(player_id, '')) <> '' AND trim(season) ~ '^\d{4}$'
+  GROUP BY trim(player_id)
 ), candidates AS (
-  SELECT source_player_id, max(player_name) AS player_name, min(season) AS first_seen_season,
-         count(*) AS games_played, import_normalize_name(max(player_name)) AS normalized_name
-  FROM candidate_rows GROUP BY source_player_id
+  SELECT cr.source_player_id, max(cr.player_name) AS player_name,
+         COALESCE(sps.first_seen_season, min(cr.season)) AS first_seen_season,
+         count(*) AS games_played, import_normalize_name(max(cr.player_name)) AS normalized_name
+  FROM candidate_rows cr
+  LEFT JOIN source_player_seasons sps USING (source_player_id)
+  GROUP BY cr.source_player_id, sps.first_seen_season
 ), combine_rows AS (
   SELECT trim(year)::smallint AS combine_year, trim(player) AS raw_name,
          trim(regexp_replace(player, '^\s*([^,]+),\s*(.+?)\s*$', '\2 \1')) AS nba_order_name,
@@ -117,10 +125,17 @@ WITH candidate_rows AS (
   SELECT trim(d.player_id) AS source_player_id, trim(d.player_name) AS player_name, g.season
   FROM stg_nba_game_detail d JOIN game g ON g.external_id = 'nba:' || trim(d.game_id)
   WHERE trim(coalesce(d.player_id, '')) <> '' AND trim(coalesce(d.player_name, '')) <> ''
+), source_player_seasons AS (
+  SELECT trim(player_id) AS source_player_id, min(trim(season)::smallint) AS first_seen_season
+  FROM stg_nba_player
+  WHERE trim(coalesce(player_id, '')) <> '' AND trim(season) ~ '^\d{4}$'
+  GROUP BY trim(player_id)
 ), candidates AS (
-  SELECT source_player_id, min(season) AS first_seen_season,
-    import_normalize_name(max(player_name)) AS normalized_name
-  FROM candidate_rows GROUP BY source_player_id
+  SELECT cr.source_player_id, COALESCE(sps.first_seen_season, min(cr.season)) AS first_seen_season,
+    import_normalize_name(max(cr.player_name)) AS normalized_name
+  FROM candidate_rows cr
+  LEFT JOIN source_player_seasons sps USING (source_player_id)
+  GROUP BY cr.source_player_id, sps.first_seen_season
 ), candidate_counts AS (
   SELECT normalized_name, count(*) AS nba_name_count, min(first_seen_season) AS first_seen_season
   FROM candidates GROUP BY normalized_name
@@ -204,10 +219,17 @@ WITH candidate_rows AS (
   SELECT trim(d.player_id) AS source_player_id, trim(d.player_name) AS player_name, g.season
   FROM stg_nba_game_detail d JOIN game g ON g.external_id = 'nba:' || trim(d.game_id)
   WHERE trim(coalesce(d.player_id, '')) <> '' AND trim(coalesce(d.player_name, '')) <> ''
+), source_player_seasons AS (
+  SELECT trim(player_id) AS source_player_id, min(trim(season)::smallint) AS first_seen_season
+  FROM stg_nba_player
+  WHERE trim(coalesce(player_id, '')) <> '' AND trim(season) ~ '^\d{4}$'
+  GROUP BY trim(player_id)
 ), candidates AS (
-  SELECT source_player_id, min(season) AS first_seen_season,
-    import_normalize_name(max(player_name)) AS normalized_name
-  FROM candidate_rows GROUP BY source_player_id
+  SELECT cr.source_player_id, COALESCE(sps.first_seen_season, min(cr.season)) AS first_seen_season,
+    import_normalize_name(max(cr.player_name)) AS normalized_name
+  FROM candidate_rows cr
+  LEFT JOIN source_player_seasons sps USING (source_player_id)
+  GROUP BY cr.source_player_id, sps.first_seen_season
 ), candidate_named AS (
   SELECT *, count(*) OVER (PARTITION BY normalized_name) AS name_count FROM candidates
 ), combine_rows AS (

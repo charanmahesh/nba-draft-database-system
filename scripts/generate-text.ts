@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pool } from "../lib/db/pg";
+import { GENERATED_REPORT_MARKER } from "../lib/generated-report";
 
 type Position = "PG" | "SG" | "SF" | "PF" | "C" | null;
 
@@ -51,8 +52,6 @@ interface GeneratedArticle {
   mentioned_player_ids: string[];
 }
 
-const REPORT_MARKER =
-  "Generated demo scouting text (synthetic; not a real scouting report).";
 const ARTICLE_MARKER =
   "Generated demo article (synthetic; not real news material).";
 const REPORTS_PER_ARCHETYPE = 15;
@@ -130,7 +129,7 @@ function buildReport(
   ];
 
 
-  return `${REPORT_MARKER} ${observations[reportNumber % observations.length]} ${observations[(reportNumber + 1) % observations.length]} ${openings[reportNumber % openings.length]}`;
+  return `${GENERATED_REPORT_MARKER} ${observations[reportNumber % observations.length]} ${observations[(reportNumber + 1) % observations.length]} ${openings[reportNumber % openings.length]}`;
 }
 
 function buildArticle(player: PlayerProfile, articleNumber: number): {
@@ -229,7 +228,7 @@ async function insertGeneratedRows(
 
     await client.query(
       "DELETE FROM scouting_report WHERE scout_id = $1 AND summary LIKE $2",
-      [scoutId, `${REPORT_MARKER}%`],
+      [scoutId, `${GENERATED_REPORT_MARKER}%`],
     );
     await client.query("DELETE FROM news_article WHERE summary LIKE $1", [
       `${ARTICLE_MARKER}%`,

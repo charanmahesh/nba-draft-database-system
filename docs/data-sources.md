@@ -19,9 +19,14 @@ IDs are retained as prefixed `external_id` values to make reruns traceable.
 ## Identity and scope safeguards
 
 Draft Combine matches require unique normalized names on both sides and a
-plausible observed NBA debut window; unmatched or ambiguous rows are stored in
-`import_unmatched`. The importer never creates combine-only players and never
-inserts `draft_prospect` rows. It does not import the Draft Like a Pro dataset.
+plausible debut window checked against the earliest season in the full
+`players.csv` history for the already identified NBA player ID. That file only
+provides season history; player identity still comes from `games_details.csv`,
+and the 2017–2019 subset alone is not treated as the player's debut. If the
+history has no valid season, the selected game subset is used as a fallback.
+Unmatched or ambiguous rows are stored in `import_unmatched`. The importer
+never creates combine-only players and never inserts `draft_prospect` rows. It
+does not import the Draft Like a Pro dataset.
 
 `injury_history` is deliberately empty in Phase 3A: no real injury source has
 been introduced, so no injuries are fabricated.

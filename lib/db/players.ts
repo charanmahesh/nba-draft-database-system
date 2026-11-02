@@ -4,7 +4,13 @@ export async function listPlayers(input: PlayerListInput) {
   const result = await pool.query(`
     WITH matching AS (
       SELECT p.player_id, p.f_name, p.l_name, p.position, p.height_cm, p.weight_kg,
-        count(gp.performance_id)::int AS games, round(avg(gp.points), 2) AS avg_points
+        count(gp.performance_id)::int AS games,
+        round(avg(gp.minutes), 2) AS avg_minutes,
+        round(avg(gp.points), 2) AS avg_points,
+        round(avg(gp.rebounds), 2) AS avg_rebounds,
+        round(avg(gp.assists), 2) AS avg_assists,
+        round(avg(gp.steals), 2) AS avg_steals,
+        round(avg(gp.blocks), 2) AS avg_blocks
       FROM player p
       LEFT JOIN game_performance gp ON gp.player_id = p.player_id
       LEFT JOIN game g ON g.game_id = gp.game_id
@@ -17,6 +23,11 @@ export async function listPlayers(input: PlayerListInput) {
     )
     SELECT matching.*, totals.total FROM (SELECT count(*)::int AS total FROM matching) totals LEFT JOIN LATERAL (SELECT * FROM matching
     ORDER BY CASE WHEN $6 = 'points' THEN avg_points END DESC NULLS LAST,
+             CASE WHEN $6 = 'rebounds' THEN avg_rebounds END DESC NULLS LAST,
+             CASE WHEN $6 = 'assists' THEN avg_assists END DESC NULLS LAST,
+             CASE WHEN $6 = 'steals' THEN avg_steals END DESC NULLS LAST,
+             CASE WHEN $6 = 'blocks' THEN avg_blocks END DESC NULLS LAST,
+             CASE WHEN $6 = 'minutes' THEN avg_minutes END DESC NULLS LAST,
              CASE WHEN $6 = 'games' THEN games END DESC NULLS LAST,
              l_name, f_name, player_id
     LIMIT $7 OFFSET $8) matching ON true

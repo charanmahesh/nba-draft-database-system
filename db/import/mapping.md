@@ -33,10 +33,13 @@ matching. Normalization lowercases and removes punctuation/whitespace only;
 suffix tokens such as `Jr`, `II`, and `III` remain part of the key.
 
 A combine row is accepted only when its normalized name occurs once in the
-combine data, once among selected NBA candidates, and the candidate's earliest
-observed NBA season is from the combine year through eight years later. Every
-other combine row is written to `import_unmatched` with a reason; no fuzzy or
-best-effort match is used.
+combine data and once among selected NBA candidates, and the candidate's
+earliest season in `players.csv` is from the combine year through eight years
+later. The candidate ID and name still come from `games_details.csv`; the
+all-season `players.csv` history only supplies a better debut-season check than
+the 2017–2019 game subset. If no valid season exists for that ID, the earliest
+selected game season is used instead. Every other combine row is written to
+`import_unmatched` with a reason; no fuzzy or best-effort match is used.
 
 | Combine columns | Target | Conversion |
 | --- | --- | --- |
