@@ -4,6 +4,8 @@ DraftBoard is a basketball scouting and team-recruitment application. It combine
 
 ## Prerequisites
 
+- Optional, only to regenerate documentation diagrams: Graphviz system CLI (`brew install graphviz` on macOS), then `npm run diagrams`. No npm diagram dependency is required. Sources: `docs/diagrams/*.dot`; outputs: PNG and SVG.
+
 - Git, Node.js 22 LTS and npm (verify with `node -v` and `npm -v`).
 - Docker Desktop on macOS or Windows, or Docker Engine with the Compose plugin on Linux. Start Docker and check `docker compose version`.
 - PostgreSQL 16 client tools, especially `psql`, on your **host** PATH (`psql --version`). The database itself runs in Docker. On macOS, `brew install libpq` and add its `bin` directory to PATH. On Windows, install the PostgreSQL command-line tools and add their `bin` directory to PATH. On Debian/Ubuntu, install `postgresql-client-16` from the PostgreSQL apt repository (or a compatible `postgresql-client`).
