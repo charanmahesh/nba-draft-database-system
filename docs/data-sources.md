@@ -5,6 +5,7 @@
 | Dataset | Provider and URL | Files used | Licence/status | Project use |
 | --- | --- | --- | --- | --- |
 | NBA Games | Nathan Lauga, Kaggle: [NBA Games](https://www.kaggle.com/datasets/nathanlauga/nba-games) | `teams.csv`, `players.csv`, `games.csv`, `games_details.csv` | Kaggle dataset; follow Kaggle's dataset terms | Real teams, selected games, performances, and historical rosters. |
+| NBA Players | justinas, Kaggle: [NBA Players](https://www.kaggle.com/datasets/justinas/nba-players-data) | `all_seasons.csv` | Kaggle dataset; follow Kaggle dataset terms | Height and weight for unique player-season matches, after combine values. |
 | NBA Draft Combine Measurements | Kaggle: [NBA Draft Combine Measurements](https://www.kaggle.com/datasets/marcusfern/nba-draft-combine) | `Draft Combine - Kaggle.csv` | Kaggle dataset; follow Kaggle's dataset terms | Safely matched physical attributes and measurements only. |
 
 The documented NBA subset is 2017–2019. The importer retains players with at
@@ -59,3 +60,8 @@ scouting reports or news in the demo.
 ## Provenance at a glance
 
 Imported NBA facts: teams, selected players, games, performances and derived historical rosters. Safely matched combine records supply positions, physical attributes and measurements. Synthetic support: demo people and subtype rows, needs and managed rosters. Generated material: reports, articles and their mention links, derived from imported statistics; embeddings are model outputs over those generated texts. User-entered records are application data and should not be presented as imported facts. `import_unmatched` preserves unresolved combine records for inspection; `draft_prospect` and imported injury history remain empty under the documented import. See [db/import/mapping.md](../db/import/mapping.md) for exact cleaning and matching rules and [test-results.md](test-results.md) for measured subset counts.
+
+For the documented local snapshot (739 NBA players), before this enrichment,
+414 had a detailed position, 413 had height and 411 had weight. After import,
+415 have a detailed position; 677 have either that position or a starter group;
+737 have height and 737 have weight. Team Match can use a starter group at half the position weight when the detailed position is missing; other eligibility rules still apply.

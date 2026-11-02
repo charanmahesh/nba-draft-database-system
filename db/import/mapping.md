@@ -64,3 +64,28 @@ no injuries are fabricated.
 
 Physical height and weight values outside the schema's valid ranges (including
 source zeroes) are treated as missing rather than inserted as measurements.
+
+
+## NBA Players and starter groups
+
+`all_seasons.csv` is staged as text. Its `season` must be a valid 2017-18,
+2018-19 or 2019-20 label; the first year is the NBA Games season. Normalize
+names with the same punctuation/case-only rule. A row is usable only when its
+normalized name and season are unique in the source and match exactly one
+imported player who appeared that season. Duplicate source rows and missing or
+ambiguous candidates are logged under `NBA Players - justinas` with row ID and
+counts. For each player the latest safe season supplies height (already cm)
+and weight (already kg), subject to schema bounds. Existing combine values
+take precedence independently for each field. No combine measurements are
+created from this source.
+
+`games_details.START_POSITION` supplies the most frequent nonempty G, F or C
+across selected games. A tie leaves the group NULL. This is a starter
+observation, not a five-position designation; Team Match uses it only as a half-weight fallback when `position` is NULL.
+
+## Combine aliases
+
+The curated `import_combine_alias` table applies only before strict combine
+name uniqueness and debut-window checks. Edrice Adebayo → Bam Adebayo: Bam is
+the NBA player's commonly used name; Edrice is his given name as recorded in
+the combine file. No fuzzy matching or suffix removal is performed.

@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS player (
   weight_kg NUMERIC CHECK (weight_kg IS NULL OR weight_kg BETWEEN 45 AND 200),
   position player_position,
   secondary_position player_position,
+  position_group TEXT CHECK (position_group IN ('G', 'F', 'C')),
   CONSTRAINT chk_player_secondary_position
     CHECK (secondary_position IS NULL OR secondary_position <> position)
 );
