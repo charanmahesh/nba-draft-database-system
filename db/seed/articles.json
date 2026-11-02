@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T06:46:20.926Z",
+  "generatedAt": "2026-11-02T05:42:42.645Z",
   "articles": [
     {
       "title": "[Generated demo article] Andrew Bogut: selected-season box-score snapshot",
@@ -8,7 +8,7 @@
         "1"
       ],
       "article_id": "1",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Marvin Williams's NBA appearances",
@@ -17,7 +17,7 @@
         "2"
       ],
       "article_id": "2",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Chris Paul in the imported NBA sample",
@@ -26,16 +26,16 @@
         "3"
       ],
       "article_id": "3",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Raymond Felton's recorded production",
-      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 185.4 cm and 93.0 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
       "mentioned_player_ids": [
         "4"
       ],
       "article_id": "4",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Channing Frye",
@@ -44,7 +44,7 @@
         "5"
       ],
       "article_id": "5",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Gerald Green: selected-season box-score snapshot",
@@ -53,7 +53,7 @@
         "6"
       ],
       "article_id": "6",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Jarrett Jack's NBA appearances",
@@ -62,7 +62,7 @@
         "7"
       ],
       "article_id": "7",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Ian Mahinmi in the imported NBA sample",
@@ -71,16 +71,16 @@
         "8"
       ],
       "article_id": "8",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: CJ Miles's recorded production",
-      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 198.1 cm and 99.8 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
       "mentioned_player_ids": [
         "9"
       ],
       "article_id": "9",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Ersan Ilyasova",
@@ -89,7 +89,7 @@
         "10"
       ],
       "article_id": "10",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Lou Williams: selected-season box-score snapshot",
@@ -98,7 +98,7 @@
         "11"
       ],
       "article_id": "11",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Amir Johnson's NBA appearances",
@@ -107,7 +107,7 @@
         "12"
       ],
       "article_id": "12",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Marcin Gortat in the imported NBA sample",
@@ -116,16 +116,16 @@
         "13"
       ],
       "article_id": "13",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Jose Calderon's recorded production",
-      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 190.5 cm and 90.7 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
       "mentioned_player_ids": [
         "14"
       ],
       "article_id": "14",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Jahlil Okafor",
@@ -134,7 +134,7 @@
         "15"
       ],
       "article_id": "15",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Emmanuel Mudiay: selected-season box-score snapshot",
@@ -143,7 +143,7 @@
         "16"
       ],
       "article_id": "16",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Tyus Jones's NBA appearances",
@@ -152,7 +152,7 @@
         "17"
       ],
       "article_id": "17",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Cliff Alexander in the imported NBA sample",
@@ -161,7 +161,7 @@
         "18"
       ],
       "article_id": "18",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Justin Anderson's recorded production",
@@ -170,7 +170,7 @@
         "19"
       ],
       "article_id": "19",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Anthony Brown",
@@ -179,7 +179,7 @@
         "20"
       ],
       "article_id": "20",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Montrezl Harrell: selected-season box-score snapshot",
@@ -188,7 +188,7 @@
         "21"
       ],
       "article_id": "21",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Andrew Harrison's NBA appearances",
@@ -197,7 +197,7 @@
         "22"
       ],
       "article_id": "22",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Aaron Harrison in the imported NBA sample",
@@ -206,7 +206,7 @@
         "23"
       ],
       "article_id": "23",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Delon Wright's recorded production",
@@ -215,7 +215,7 @@
         "24"
       ],
       "article_id": "24",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: RJ Hunter",
@@ -224,7 +224,7 @@
         "25"
       ],
       "article_id": "25",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Sam Dekker: selected-season box-score snapshot",
@@ -233,7 +233,7 @@
         "26"
       ],
       "article_id": "26",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at D'Angelo Russell's NBA appearances",
@@ -242,7 +242,7 @@
         "27"
       ],
       "article_id": "27",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Karl-Anthony Towns in the imported NBA sample",
@@ -251,7 +251,7 @@
         "28"
       ],
       "article_id": "28",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Richaun Holmes's recorded production",
@@ -260,7 +260,7 @@
         "29"
       ],
       "article_id": "29",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Justise Winslow",
@@ -269,7 +269,7 @@
         "30"
       ],
       "article_id": "30",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Willie Cauley-Stein: selected-season box-score snapshot",
@@ -278,7 +278,7 @@
         "31"
       ],
       "article_id": "31",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Kelly Oubre Jr.'s NBA appearances",
@@ -287,7 +287,7 @@
         "32"
       ],
       "article_id": "32",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Frank Kaminsky in the imported NBA sample",
@@ -296,7 +296,7 @@
         "33"
       ],
       "article_id": "33",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Devin Booker's recorded production",
@@ -305,7 +305,7 @@
         "34"
       ],
       "article_id": "34",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Brandon Ashley",
@@ -314,7 +314,7 @@
         "35"
       ],
       "article_id": "35",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Cameron Payne: selected-season box-score snapshot",
@@ -323,7 +323,7 @@
         "36"
       ],
       "article_id": "36",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Myles Turner's NBA appearances",
@@ -332,7 +332,7 @@
         "37"
       ],
       "article_id": "37",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Trey Lyles in the imported NBA sample",
@@ -341,7 +341,7 @@
         "38"
       ],
       "article_id": "38",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Stanley Johnson's recorded production",
@@ -350,7 +350,7 @@
         "39"
       ],
       "article_id": "39",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Jerian Grant",
@@ -359,7 +359,7 @@
         "40"
       ],
       "article_id": "40",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Bobby Portis: selected-season box-score snapshot",
@@ -368,7 +368,7 @@
         "41"
       ],
       "article_id": "41",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Kevon Looney's NBA appearances",
@@ -377,7 +377,7 @@
         "42"
       ],
       "article_id": "42",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Rashad Vaughn in the imported NBA sample",
@@ -386,7 +386,7 @@
         "43"
       ],
       "article_id": "43",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Christian Wood's recorded production",
@@ -395,7 +395,7 @@
         "44"
       ],
       "article_id": "44",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Jordan Mickey",
@@ -404,7 +404,7 @@
         "45"
       ],
       "article_id": "45",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Dakari Johnson: selected-season box-score snapshot",
@@ -413,7 +413,7 @@
         "46"
       ],
       "article_id": "46",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Rondae Hollis-Jefferson's NBA appearances",
@@ -422,7 +422,7 @@
         "47"
       ],
       "article_id": "47",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Terry Rozier in the imported NBA sample",
@@ -431,7 +431,7 @@
         "48"
       ],
       "article_id": "48",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Norman Powell's recorded production",
@@ -440,7 +440,7 @@
         "49"
       ],
       "article_id": "49",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Chasson Randle",
@@ -449,7 +449,7 @@
         "51"
       ],
       "article_id": "50",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Jarell Martin: selected-season box-score snapshot",
@@ -458,7 +458,7 @@
         "52"
       ],
       "article_id": "51",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Michael Frazier's NBA appearances",
@@ -467,7 +467,7 @@
         "53"
       ],
       "article_id": "52",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Quinn Cook in the imported NBA sample",
@@ -476,7 +476,7 @@
         "54"
       ],
       "article_id": "53",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Chris McCullough's recorded production",
@@ -485,7 +485,7 @@
         "55"
       ],
       "article_id": "54",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Pat Connaughton",
@@ -494,7 +494,7 @@
         "56"
       ],
       "article_id": "55",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Willy Hernangomez: selected-season box-score snapshot",
@@ -503,7 +503,7 @@
         "57"
       ],
       "article_id": "56",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] A statistical look at Josh Richardson's NBA appearances",
@@ -512,7 +512,7 @@
         "58"
       ],
       "article_id": "57",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Joe Young in the imported NBA sample",
@@ -521,7 +521,7 @@
         "59"
       ],
       "article_id": "58",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] Numbers note: Treveon Graham's recorded production",
@@ -530,7 +530,7 @@
         "60"
       ],
       "article_id": "59",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     },
     {
       "title": "[Generated demo article] DraftBoard demo profile: Larry Nance Jr.",
@@ -539,7 +539,7 @@
         "61"
       ],
       "article_id": "60",
-      "publish_date": "2026-11-01"
+      "publish_date": "2026-11-02"
     }
   ]
 }

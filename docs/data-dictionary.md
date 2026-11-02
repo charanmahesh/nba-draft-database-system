@@ -46,7 +46,7 @@ Roster deletion cascades to memberships. Player deletion is restricted while mem
 
 ### `player` and `draft_prospect`
 
-`player` stores one project-owned identity for each real player. `external_id` preserves the source identity. Position is nullable; hybrid source labels are mapped later to primary and secondary enum values. Height must be 150–240 cm and weight 45–200 kg when present. Secondary position cannot equal primary position. `draft_prospect` is an optional player subtype reserved for the future draft extension, with an optional college and class year. Current imports create no prospect rows.
+`player` stores one project-owned identity for each real player. `external_id` preserves the source identity. Position is nullable; `position_group` is a nullable G/F/C starter observation (ties are NULL), distinct from the five-position enum and excluded from Team Match. Hybrid source labels are mapped later to primary and secondary enum values. Height must be 150–240 cm and weight 45–200 kg when present. Secondary position cannot equal primary position. `draft_prospect` is an optional player subtype reserved for the future draft extension, with an optional college and class year. Current imports create no prospect rows.
 
 Prospect deletion cascades to its subtype row, while player deletion is restricted by historical performance/report references.
 
