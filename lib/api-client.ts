@@ -4,9 +4,9 @@ export type Severity = "minor" | "moderate" | "severe";
 export type Id = string;
 export type Numeric = string | number;
 export interface Session { person_id:Id; name:string; email:string; role:Role; team_id:Id|null }
-export interface Player { player_id:Id; f_name:string; l_name:string; position:Position|null; position_group:"G"|"F"|"C"|null; height_cm:Numeric|null; weight_kg:Numeric|null; games:number; avg_minutes:Numeric|null; avg_points:Numeric|null; avg_rebounds:Numeric|null; avg_assists:Numeric|null; avg_steals:Numeric|null; avg_blocks:Numeric|null }
+export interface Player { player_id:Id; f_name:string; l_name:string; position:Position|null; height_cm:Numeric|null; weight_kg:Numeric|null; games:number; avg_minutes:Numeric|null; avg_points:Numeric|null; avg_rebounds:Numeric|null; avg_assists:Numeric|null; avg_steals:Numeric|null; avg_blocks:Numeric|null }
 export interface SeasonAverage { season:number; games:number; minutes:Numeric|null; points:Numeric|null; rebounds:Numeric|null; assists:Numeric|null; steals:Numeric|null; blocks:Numeric|null }
-export interface PlayerDetail { player_id:Id; f_name:string; l_name:string; position:Position|null; secondary_position:Position|null; position_group:"G"|"F"|"C"|null; dob:string|null; height_cm:Numeric|null; weight_kg:Numeric|null; season_averages:SeasonAverage[]; measurements:Measurement[]; injuries:Injury[]; reports:Report[]; news:Article[]; [key:string]:unknown }
+export interface PlayerDetail { player_id:Id; f_name:string; l_name:string; position:Position|null; secondary_position:Position|null; dob:string|null; height_cm:Numeric|null; weight_kg:Numeric|null; season_averages:SeasonAverage[]; measurements:Measurement[]; injuries:Injury[]; reports:Report[]; news:Article[]; [key:string]:unknown }
 export interface Team { team_id:Id; team_name:string; city:string }
 export interface Game { game_id:Id; game_date:string; season:number; home_team_id:Id; away_team_id:Id; home_team:string; away_team:string }
 export interface Performance { performance_id:Id; game_id:Id; player_id:Id; team_id:Id; minutes:Numeric; points:number; rebounds:number; assists:number; blocks:number; steals:number }
@@ -18,7 +18,7 @@ export interface Roster { roster_id:Id; team_id:Id; season:number; is_historical
 export interface Membership { roster_id:Id; player_id:Id; season:number }
 export interface Report { report_id:Id; player_id:Id; scout_id:Id; report_date:string; summary:string; embedding_status:"indexed"|"pending" }
 export interface Article { article_id:Id; title:string; publish_date:string; summary:string; url:string|null; embedding_status?:"indexed"|"pending" }
-export interface Match { player_id:Id; f_name:string; l_name:string; position:Position|null; position_group:"G"|"F"|"C"|null; match_type:"exact"|"group"; need_position:Position; target_season:number; need_id:Id; need_priority:number; position_score:Numeric; stats_score:Numeric; measurement_bonus:Numeric; match_score:Numeric }
+export interface Match { player_id:Id; f_name:string; l_name:string; position:Position; target_season:number; need_id:Id; need_priority:number; position_score:Numeric; stats_score:Numeric; measurement_bonus:Numeric; match_score:Numeric }
 export interface SemanticReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; similarity:number; f_name?:string; l_name?:string; position?:Position|null }
 export interface SimilarPlayer { player_id:Id; f_name:string; l_name:string; position:Position|null; similarity:number }
 export interface KeywordReport { report_id:Id; player_id:Id; scout_id:Id; summary:string; f_name:string; l_name:string; position:Position|null; rank:number; headline:string }
@@ -56,5 +56,5 @@ export type DashboardData =
  | {role:"admin";counts:{players:number;teams:number;reports:number;open_needs:number};recent_reports:DashboardReport[];open_needs:DashboardNeed[]}
  | {role:"scout";report_count:number;pending_count:number;reports:DashboardReport[]}
  | {role:"analyst";top_performers:{player_id:Id;player_name:string;games:number;points:number}[];efficiency_leaders:{player_id:Id;player_name:string;games:number;efficiency:number}[]}
- | {role:"team_manager";team_id:Id;team_name:string;open_needs:DashboardNeed[];roster:{roster_id:Id;season:number;size:number}|null;matches:{player_id:Id;f_name:string;l_name:string;position:Position|null;position_group:"G"|"F"|"C"|null;match_type:"exact"|"group";match_score:number;need_priority:number}[]};
+ | {role:"team_manager";team_id:Id;team_name:string;open_needs:DashboardNeed[];roster:{roster_id:Id;season:number;size:number}|null;matches:{player_id:Id;f_name:string;l_name:string;position:Position;match_score:number;need_priority:number}[]};
 export const getDashboard=()=>request<DashboardData>("/api/dashboard");

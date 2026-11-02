@@ -474,28 +474,26 @@
 <!-- player -->
 <g id="node10" class="node">
 <title>player</title>
-<text xml:space="preserve" text-anchor="start" x="403" y="-1965.35" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="12.00">player</text>
-<polygon fill="none" stroke="black" points="403,-1925 403,-1963 1364,-1963 1364,-1925 403,-1925"/>
-<polygon fill="none" stroke="black" points="404,-1926 404,-1962 490,-1962 490,-1926 404,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="422.25" y="-1939.97" font-family="Helvetica,sans-Serif" text-decoration="underline" font-size="12.00">player_id</text>
-<polygon fill="none" stroke="black" points="490,-1926 490,-1962 589,-1962 589,-1926 490,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="509.88" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">external_id</text>
-<polygon fill="none" stroke="black" points="589,-1926 589,-1962 675,-1962 675,-1926 589,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="612.12" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">f_name</text>
-<polygon fill="none" stroke="black" points="675,-1926 675,-1962 761,-1962 761,-1926 675,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="698.12" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">l_name</text>
-<polygon fill="none" stroke="black" points="761,-1926 761,-1962 847,-1962 847,-1926 761,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="793.88" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">dob</text>
-<polygon fill="none" stroke="black" points="847,-1926 847,-1962 933,-1962 933,-1926 847,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="862.25" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">height_cm</text>
-<polygon fill="none" stroke="black" points="933,-1926 933,-1962 1019,-1962 1019,-1926 933,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="948.62" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">weight_kg</text>
-<polygon fill="none" stroke="black" points="1019,-1926 1019,-1962 1105,-1962 1105,-1926 1019,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="1041" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">position</text>
-<polygon fill="none" stroke="black" points="1105,-1926 1105,-1962 1253,-1962 1253,-1926 1105,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="1126.88" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">secondary_position</text>
-<polygon fill="none" stroke="black" points="1253,-1926 1253,-1962 1363,-1962 1363,-1926 1253,-1926"/>
-<text xml:space="preserve" text-anchor="start" x="1268.25" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">position_group</text>
+<text xml:space="preserve" text-anchor="start" x="458" y="-1965.35" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="12.00">player</text>
+<polygon fill="none" stroke="black" points="458,-1925 458,-1963 1309,-1963 1309,-1925 458,-1925"/>
+<polygon fill="none" stroke="black" points="459,-1926 459,-1962 545,-1962 545,-1926 459,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="477.25" y="-1939.97" font-family="Helvetica,sans-Serif" text-decoration="underline" font-size="12.00">player_id</text>
+<polygon fill="none" stroke="black" points="545,-1926 545,-1962 644,-1962 644,-1926 545,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="564.88" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">external_id</text>
+<polygon fill="none" stroke="black" points="644,-1926 644,-1962 730,-1962 730,-1926 644,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="667.12" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">f_name</text>
+<polygon fill="none" stroke="black" points="730,-1926 730,-1962 816,-1962 816,-1926 730,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="753.12" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">l_name</text>
+<polygon fill="none" stroke="black" points="816,-1926 816,-1962 902,-1962 902,-1926 816,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="848.88" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">dob</text>
+<polygon fill="none" stroke="black" points="902,-1926 902,-1962 988,-1962 988,-1926 902,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="917.25" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">height_cm</text>
+<polygon fill="none" stroke="black" points="988,-1926 988,-1962 1074,-1962 1074,-1926 988,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="1003.62" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">weight_kg</text>
+<polygon fill="none" stroke="black" points="1074,-1926 1074,-1962 1160,-1962 1160,-1926 1074,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="1096" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">position</text>
+<polygon fill="none" stroke="black" points="1160,-1926 1160,-1962 1308,-1962 1308,-1926 1160,-1926"/>
+<text xml:space="preserve" text-anchor="start" x="1181.88" y="-1940.62" font-family="Helvetica,sans-Serif" font-size="12.00">secondary_position</text>
 </g>
 <!-- player&#45;&gt;player -->
 <g id="edge37" class="edge">

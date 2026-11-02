@@ -57,7 +57,7 @@ Names and columns match `db/postgres/01_schema.sql`, plus the durable `import_un
 
 - FK `(team_id)` → `team(team_id)`.
 
-**PLAYER**(<u>player_id</u>, external_id, f_name, l_name, dob, height_cm, weight_kg, position, secondary_position, position_group)
+**PLAYER**(<u>player_id</u>, external_id, f_name, l_name, dob, height_cm, weight_kg, position, secondary_position)
 
 **ROSTER_PLAYER**(<u>roster_id</u> **[FK]**, <u>player_id</u> **[FK]**, season **[FK]**)
 

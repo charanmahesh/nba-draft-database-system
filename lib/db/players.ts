@@ -3,7 +3,7 @@ import type { PlayerListInput } from "../validators/players";
 export async function listPlayers(input: PlayerListInput) {
   const result = await pool.query(`
     WITH matching AS (
-      SELECT p.player_id, p.f_name, p.l_name, p.position, p.position_group, p.height_cm, p.weight_kg,
+      SELECT p.player_id, p.f_name, p.l_name, p.position, p.height_cm, p.weight_kg,
         count(gp.performance_id)::int AS games,
         round(avg(gp.minutes), 2) AS avg_minutes,
         round(avg(gp.points), 2) AS avg_points,

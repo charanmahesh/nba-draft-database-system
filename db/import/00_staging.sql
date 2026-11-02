@@ -61,19 +61,3 @@ PARALLEL SAFE
 AS $$
   SELECT NULLIF(regexp_replace(lower(trim(input_name)), '[^a-z0-9]+', '', 'g'), '')
 $$;
-
-CREATE TABLE IF NOT EXISTS stg_nba_players_seasons (
-  row_id TEXT, player_name TEXT, team_abbreviation TEXT, age TEXT, player_height TEXT,
-  player_weight TEXT, college TEXT, country TEXT, draft_year TEXT, draft_round TEXT,
-  draft_number TEXT, gp TEXT, pts TEXT, reb TEXT, ast TEXT, net_rating TEXT,
-  oreb_pct TEXT, dreb_pct TEXT, usg_pct TEXT, ts_pct TEXT, ast_pct TEXT, season TEXT
-);
-
--- Curated identity aliases apply only to Draft Combine names.
-CREATE TABLE IF NOT EXISTS import_combine_alias (combine_name TEXT PRIMARY KEY, nba_name TEXT NOT NULL UNIQUE);
-INSERT INTO import_combine_alias VALUES ('Edrice Adebayo', 'Bam Adebayo') ON CONFLICT DO NOTHING;
-CREATE OR REPLACE FUNCTION import_combine_name(input_name TEXT) RETURNS TEXT
-LANGUAGE sql STABLE AS $$
- SELECT import_normalize_name(COALESCE((SELECT nba_name FROM import_combine_alias
-   WHERE import_normalize_name(combine_name) = import_normalize_name(input_name)), input_name))
-$$;
