@@ -21,6 +21,8 @@ player_position [shape=ellipse, label=<position>];
 player -- player_position [weight=2];
 player_secondary_position [shape=ellipse, label=<secondary_position>];
 player -- player_secondary_position [weight=2];
+player_position_group [shape=ellipse, label=<position_group>];
+player -- player_position_group [weight=2];
 scout [label="SCOUT", penwidth=1.5];
 scout_experience [shape=ellipse, label=<experience>];
 scout -- scout_experience [weight=2];

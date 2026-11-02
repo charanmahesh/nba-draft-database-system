@@ -41,6 +41,7 @@ SELECT
   p.height_cm,
   p.weight_kg,
   p.position,
+  p.position_group,
   p.secondary_position,
   COALESCE(lm.measurements, '{}'::jsonb) AS latest_measurements,
   COALESCE(ic.injury_count, 0)::BIGINT AS injury_count
@@ -69,6 +70,7 @@ SELECT
   p.f_name,
   p.l_name,
   p.position,
+  p.position_group,
   p.secondary_position,
   p.height_cm,
   p.weight_kg,
@@ -96,6 +98,7 @@ GROUP BY
   p.f_name,
   p.l_name,
   p.position,
+  p.position_group,
   p.secondary_position,
   p.height_cm,
   p.weight_kg,

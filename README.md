@@ -22,11 +22,12 @@ git clone https://github.com/charanmahesh/nba-draft-database-system.git
 cd nba-draft-database-system
 ```
 
-Create a `dataset` directory. Download the following datasets from Kaggle (a Kaggle account may be required), extract the archives, and place these exact five filenames directly in `dataset/`:
+Create a `dataset` directory. Download the following datasets from Kaggle (a Kaggle account may be required), extract the archives, and place these exact six filenames directly in `dataset/`:
 
 | Download | Files to copy into `dataset/` |
 | --- | --- |
 | [Nathan Lauga — NBA Games](https://www.kaggle.com/datasets/nathanlauga/nba-games) | `teams.csv`, `players.csv`, `games.csv`, `games_details.csv` |
+| [NBA Players — justinas](https://www.kaggle.com/datasets/justinas/nba-players-data) | `all_seasons.csv` |
 | [NBA Draft Combine Measurements](https://www.kaggle.com/datasets/marcusfern/nba-draft-combine) | `Draft Combine - Kaggle.csv` |
 
 Keep the spaces in the combine filename. The import uses the 2017–2019 season subset; counts and matching rules are documented in [data sources](docs/data-sources.md) and [mapping](db/import/mapping.md). The files are gitignored and are not supplied in the clone. Dataset contents can change upstream, so exact test counts require the documented snapshot.
