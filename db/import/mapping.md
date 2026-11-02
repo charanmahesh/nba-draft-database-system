@@ -81,7 +81,7 @@ created from this source.
 
 `games_details.START_POSITION` supplies the most frequent nonempty G, F or C
 across selected games. A tie leaves the group NULL. This is a starter
-observation, not a five-position designation; Team Match uses `position` only.
+observation, not a five-position designation; Team Match uses it only as a half-weight fallback when `position` is NULL.
 
 ## Combine aliases
 

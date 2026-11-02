@@ -34,7 +34,7 @@ This is the original prototype-to-API mapping, retained as design history. The c
 | `getFilterOptions` | `GET /api/players/filters`: fixed positions and supported injury severity; drop class years. |
 | `semanticSearch` | `GET /api/search/reports` and `/api/search/keyword`: scouting_report JOIN player; vector `<=>` and FTS `@@` respectively, same relational filters. |
 | `findSimilarReports` | Query text: `/api/search/reports`; report ID: `/api/reports/:id/similar`, self-excluding vector nearest neighbours. |
-| `getDraftBoard` | `GET /api/teams/:id/matches`: proposed new SQL function `fn_match_players_for_team(team_id)` scores NBA players against open needs by primary position and priority, with transparent measurement and injury components; specify roster eligibility before implementation. |
+| `getDraftBoard` | `GET /api/teams/:id/matches`: `fn_match_players_for_team(team_id)` scores open needs using exact primary position or, when it is NULL, starter group G → PG/SG, F → SF/PF, C → C. Group position scores are half the exact score. The breakdown identifies group matches; statistics and measurements contribute separately, with no injury penalty. |
 | `draftProspect` | Drop in current scope; no signing or draft mutation. |
 | `getReports` | `GET /api/reports`: scouting_report JOIN player, scout/person; derive indexing status from embedding. |
 | `createReport` | `POST /api/reports`: authenticated scout insert in audited transaction where applicable, then embedding update with missing-vector fallback. |

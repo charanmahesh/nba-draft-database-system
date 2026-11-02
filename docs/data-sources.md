@@ -64,5 +64,4 @@ Imported NBA facts: teams, selected players, games, performances and derived his
 For the documented local snapshot (739 NBA players), before this enrichment,
 414 had a detailed position, 413 had height and 411 had weight. After import,
 415 have a detailed position; 677 have either that position or a starter group;
-737 have height and 737 have weight. Group coverage does not imply eligibility
-for Team Match, which requires a detailed position.
+737 have height and 737 have weight. Team Match can use a starter group at half the position weight when the detailed position is missing; other eligibility rules still apply.
