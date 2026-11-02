@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T05:42:42.645Z",
+  "generatedAt": "2026-11-02T05:27:01.844Z",
   "articles": [
     {
       "title": "[Generated demo article] Andrew Bogut: selected-season box-score snapshot",
@@ -30,7 +30,7 @@
     },
     {
       "title": "[Generated demo article] Numbers note: Raymond Felton's recorded production",
-      "summary": "Generated demo article (synthetic; not real news material). The player record lists 185.4 cm and 93.0 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists 181.6 cm and 90.5 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
       "mentioned_player_ids": [
         "4"
       ],
@@ -75,7 +75,7 @@
     },
     {
       "title": "[Generated demo article] Numbers note: CJ Miles's recorded production",
-      "summary": "Generated demo article (synthetic; not real news material). The player record lists 198.1 cm and 99.8 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
       "mentioned_player_ids": [
         "9"
       ],
@@ -120,7 +120,7 @@
     },
     {
       "title": "[Generated demo article] Numbers note: Jose Calderon's recorded production",
-      "summary": "Generated demo article (synthetic; not real news material). The player record lists 190.5 cm and 90.7 kg; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
+      "summary": "Generated demo article (synthetic; not real news material). The player record lists no safely matched height recorded and no safely matched weight recorded; these physical values are present only when safely matched. This synthetic item summarizes imported statistics only; it does not report a real event, quote, transaction, or injury.",
       "mentioned_player_ids": [
         "14"
       ],

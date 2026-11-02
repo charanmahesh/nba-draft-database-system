@@ -83,8 +83,6 @@ player_position [shape=ellipse, label=<position>];
 player -- player_position [weight=2];
 player_secondary_position [shape=ellipse, label=<secondary_position>];
 player -- player_secondary_position [weight=2];
-player_position_group [shape=ellipse, label=<position_group>];
-player -- player_position_group [weight=2];
 draft_prospect [label="DRAFT PROSPECT\n(future extension)", penwidth=1.5];
 draft_prospect_prospect_id [shape=ellipse, label=<<U>prospect_id</U>>];
 draft_prospect -- draft_prospect_prospect_id [weight=2];

@@ -33,10 +33,13 @@ matching. Normalization lowercases and removes punctuation/whitespace only;
 suffix tokens such as `Jr`, `II`, and `III` remain part of the key.
 
 A combine row is accepted only when its normalized name occurs once in the
-combine data, once among selected NBA candidates, and the candidate's earliest
-observed NBA season is from the combine year through eight years later. Every
-other combine row is written to `import_unmatched` with a reason; no fuzzy or
-best-effort match is used.
+combine data and once among selected NBA candidates, and the candidate's
+earliest season in `players.csv` is from the combine year through eight years
+later. The candidate ID and name still come from `games_details.csv`; the
+all-season `players.csv` history only supplies a better debut-season check than
+the 2017–2019 game subset. If no valid season exists for that ID, the earliest
+selected game season is used instead. Every other combine row is written to
+`import_unmatched` with a reason; no fuzzy or best-effort match is used.
 
 | Combine columns | Target | Conversion |
 | --- | --- | --- |
@@ -64,28 +67,3 @@ no injuries are fabricated.
 
 Physical height and weight values outside the schema's valid ranges (including
 source zeroes) are treated as missing rather than inserted as measurements.
-
-
-## NBA Players and starter groups
-
-`all_seasons.csv` is staged as text. Its `season` must be a valid 2017-18,
-2018-19 or 2019-20 label; the first year is the NBA Games season. Normalize
-names with the same punctuation/case-only rule. A row is usable only when its
-normalized name and season are unique in the source and match exactly one
-imported player who appeared that season. Duplicate source rows and missing or
-ambiguous candidates are logged under `NBA Players - justinas` with row ID and
-counts. For each player the latest safe season supplies height (already cm)
-and weight (already kg), subject to schema bounds. Existing combine values
-take precedence independently for each field. No combine measurements are
-created from this source.
-
-`games_details.START_POSITION` supplies the most frequent nonempty G, F or C
-across selected games. A tie leaves the group NULL. This is a starter
-observation, not a five-position designation; Team Match uses it only as a half-weight fallback when `position` is NULL.
-
-## Combine aliases
-
-The curated `import_combine_alias` table applies only before strict combine
-name uniqueness and debut-window checks. Edrice Adebayo → Bam Adebayo: Bam is
-the NBA player's commonly used name; Edrice is his given name as recorded in
-the combine file. No fuzzy matching or suffix removal is performed.

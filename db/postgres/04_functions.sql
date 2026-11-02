@@ -167,11 +167,9 @@ $$;
 
 -- Current NBA scouting workflow. Scores are transparent proxies, not a
 -- prediction of player quality. The latest managed roster defines the season.
-DROP FUNCTION IF EXISTS fn_match_players_for_team(BIGINT);
-CREATE FUNCTION fn_match_players_for_team(p_team_id BIGINT)
+CREATE OR REPLACE FUNCTION fn_match_players_for_team(p_team_id BIGINT)
 RETURNS TABLE (
   player_id BIGINT, f_name TEXT, l_name TEXT, "position" player_position,
-  position_group TEXT, match_type TEXT, need_position player_position,
   target_season SMALLINT, need_id BIGINT, need_priority SMALLINT,
   position_score NUMERIC, stats_score NUMERIC, measurement_bonus NUMERIC,
   match_score NUMERIC
@@ -187,28 +185,25 @@ BEGIN
 
   RETURN QUERY
   WITH candidates AS (
-    SELECT p.player_id, p.f_name, p.l_name, p.position, p.position_group, n.need_id, n.priority, n.position AS need_position,
-      CASE WHEN p.position IS NULL THEN 'group' ELSE 'exact' END AS match_type,
-      (n.priority * CASE WHEN p.position IS NULL THEN 10 ELSE 20 END)::numeric AS ps,
+    SELECT p.player_id, p.f_name, p.l_name, p.position, n.need_id, n.priority,
+      (n.priority * 20)::numeric AS ps,
       COALESCE(LEAST(ROUND(AVG(gp.points + gp.rebounds + gp.assists + gp.steals + gp.blocks), 2), 50), 0)::numeric AS ss,
       LEAST(COUNT(DISTINCT cm.measurement_id) * 2, 10)::numeric AS mb
     FROM player p
     JOIN LATERAL (
-      SELECT tn.need_id, tn.priority, tn.position FROM team_need tn
-      WHERE tn.team_id = p_team_id AND NOT tn.is_filled
-        AND (tn.position = p.position OR (p.position IS NULL AND p.position_group =
-          CASE WHEN tn.position IN ('PG', 'SG') THEN 'G' WHEN tn.position IN ('SF', 'PF') THEN 'F' ELSE 'C' END))
+      SELECT tn.need_id, tn.priority FROM team_need tn
+      WHERE tn.team_id = p_team_id AND NOT tn.is_filled AND tn.position = p.position
       ORDER BY tn.priority DESC, tn.need_id LIMIT 1
     ) n ON true
     LEFT JOIN game_performance gp ON gp.player_id = p.player_id
     LEFT JOIN LATERAL (SELECT m.measurement_id FROM combined_measurement m WHERE m.player_id = p.player_id LIMIT 5) cm ON true
-    WHERE NOT EXISTS (
+    WHERE p.position IS NOT NULL AND NOT EXISTS (
       SELECT 1 FROM roster_player rp WHERE rp.player_id = p.player_id AND rp.season = v_season
     )
-    GROUP BY p.player_id, n.need_id, n.priority, n.position
+    GROUP BY p.player_id, n.need_id, n.priority
     HAVING COUNT(DISTINCT gp.performance_id) >= 10
   )
-  SELECT c.player_id, c.f_name, c.l_name, c.position, c.position_group, c.match_type, c.need_position, v_season,
+  SELECT c.player_id, c.f_name, c.l_name, c.position, v_season,
          c.need_id, c.priority, c.ps, c.ss, c.mb, c.ps + c.ss + c.mb
   FROM candidates c ORDER BY c.ps + c.ss + c.mb DESC, c.player_id;
 END;
@@ -236,7 +231,7 @@ BEGIN
     SELECT jsonb_build_object('role',v_role,'team_id',v_team::text,'team_name',(SELECT team_name FROM team WHERE team_id=v_team),
       'open_needs',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT need_id::text,position,priority,description FROM team_need WHERE team_id=v_team AND NOT is_filled ORDER BY priority DESC,need_id) x),
       'roster',(SELECT to_jsonb(x) FROM (SELECT r.roster_id::text,r.season,count(rp.player_id)::int AS size FROM roster r LEFT JOIN roster_player rp USING(roster_id) WHERE r.team_id=v_team AND NOT r.is_historical GROUP BY r.roster_id ORDER BY r.season DESC LIMIT 1) x),
-      'matches',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT m.player_id::text,m.f_name,m.l_name,m.position,m.position_group,m.match_type,m.match_score,m.need_priority FROM fn_match_players_for_team(v_team) m ORDER BY m.match_score DESC,m.player_id LIMIT 5) x)) INTO v_result;
+      'matches',(SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) FROM (SELECT m.player_id::text,m.f_name,m.l_name,m.position,m.match_score,m.need_priority FROM fn_match_players_for_team(v_team) m ORDER BY m.match_score DESC,m.player_id LIMIT 5) x)) INTO v_result;
   END IF;
   RETURN v_result;
 END;
